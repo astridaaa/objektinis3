@@ -3,6 +3,9 @@
 main()
 {
     srand(time(NULL));
+    cout << "Pasirinkite: 1 - duomenys įvedinėjami ranka, 2 - pažymiai generuojami, 3 - generuojami visi studentų duomenys, 4 - baigti" << endl;
+    cin >> meniu;
+
     for (int i = 0; i < rand() % 5 + 1; i++)
     {   
         Stud stud{};
@@ -50,11 +53,16 @@ main()
 
     }
 
+    if (meniu == 4)
+    {
+        return EXIT_SUCCESS;
+    }
+
     cout << setw(15) << left << "Pavardė" << setw(15) << left << "Vardas" << setw(15) << left << "Galutinis (Vid.) / Galutinis (Med.)\n";
     cout << "------------------------------------------------------------" << endl;
 
     for (Stud j : VISIstud)
     {
-        cout << setw(15) << left << j.pavarde << setw(15) << left << j.vardas << setw(15) << fixed << setprecision(2) << galutinis(j.NDrez, j.EGrez) << endl;
+        cout << setw(15) << left << j.pavarde << setw(15) << left << j.vardas << setw(15) << fixed << setprecision(2) << galutinis(j) << endl;
     }
 }
