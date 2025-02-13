@@ -13,6 +13,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::fixed;
+using std::floor;
 using std::getline;
 using std::ifstream;
 using std::ios;
@@ -27,13 +28,12 @@ using std::sort;
 using std::streamsize;
 using std::string;
 using std::vector;
-using std::floor;
 
 struct Stud
 {
     string vardas, pavarde;
     int EGrez;
-    int* pazymiai{nullptr};
+    int *pazymiai{nullptr};
     int u = 0;
 };
 
@@ -43,7 +43,6 @@ bool stop;
 bool stop1;
 int meniu;
 bool stop2;
-
 
 double galutinis(Stud stud)
 {
@@ -57,8 +56,7 @@ double galutinis(Stud stud)
         {
             suma += stud.pazymiai[p];
         }
-         
-        
+
         vidurkis = suma / stud.u;
         double Gbalas_vid = round((0.4 * vidurkis + 0.6 * stud.EGrez) * 100) / 100;
         return Gbalas_vid;
@@ -114,7 +112,7 @@ Stud mot(Stud &studentas)
     int C = rand() % vsuma;
     int W = rand() % vsuma;
     int lytis = rand() % 100 + 1;
-    f.clear(); 
+    f.clear();
     f.seekg(0, ios::beg);
     if (lytis % 2 == 0)
     {
@@ -146,16 +144,18 @@ Stud mot(Stud &studentas)
     }
 }
 
-void NDpazymiai(Stud &studentas){
-   
+void NDpazymiai(Stud &studentas)
+{
+
     int pp;
     bool stopp;
     cout << "Įveskite studento pažymius (-į), baigę įveskite 0" << endl;
-    do{
-        
-        int *pazymiaii = new int[studentas.u +1];
+    do
+    {
+
+        int *pazymiaii = new int[studentas.u + 1];
         cin >> pp;
-        
+
         while (pp > 10 || pp < 0)
         {
             cout << "Įveskite tinkamą rezultatą" << endl;
@@ -167,33 +167,33 @@ void NDpazymiai(Stud &studentas){
             stopp == true;
             break;
         }
-        for(int i = 0; i < studentas.u; i++){
+        for (int i = 0; i < studentas.u; i++)
+        {
             pazymiaii[i] = studentas.pazymiai[i];
         }
         pazymiaii[studentas.u] = pp;
-        
+
         studentas.u++;
         delete[] studentas.pazymiai;
         studentas.pazymiai = pazymiaii;
-        
-    }while(stopp != true);
 
+    } while (stopp != true);
 }
 
+void ND1(Stud &studentas)
+{
 
+    int pp = rand() % 10 + 1;
 
+    int *pazymiaii = new int[studentas.u + 1];
 
+    for (int i = 0; i < studentas.u; i++)
+    {
+        pazymiaii[i] = studentas.pazymiai[i];
+    }
+    pazymiaii[studentas.u] = pp;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    studentas.u++;
+    delete[] studentas.pazymiai;
+    studentas.pazymiai = pazymiaii;
+}

@@ -73,9 +73,9 @@ int main()
             int A = rand() % 10 + 2;
             for (int i = 0; i < A; i++)
             {
-                int P = rand() % 10 + 1;
-                stud.pazymiai[i] = P;
+                ND1(stud);
             }
+
             stud.EGrez = rand() % 10 + 1;
             VISIstud.push_back(stud);
             cout << "..." << endl;
@@ -95,8 +95,7 @@ int main()
             int A = rand() % 10 + 2;
             for (int i = 0; i < A; i++)
             {
-                int P = rand() % 10 + 1;
-                stud.pazymiai[i] = P;
+                ND1(stud);
             }
             stud.EGrez = rand() % 10 + 1;
             VISIstud.push_back(stud);
