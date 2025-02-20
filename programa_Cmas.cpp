@@ -35,8 +35,9 @@ int main()
                 getline(cin, stud.pavarde);
             }
 
-
-            stud.EGrez = rand() % 10 + 1;
+            cout << "Įveskite egzamino bala" << endl;
+            cin >> stud.EGrez;
+            //stud.EGrez = rand() % 10 + 1;
             NDpazymiai(stud);
             cout << "..." << endl;
             VISIstud.push_back(stud);

@@ -1,6 +1,9 @@
 #include "programa.h"
 
-main()
+//i structa susidet funckijas kad skaiciuotu vidurkius ir pazymius t.t. ir callinti stud.pazymiai; accumulate naudot
+
+
+int main()
 {
     srand(time(NULL));
     cout << "Pasirinkite: 1 - duomenys įvedinėjami ranka, 2 - pažymiai generuojami, 3 - generuojami visi studentų duomenys, 4 - baigti" << endl;
@@ -54,7 +57,9 @@ main()
 
             } while (stop1 != true);
 
-            stud.EGrez = rand() % 10 + 1;
+            //stud.EGrez = rand() % 10 + 1;
+            cout << "Įveskite egzamino pažymį" << endl;
+            cin >> stud.EGrez;
             cout << "..." << endl;
             VISIstud.push_back(stud);
 
@@ -123,7 +128,7 @@ main()
     }
     if (meniu == 4)
     {
-        return EXIT_SUCCESS;
+        return 0;
     }
 
     cout << setw(15) << left << "Pavardė" << setw(15) << left << "Vardas" << setw(15) << left << "Galutinis (Vid.) / Galutinis (Med.)\n";
