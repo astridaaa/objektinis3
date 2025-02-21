@@ -41,6 +41,8 @@ struct Stud
     string vardas, pavarde;
     int egzaminas;
     vector<int> nd;
+    double BalasGalutinisMed;
+    double BalasGalutinisVid;
 };
 
 bool tinkamas_char(string vardas)
@@ -66,7 +68,33 @@ bool tinkamas_int(int skaicius)
     }
     return true;
 }
+double galutinismed(Stud studentas)
+{
+    double med;
+    sort(studentas.nd.begin(), studentas.nd.end());
+    if (studentas.nd.size() % 2 == 0)
+    {
+        med = (studentas.nd[studentas.nd.size() / 2 - 1] + studentas.nd[studentas.nd.size() / 2]) / 2;
+    }
+    else
+    {
+        med = studentas.nd[round(studentas.nd.size() / 2) - 1];
+    }
+    return round((0.4 * med + 0.6 * studentas.egzaminas) * 100) / 100;
+}
 
+double galutinisvid(Stud studentas)
+{
+    double vidurkis;
+    double suma{0.0};
+    for (size_t ss = 0; ss < studentas.nd.size(); ss++)
+    {
+        suma += studentas.nd[ss];
+    }
+
+    vidurkis = suma / studentas.nd.size();
+    return round((0.4 * vidurkis + 0.6 * studentas.egzaminas) * 100) / 100;
+}
 void pazymiu_ivedimas(Stud &studentas)
 {
     bool stop1 = false;
@@ -190,15 +218,14 @@ void duomenu_ivedimas(vector<Stud> &studentai)
         if (meniu == 1)
         {
             pazymiu_ivedimas(studentas);
-            cout << endl;
-            for (int i : studentas.nd)
-            {
-                cout << i << endl;
-            }
+            studentas.BalasGalutinisMed = galutinismed(studentas);
+            studentas.BalasGalutinisVid = galutinisvid(studentas);
         }
         else if (meniu == 2)
         {
             paz_gener(studentas);
+            studentas.BalasGalutinisMed = galutinismed(studentas);
+            studentas.BalasGalutinisVid = galutinisvid(studentas);
         }
         studentai.push_back(studentas);
 
@@ -216,39 +243,11 @@ void duomenu_generavimas(vector<Stud> &studentai)
         vardai(studentas);
         studentas.egzaminas = rand() % 10 + 1;
         paz_gener(studentas);
+        studentas.BalasGalutinisMed = galutinismed(studentas);
+        studentas.BalasGalutinisVid = galutinisvid(studentas);
         studentai.push_back(studentas);
     }
 }
-
-double galutinismed(Stud studentas)
-{
-    double med;
-    sort(studentas.nd.begin(), studentas.nd.end());
-    if (studentas.nd.size() % 2 == 0)
-    {
-        med = (studentas.nd[studentas.nd.size() / 2 - 1] + studentas.nd[studentas.nd.size() / 2]) / 2;
-    }
-    else
-    {
-        med = studentas.nd[round(studentas.nd.size() / 2) - 1];
-    }
-    return round((0.4 * med + 0.6 * studentas.egzaminas) * 100) / 100;
-}
-
-double galutinisvid(Stud studentas)
-{
-    double vidurkis;
-    double suma{0.0};
-    for (size_t ss = 0; ss < studentas.nd.size(); ss++)
-    {
-        suma += studentas.nd[ss];
-    }
-
-    vidurkis = suma / studentas.nd.size();
-    return round((0.4 * vidurkis + 0.6 * studentas.egzaminas) * 100) / 100;
-}
-
-
 
 void fileskait(vector<Stud> &studentai)
 {
@@ -282,46 +281,85 @@ void fileskait(vector<Stud> &studentai)
         }
         studentas.egzaminas = studentas.nd.back();
         studentas.nd.pop_back();
+        studentas.BalasGalutinisVid = galutinisvid(studentas);
+        studentas.BalasGalutinisMed = galutinismed(studentas);
         studentai.push_back(studentas);
     }
 }
-//milijonus su tuo nejasnu vest, updatint random vietoj srand, printf implementint //random device rd
-//std::mt19937 64 bits naudot mt(rd()) jeigu nera tai chromo biblioteka naudot
-//uniform int distribution<int> dist(1. 11)
+// milijonus su tuo nejasnu vest, updatint random vietoj srand, printf implementint //random device rd
+// std::mt19937 64 bits naudot mt(rd()) jeigu nera tai chromo biblioteka naudot
+// uniform int distribution<int> dist(1. 11)
 //...skaidrese yra fore su dist(mt)
 
-
-
-void print(vector<Stud> visi, bool outputFILE)
+bool PalygintiVardas(Stud stud1, Stud stud2)
 {
-    int pagalx;
+    return stud1.vardas < stud2.vardas;
+}
+
+bool PalygintiPavardes(Stud stud1, Stud stud2)
+{
+    return stud1.pavarde < stud2.pavarde;
+}
+
+bool PalygintiBalaMed(Stud stud1, Stud stud2)
+{
+    return stud1.BalasGalutinisMed > stud2.BalasGalutinisMed;
+}
+
+bool PalygintiBalaVid(Stud stud1, Stud stud2)
+{
+    return stud1.BalasGalutinisVid > stud2.BalasGalutinisVid;
+}
+
+void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
+{
+    int SkaiciuotiPagal;
     cout << "Galutinis balas skaičiuojamas pagal:" << endl;
     cout << "1 - medianą\n";
     cout << "2 - vidurkį\n";
-    cin >> pagalx;
-    std::ostream* out;
-    //std:: ofstream f;
-    if(outputFILE){
-        std::ofstream f("isvedimas.txt");
+    cin >> SkaiciuotiPagal;
+    std::ostream *out;
+    std::ofstream f;
+    if (outputFILE)
+    {
+        f.open("isvedimas.txt");
         out = &f;
     }
-    else out = &cout;
-    if (pagalx == 1)
-    {   
+    else
+        out = &cout;
+
+    if (RusiavimasPagal == 1)
+    {
+        sort(visi.begin(), visi.end(), PalygintiVardas);
+    }
+    else if (RusiavimasPagal == 2)
+    {
+        sort(visi.begin(), visi.end(), PalygintiPavardes);
+    }
+//pagal mediana
+    if (SkaiciuotiPagal == 1)
+    {
+        if (RusiavimasPagal == 3)
+        {
+            sort(visi.begin(), visi.end(), PalygintiBalaMed);
+        }
         *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Med.)\n";
         *out << "----------------------------------------------------" << endl;
         for (Stud j : visi)
         {
-            *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << galutinismed(j) << endl;
+            *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << j.BalasGalutinisMed << endl;
         }
     }
-    else
-    {
+    //skaiciuojam rn pagal vidurki
+    else{
+        if (RusiavimasPagal == 3){
+            sort(visi.begin(), visi.end(), PalygintiBalaVid);
+        }
         *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Vid.)\n";
         *out << "----------------------------------------------------" << endl;
         for (Stud j : visi)
         {
-            *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << galutinisvid(j) << endl;
+            *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
         }
     }
 }
