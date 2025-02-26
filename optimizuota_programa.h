@@ -1,5 +1,5 @@
-
-// visi includai
+#ifndef optimizuota_programa.h
+#define optimizuota_programa.h
 
 #include <iostream>
 #include <iomanip>

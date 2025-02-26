@@ -1,7 +1,5 @@
 #include "optimizuota_programa.h"
 
-// maina NEKEIST
-
 int main()
 {
     srand(time(NULL));
