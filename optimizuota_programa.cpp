@@ -44,8 +44,7 @@ int main()
         break;
     }
     case 5:
-    {
-        int testavimas;
+    {   int testavimas;
         cout << "Testuoti su 1 - 10,000 studentu; 2 - 100,000 studentu; 3 - 1,000,000 studentu" << endl;
         cin >> testavimas;
 
