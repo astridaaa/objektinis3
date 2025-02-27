@@ -1,5 +1,3 @@
-#ifndef optimizuota_programa.h
-#define optimizuota_programa.h
 
 #include <iostream>
 #include <iomanip>
@@ -31,8 +29,6 @@ using std::streamsize;
 using std::string;
 using std::vector;
 
-int meniu;
-int paz;
 struct Stud
 {
     string vardas, pavarde;

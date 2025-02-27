@@ -1,7 +1,11 @@
-#include "optimizuota_programa.h"
+//#include "optimizuota_programa.h"
+#include "Funkciju_aprasai.h"
 
 int main()
 {
+    int meniu;
+    int paz;
+
     srand(time(NULL));
     vector<Stud> visi;
     int rusiavimas;
@@ -11,14 +15,16 @@ int main()
     {
     case 1:
     {
-        duomenu_ivedimas(visi);
-        print(visi, false, 4);
+        filePasirinkimas();
+        //duomenu_ivedimas(visi, meniu);
+        //print(visi, false, 4);
+        //vectorius us nenormu sarasui ir tada lygini ir jei susilygina ir tada neprintina
         break;
     }
 
     case 2:
     {
-        duomenu_ivedimas(visi);
+        duomenu_ivedimas(visi, meniu);
         print(visi, false, 4);
         break;
     }

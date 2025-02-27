@@ -1,3 +1,8 @@
+#include "Funkciju_aprasai.h"
+// #include "optimizuota_programa.h"
+
+// su sistem dir
+// randomiseris
 
 bool tinkamas_char(string vardas)
 {
@@ -136,7 +141,7 @@ Stud vardai(Stud &studentas)
     }
 }
 
-void duomenu_ivedimas(vector<Stud> &studentai)
+void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
 {
     bool stop;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -349,4 +354,47 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
             *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << galutinis(j, 1) << endl;
         }
     }
+}
+
+string filePasirinkimas()
+{
+    system("dir /b *.txt > temp.txt"); //reikia vienos rodykles nes tada ne apendina bet overwritina
+    ifstream f;
+    string eilute;
+    int sumaeil = 0;
+    int pasirinkimas;
+    vector<string> txtfiles;
+    vector<string> nenorimiFiles = {"isvedimas.txt", "vardai_moteru.txt", "vardai_vyru.txt", "temp.txt"}; // temp.txt reikes isdelintint pries dedant i file arba i vektoriu itraukti
+    f.open("temp.txt");
+    while (getline(f, eilute))
+    {   bool pasikartojantis;
+        for (int a = 1; a <= nenorimiFiles.size(); a++)
+        {
+            if (eilute != nenorimiFiles[a - 1])
+            {
+                pasikartojantis = false;
+            }
+            else
+            {
+                pasikartojantis = true;
+                break;
+            }
+        }
+        if (!pasikartojantis)
+        {
+            txtfiles.push_back(eilute);
+        }
+    }
+    f.close();
+    system("del temp.txt");
+    cout << "Pasirinkite file: " << endl;
+    int a = 1;
+
+    for (int i = 0; i < txtfiles.size(); i++)
+    {
+        cout << txtfiles[i] << " |" << i+1 << " pasirinkimas" << endl;
+    }
+    cin >> pasirinkimas;
+    return txtfiles[pasirinkimas -1];
+    // returna reikes padaryti
 }
