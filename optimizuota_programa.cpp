@@ -9,7 +9,7 @@ int main()
     srand(time(NULL));
     vector<Stud> visi;
     int rusiavimas;
-    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - baigti programa" << endl;
+    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - generuoti files, 6 - baigti programa" << endl;
     while (true)
     {
         try
@@ -115,6 +115,17 @@ int main()
         break;
     }
     case 5:
+    {
+        GeneruotiFiles(10);
+    }
+
+
+
+
+
+
+
+    case 6:
     {   return 0;}
     }
 }

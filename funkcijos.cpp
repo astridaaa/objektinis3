@@ -512,3 +512,27 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
         }
     }
 }
+
+void GeneruotiFiles(int StudSkaicius){
+    string FileName = "Studentai" +  std::to_string(StudSkaicius) + ".txt" ;
+    std::stringstream BufferisTest;
+    std::ofstream f;
+    f.open(FileName);
+    int pazSk = rand() % 20 +1;
+    BufferisTest << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Pavarde" << std::setw(15) << std::left;
+    for(int j = 1; j <= pazSk; j++){
+        if(j != pazSk ){
+            BufferisTest << "ND" + std::to_string(j) << std:: setw(15) << std::left;
+        }
+        else BufferisTest << "EG rez." << endl;
+    }
+    for(int i = 1; i <= StudSkaicius; i++){
+        BufferisTest << std::setw(15) << std::left << "Vardas" + std::to_string(i) << std:: setw(15) << std::left << "Pavarde" + std::to_string(i) << std:: setw(15) << std::left;
+    for(int j = 1; j <= pazSk; j++){
+        BufferisTest << rand() % 10 +1 << std::setw(15) << std::left;
+    }
+    BufferisTest << endl;
+    }
+    f << BufferisTest.str();
+    f.close();
+}
