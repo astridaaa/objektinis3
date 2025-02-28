@@ -73,7 +73,7 @@ int main()
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     throw "Neteisingas pasirinkimas, iveskite skaiciu 1 arba 2";
                 }
-                if (printinimas != 1 || printinimas != 2)
+                if (printinimas != 1 && printinimas != 2)
                 {
                     throw "Neteisingas pasirinkimas, iveskite skaiciu 1 arba 2";
                 }

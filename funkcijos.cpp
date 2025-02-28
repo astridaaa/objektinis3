@@ -30,10 +30,11 @@ double galutinis(Stud studentas, int PagalSkaiciavimas)
     if (PagalSkaiciavimas == 0)
     {
         double med;
-        if(studentas.nd.size() == 1){
+        if (studentas.nd.size() == 1)
+        {
             med = studentas.nd[0];
         }
-        
+
         else if (studentas.nd.size() % 2 == 0)
         {
             sort(studentas.nd.begin(), studentas.nd.end());
@@ -49,18 +50,19 @@ double galutinis(Stud studentas, int PagalSkaiciavimas)
     {
         double vidurkis;
         double suma{0.0};
-        if(studentas.nd.size() == 1){
+        if (studentas.nd.size() == 1)
+        {
             vidurkis = studentas.nd[0];
         }
-        else{
-            for (size_t ss = 0; ss < studentas.nd.size(); ss++)
+        else
         {
-            suma += studentas.nd[ss];
-        }
+            for (size_t ss = 0; ss < studentas.nd.size(); ss++)
+            {
+                suma += studentas.nd[ss];
+            }
 
-        vidurkis = suma / studentas.nd.size();
-        
-    }
+            vidurkis = suma / studentas.nd.size();
+        }
         return round((0.4 * vidurkis + 0.6 * studentas.egzaminas) * 100) / 100;
     }
 }
@@ -87,7 +89,8 @@ void pazymiu_ivedimas(Stud &studentas)
                 {
                     throw "Neteisingai ivestas skaicius";
                 }
-                if(paz == 0 && studentas.nd.empty()){
+                if (paz == 0 && studentas.nd.empty())
+                {
                     throw "Iveskite bent viena pazymi";
                 }
                 if (paz == 0)
@@ -347,6 +350,23 @@ void fileskait(vector<Stud> &studentai)
     string testuojamasFile = filePasirinkimas();
     cout << testuojamasFile << endl;
     f.open(testuojamasFile); // atsidarau file su kuriuo viska testuosiu
+    while (true)
+    {
+        try
+        {
+            if (!f)
+            {
+                throw "Failo atidaryti nepavyko";
+            }
+            break;
+        }
+        catch (const char *masyvas)
+        {
+            cout << masyvas << endl;
+            std::terminate();
+        }
+    }
+
     int iteracijos;
 
     (testuojamasFile == "kursiokai.txt") ? iteracijos = 0 : iteracijos = 2;
