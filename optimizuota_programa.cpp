@@ -122,6 +122,7 @@ int main()
         int tyrimoPasirinkimas;
         cout << "1- tyrimas 1, 2- tyrimas 2\n";
         cin >> tyrimoPasirinkimas;
+        tyrimai(tyrimoPasirinkimas);
 
 
 
@@ -136,5 +137,5 @@ int main()
         }
         if (tyrimoPasirinkimas == 2)
         {
-        }
-    }*/
+        }*/
+    }

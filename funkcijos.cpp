@@ -513,12 +513,13 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
     }
 }
 
-void GeneruotiFiles(int StudSkaicius){
+double GeneruotiFiles(int StudSkaicius){
     string FileName = "Studentai" +  std::to_string(StudSkaicius) + ".txt" ;
     std::stringstream BufferisTest;
     std::ofstream f;
     f.open(FileName);
     int pazSk = rand() % 20 +1;
+     auto start = std::chrono::high_resolution_clock::now(); //pradedu laika matoti
     BufferisTest << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Pavarde" << std::setw(15) << std::left;
     for(int j = 1; j <= pazSk; j++){
         if(j != pazSk ){
@@ -533,12 +534,38 @@ void GeneruotiFiles(int StudSkaicius){
     }
     BufferisTest << endl;
     }
-    f << BufferisTest.str();
+    f << BufferisTest.rdbuf();
     f.close();
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start; //gaunu skirtuma kiek vienam failui uztruko laiko sugeneruot
+    return diff.count();
 }
 
-void tyrimai(int pasirinkimasTyrimo){
-    /*for(int i : 5){
-        cout << i;
-    }*/
+void tyrimai(int pasirinkimasTyrimo)
+{
+    if (pasirinkimasTyrimo == 1)
+    {
+        for (int a = 1000; a <= 10000000; a *= 10)
+        {
+            cout << "Studentai" << a << ".txt\n";
+            double laikas = 0.0;
+            for (int i = 0; i < 3; i++)
+            {   
+                double s = GeneruotiFiles(a);
+                cout << i + 1 << " iteracija: " << s << "s"<< endl;
+                laikas += s;
+            }
+            cout << "Studentai" << a << " vidutiniskai generuoja: " << laikas / 3 << "s" << endl;
+            cout << "...\n";
+        }
+    }
 }
+
+//sukuriu 5 files => 
+//startuoju du laikus (vienas rodys kiek laiko uztrunka tris kartus parunnint tik i bufferi ir tada breakina, o kitas skaiciuoja toliau)
+//kiekviena po tris kartus ir paimu kiek laiko uztruko TIK IDEIT I BUFERI viska
+//duomenis pradedu det i vektorius (naudoju galutinio funckija ir jei maziau daugiau 5 skirstau kaip reikia)
+//Stud visidaug5 ir visimaz5 pagal galutini bala
+//i du atskirus files vedu abu vektorius
+//is pradziu pakuriu tyrima pirma ir jei is pat pradziu buvo pasirinktas pirmas galo su if statement if ==2 nedarau ir tik ta laika matuoju jei ne pisu toliau
+//pagal tai coutinu laika
