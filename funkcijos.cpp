@@ -281,6 +281,24 @@ string filePasirinkimas()
     vector<string> txtfiles;
     vector<string> nenorimiFiles = {"isvedimas.txt", "vardai_moteru.txt", "vardai_vyru.txt", "temp.txt", "Studentai10000000.txt", "Pirmunai1000.txt", "Pirmunai10000.txt", "Pirmunai100000.txt", "Pirmunai1000000.txt", "Pirmunai10000000.txt", "Nesimokantys1000.txt", "Nesimokantys10000.txt", "Nesimokantys100000.txt", "Nesimokantys1000000.txt", "Nesimokantys10000000.txt"};
     f.open("temp.txt");
+
+    while (true)
+    {
+        try
+        {
+            if (!f)
+            {
+                throw "Failo atidaryti nepavyko";
+            }
+            break;
+        }
+        catch (const char *masyvas)
+        {
+            cout << masyvas << endl;
+            return 0;
+        }
+    }
+
     while (getline(f, eilute))
     {
         bool pasikartojantis;
@@ -339,7 +357,6 @@ string filePasirinkimas()
 
 void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasLaikas)
 {
-    // TRUE - testavimas, FALSE - nuskaitymas is file su file pasirinkiams
     double visasLaikas = 0.0;
     vector<string> visaeil;
     Stud studentas;
@@ -359,8 +376,7 @@ void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasL
     }
     cout << "...\n";
     cout << testuojamasFile << endl;
-
-    f.open(testuojamasFile); // atsidarau file su kuriuo viska testuosiu
+    f.open(testuojamasFile); 
     while (true)
     {
         try
@@ -377,11 +393,8 @@ void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasL
             std::terminate();
         }
     }
-
     int iteracijos;
-
-    (testuojamasFile == "kursiokai.txt") ? iteracijos = 0 : iteracijos = 1;
-
+    if(testuojamasFile == "kursiokai.txt") ? iteracijos = 0 : iteracijos = 1;
     for (int i = 0; i <= iteracijos; i++)
     {
         studentai.clear();
@@ -401,8 +414,7 @@ void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasL
             else
                 break;
         }
-
-        for (string s : visaeil) // SKAITO PIRMA MANO BLOGA EILUTE
+        for (string s : visaeil) 
         {
             std::istringstream f(s);
             f >> studentas.vardas >> studentas.pavarde;
@@ -496,6 +508,23 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
     std::ofstream f;
     f.open("isvedimas.txt");
 
+    while (true)
+    {
+        try
+        {
+            if (!f)
+            {
+                throw "Nepavyko atidaryti failo";
+            }
+            break;
+        }
+        catch (const char *masyvas)
+        {
+            cout << masyvas << endl;
+            return 0;
+        }
+    }
+
     if (outputFILE)
     {
         out = &f;
@@ -549,8 +578,26 @@ double GeneruotiFiles(int StudSkaicius)
     std::stringstream BufferisTest;
     std::ofstream f;
     f.open(FileName);
+
+    while (true)
+    {
+        try
+        {
+            if (!f)
+            {
+                throw "Nepavyko atidaryti failo";
+            }
+            break;
+        }
+        catch (const char *masyvas)
+        {
+            cout << masyvas << endl;
+            return 0;
+        }
+    }
+
     int pazSk = dist(mt);
-    auto start = std::chrono::high_resolution_clock::now(); // pradedu laika matoti
+    auto start = std::chrono::high_resolution_clock::now(); 
     BufferisTest << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left;
     for (int j = 1; j <= pazSk; j++)
     {
@@ -577,20 +624,19 @@ double GeneruotiFiles(int StudSkaicius)
     f << BufferisTest.rdbuf();
     f.close();
     auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = end - start; // gaunu skirtuma kiek vienam failui uztruko laiko sugeneruot
+    std::chrono::duration<double> diff = end - start;
     return diff.count();
 }
 
 void vectorIdejimas(int studSkaicius, vector<Stud> &pirmunai, vector<Stud> &nesimokantys, double &BendrasLaikas)
 {
     string file = "Studentai" + std::to_string(studSkaicius) + ".txt";
-    vector<Stud> studentaiTest; // viska pridejineju i sita vektoriu
+    vector<Stud> studentaiTest; 
     fileskait(studentaiTest, true, file, BendrasLaikas);
 
     double visasLaikas1 = 0.0;
-    // jau antra funckija
     for (int c = 0; c < 2; c++)
-    { // double laikas1;
+    { 
         auto start1 = std::chrono::high_resolution_clock::now();
         for (Stud j : studentaiTest)
         {
@@ -617,6 +663,23 @@ void PrintVektorius(vector<Stud> nesimokantys, vector<Stud> pirmunai, int a, int
     std::stringstream buferis;
     std::ofstream f, F;
     f.open(FILEMOK);
+
+    while (true)
+    {
+        try
+        {
+            if (!f)
+            {
+                throw "Nepavyko atidaryti file";
+            }
+            break;
+        }
+        catch (const char *masyvas)
+        {
+            cout << masyvas << endl;
+            return 0;
+        }
+    }
 
     if (RusiavimasPagal == 1)
     {
