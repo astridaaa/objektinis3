@@ -376,7 +376,7 @@ void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasL
     }
     cout << "...\n";
     cout << testuojamasFile << endl;
-    f.open(testuojamasFile); 
+    f.open(testuojamasFile);
     while (true)
     {
         try
@@ -394,7 +394,8 @@ void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasL
         }
     }
     int iteracijos;
-    if(testuojamasFile == "kursiokai.txt") ? iteracijos = 0 : iteracijos = 1;
+    if (testuojamasFile == "kursiokai.txt")
+        ? iteracijos = 0 : iteracijos = 1;
     for (int i = 0; i <= iteracijos; i++)
     {
         studentai.clear();
@@ -414,7 +415,7 @@ void fileskait(vector<Stud> &studentai, bool a, string filePav, double &BendrasL
             else
                 break;
         }
-        for (string s : visaeil) 
+        for (string s : visaeil)
         {
             std::istringstream f(s);
             f >> studentas.vardas >> studentas.pavarde;
@@ -597,7 +598,7 @@ double GeneruotiFiles(int StudSkaicius)
     }
 
     int pazSk = dist(mt);
-    auto start = std::chrono::high_resolution_clock::now(); 
+    auto start = std::chrono::high_resolution_clock::now();
     BufferisTest << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left;
     for (int j = 1; j <= pazSk; j++)
     {
@@ -631,12 +632,12 @@ double GeneruotiFiles(int StudSkaicius)
 void vectorIdejimas(int studSkaicius, vector<Stud> &pirmunai, vector<Stud> &nesimokantys, double &BendrasLaikas)
 {
     string file = "Studentai" + std::to_string(studSkaicius) + ".txt";
-    vector<Stud> studentaiTest; 
+    vector<Stud> studentaiTest;
     fileskait(studentaiTest, true, file, BendrasLaikas);
 
     double visasLaikas1 = 0.0;
     for (int c = 0; c < 2; c++)
-    { 
+    {
         auto start1 = std::chrono::high_resolution_clock::now();
         for (Stud j : studentaiTest)
         {
@@ -751,6 +752,24 @@ void PrintVektorius(vector<Stud> nesimokantys, vector<Stud> pirmunai, int a, int
         f.close();
 
         f.open(FILENESIMOK);
+
+        while (true)
+        {
+            try
+            {
+                if (!f)
+                {
+                    throw "Nepavyko atidaryti file";
+                }
+                break;
+            }
+            catch (const char *masyvas)
+            {
+                cout << masyvas << endl;
+                return 0;
+            }
+        }
+
         buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
         buferis << "----------------------------------------------------" << endl;
         for (Stud j : nesimokantys)

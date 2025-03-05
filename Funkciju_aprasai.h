@@ -30,7 +30,7 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
 
 string filePasirinkimas();
 
-double GeneruotiFiles(int StudSkaicius); //sukuria files ir returnina per kiek laiko sugeneruoja file BE NUSKAITYMO I VEKTORIU
+double GeneruotiFiles(int StudSkaicius); 
 
 void tyrimai(int pasirinkimasTyrimo);
 

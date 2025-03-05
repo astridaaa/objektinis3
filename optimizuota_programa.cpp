@@ -1,4 +1,3 @@
-// #include "optimizuota_programa.h"
 #include "Funkciju_aprasai.h"
 
 int main()
