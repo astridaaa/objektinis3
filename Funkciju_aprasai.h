@@ -26,6 +26,8 @@ bool PalygintiBalaMed(Stud &stud1, Stud &stud2);
 
 bool PalygintiBalaVid(Stud &stud1, Stud &stud2);
 
+bool PalygintiKategorijas(Stud &stud1, Stud &stud2)
+
 void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
 
 string filePasirinkimas();
