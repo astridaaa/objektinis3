@@ -1,7 +1,12 @@
 # objektinis-
 
-//rūšiavimas pagal galutinį balą
-
+|             | Failo iš įrašų nuskaitymo laikas (s)| Įrašų rūšiavimo laikas (s)| Įrašų dalijimo į dvi grupes laikas (s)| Išvedimo į failą laikas "protingų" ir "nesimokančių" (s)|
+|-------------|----------------------------------|------------------------|------------------------------------|------------------------------------------------------|
+| Studentai1000.txt| 0.007 | 0.000 | 0.001 | 0.007 |
+| Studentai10000.txt | 0.050 | 0.010 | 0.005 | 0.032 |
+| Studentai100000.txt | 0.394 | 0.169 | 0.049 | 0.243 |
+| Studentai1000000.txt | 3.391 | 2.423 | 0.440 | 2.590 |
+| Studentai10000000.txt | 36.527 | 30.858 | 4.014 | 23.340 |
 
 
 
