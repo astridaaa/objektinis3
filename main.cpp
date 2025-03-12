@@ -1,5 +1,5 @@
 #include "functions.h"
-
+//reikes arba su templates arba padaryt tris naujus files ir tsg i folderius sudeti strategijas!!!!!
 int main()
 {
 

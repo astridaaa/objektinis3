@@ -42,7 +42,7 @@ int main(){
 
         for(int a = 1000; a <= 10000000; a *= 10){
             string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
-            cout << "...\n" << testavimoFile << endl;
+            cout << "...\n" << std::to_string(a) + ".txt" << endl;
         
             
             /*std::vector<Stud> studentai;
@@ -51,6 +51,8 @@ int main(){
             nuskaitymasFile(rusiavimasPagal,testavimoFile, visasLaikas, studentai);
             studentuIsskirstymas(studentai, visasLaikas, pirmunai, nesimokantys);
             studentuRusiavimas(rusiavimasPagal, pirmunai, nesimokantys, visasLaikas);
+            testavimasPrint(studentai, pirmunai, nesimokantys, a);
+            cout << "Bendras programos vykdymo laikas" << visasLaikas << "s" << endl;
         }
         
         break;

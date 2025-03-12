@@ -1,3 +1,5 @@
+#ifndef main_h
+#define main_h
 
 #include <iostream>
 #include <iomanip>
@@ -40,3 +42,4 @@ struct Stud
     vector<int> nd;
     double BalasGalutinisVid;
 };
+#endif

@@ -30,6 +30,8 @@
 *.exe
 *.out
 *.app
+main.cpp
+main.h
 studentai10.txt
 studentai1000.txt
 studentai10000.txt
