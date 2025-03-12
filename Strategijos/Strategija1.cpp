@@ -1,8 +1,3 @@
-//includas is funkciju main respiratory su ../#
-//includas nauju funkciju, kurios su templates startegija.h
-//mainas grn
-
-//leidziant linkinti du files nes dabar visas 3 startegijas paleidziu
 
 #include "strategija.h"
 #include "../functions.h"
