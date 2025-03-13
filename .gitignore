@@ -32,6 +32,7 @@
 *.app
 main.cpp
 main.h
+functions.h
 studentai10.txt
 studentai1000.txt
 studentai10000.txt
