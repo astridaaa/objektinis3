@@ -1,6 +1,6 @@
 # OOP
 
-Programa skirta failų, turinčių skirtingą studentų skaičių, testavimui su STL konteineriais: vektoriumi, dvipuse eile bei sąrašu
+Programa skirta failų, turinčių skirtingą studentų skaičių, testavimui su STL konteineriais: vektoriumi, dvipuse eile bei sąrašu.
 
 # Kompiuterio specifikacijos
 - AMD Ryzen 5 5500U CPU
