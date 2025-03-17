@@ -16,7 +16,7 @@ int main(){
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw "Iveskite skaiciu";
                 break;}
-            else if (meniu > 3 || meniu < 1)
+            else if (konteineriuTipas > 3 || konteineriuTipas < 1)
                 {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-3";
                 break;}
             break;
@@ -37,7 +37,7 @@ int main(){
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw "Iveskite skaiciu";
                 break;}
-            else if (meniu > 4 || meniu < 1)
+            else if (rusiavimasPagal > 4 || rusiavimasPagal < 1)
                 {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-4";
                 break;}
             break;
