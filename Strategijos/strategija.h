@@ -1,6 +1,5 @@
 
 #include "../functions.h"
-// #include "../main.h"
 using std::deque;
 using std::list;
 
@@ -301,89 +300,19 @@ void vykdomaPrograma2(int rusiavimasPagal, konteineris &studentai, konteineris &
 }
 
 template <typename konteineris>
-void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, double& visasLaikas)
-{nesimokantys.clear();
-auto start = std::chrono::high_resolution_clock::now();
-
-// Use partition instead of remove_if
-auto it = std::partition(studentai.begin(), studentai.end(), 
-                        [](Stud& studentas){ return studentas.BalasGalutinisVid >= 5; });
-
-// Reserve space to avoid reallocations
-nesimokantys.resize(std::distance(it, studentai.end()));
-
-// Move elements from partitioned section to nesimokantys
-//std::move(it, studentai.end(), std::back_inserter(nesimokantys));
-std::copy(it, studentai.end(), nesimokantys.begin());
-// Erase the moved elements from original container
-studentai.erase(it, studentai.end());
-
-auto end = std::chrono::high_resolution_clock::now();
-std::chrono::duration<double> diff = end - start;
-cout << "Studentu skirstymas i dvi grupes truko: " << diff.count() << "s" << endl;
-visasLaikas += diff.count();
-    /*nesimokantys.clear();
+void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, double &visasLaikas)
+{
+    nesimokantys.clear();
     auto start = std::chrono::high_resolution_clock::now();
-    auto it = std::remove_if(studentai.begin(), studentai.end(), [](Stud& studentas){ return studentas.BalasGalutinisVid < 5; }); // adresas nuo kurio removino viska
-    nesimokantys.resize(std::distance(it, studentai.end()));//naujai
+    auto it = std::partition(studentai.begin(), studentai.end(), [](Stud &studentas){ return studentas.BalasGalutinisVid >= 5; });
+    nesimokantys.resize(std::distance(it, studentai.end()));
     std::copy(it, studentai.end(), nesimokantys.begin());
     studentai.erase(it, studentai.end());
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = end - start;
     cout << "Studentu skirstymas i dvi grupes truko: " << diff.count() << "s" << endl;
-    visasLaikas += diff.count();*/
-}
-
-
-
-/*template <typename konteineris>
-void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, double& visasLaikas)
-{
-    nesimokantys.clear();
-    auto start = std::chrono::high_resolution_clock::now();
-
-    // Partition the students: Move failing students to the end
-    auto it = std::remove_if(studentai.begin(), studentai.end(), 
-                             [](const Stud& studentas) { return studentas.BalasGalutinisVid >= 5; });
-
-    // Resize nesimokantys to fit the failing students
-    nesimokantys.resize(std::distance(it, studentai.end()));
-
-    // Copy the failing students to nesimokantys
-    std::move(it, studentai.end(), nesimokantys.begin());
-
-    // Remove failing students from studentai
-    studentai.erase(it, studentai.end());
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = end - start;
-    std::cout << "Studentu skirstymas i dvi grupes truko: " << diff.count() << "s" << std::endl;
-}*/
-
-
-/*template <typename konteineris>
-void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, double& visasLaikas)
-{
-    nesimokantys.clear(); // Clear the container before adding elements
-    auto start = std::chrono::high_resolution_clock::now();
-
-    // Remove_if moves failing students (BalasGalutinisVid < 5) to the back and returns new end
-    auto it = std::remove_if(studentai.begin(), studentai.end(), [](Stud& studentas) { return studentas.BalasGalutinisVid >= 5; });
-
-    // Resize nesimokantys to fit the new students
-    nesimokantys.resize(std::distance(it, studentai.end()));
-
-    // Copy the removed students into nesimokantys
-    std::copy(it, studentai.end(), nesimokantys.begin());
-
-    // Actually erase the moved elements from studentai
-    studentai.erase(it, studentai.end());
-
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> diff = end - start;
-    std::cout << "Studentu skirstymas i dvi grupes truko: " << diff.count() << "s" << std::endl;
     visasLaikas += diff.count();
-}*/
+}
 
 template <typename konteineris>
 void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, double &visasLaikas, int RusiuotiPagal)
@@ -391,20 +320,17 @@ void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, doub
     if constexpr (std::is_same_v<konteineris, std::list<Stud>>)
     {
         auto start = std::chrono::high_resolution_clock::now();
-        std::thread t1([&]()
-                       {
-                if (RusiuotiPagal == 1) Studentai.sort(PalygintiVardas);
-                else if (RusiuotiPagal == 2) Studentai.sort(PalygintiPavardes);
-                else if (RusiuotiPagal == 3) Studentai.sort(PalygintiKategorijas);
-                else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
+        std::thread t1([&](){
+            if (RusiuotiPagal == 1) Studentai.sort(PalygintiVardas);
+            else if (RusiuotiPagal == 2) Studentai.sort(PalygintiPavardes);
+            else if (RusiuotiPagal == 3) Studentai.sort(PalygintiKategorijas);
+            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
 
-        std::thread t2([&]()
-                       {
-                if (RusiuotiPagal == 1) nesimokantys.sort(PalygintiVardas);
-                else if (RusiuotiPagal == 2) nesimokantys.sort(PalygintiPavardes);
-                else if (RusiuotiPagal == 3) nesimokantys.sort(PalygintiKategorijas);
-                else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
-
+        std::thread t2([&](){
+            if (RusiuotiPagal == 1) nesimokantys.sort(PalygintiVardas);
+            else if (RusiuotiPagal == 2) nesimokantys.sort(PalygintiPavardes);
+            else if (RusiuotiPagal == 3) nesimokantys.sort(PalygintiKategorijas);
+            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
         t1.join();
         t2.join();
         auto end = std::chrono::high_resolution_clock::now();
@@ -415,31 +341,26 @@ void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, doub
     else{
         auto start = std::chrono::high_resolution_clock::now();
 
-            std::thread t1([&]()
-                           {
-                if(RusiuotiPagal == 1) std::sort(Studentai.begin(), Studentai.end(), PalygintiVardas);
-                else if(RusiuotiPagal == 2) std::sort(Studentai.begin(), Studentai.end(), PalygintiPavardes);
-                else if(RusiuotiPagal == 3) std::sort(Studentai.begin(), Studentai.end(), PalygintiKategorijas);
-                else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
+        std::thread t1([&](){
+            if(RusiuotiPagal == 1) std::sort(Studentai.begin(), Studentai.end(), PalygintiVardas);
+            else if(RusiuotiPagal == 2) std::sort(Studentai.begin(), Studentai.end(), PalygintiPavardes);
+            else if(RusiuotiPagal == 3) std::sort(Studentai.begin(), Studentai.end(), PalygintiKategorijas);
+            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
 
-            std::thread t2([&]()
-                           {
-                if(RusiuotiPagal == 1) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiVardas);
-                else if(RusiuotiPagal == 2) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiPavardes);
-                else if(RusiuotiPagal == 3) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiKategorijas);
-                else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
-
+        std::thread t2([&](){
+            if(RusiuotiPagal == 1) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiVardas);
+            else if(RusiuotiPagal == 2) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiPavardes);
+            else if(RusiuotiPagal == 3) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiKategorijas);
+            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
             t1.join();
             t2.join();
-
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> difference = end - start;
             cout << "Studentu rusiavimas uztruko: " << difference.count() << "s" << endl;
-            visasLaikas += difference.count();
-    }
+            visasLaikas += difference.count();}
 }
 
-template <typename konteineris>
+/*template <typename konteineris>
 void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPagal, int a){
     string FILEMOK = "Pirmunai" + std::to_string(a) + ".txt";
     string FILENESIMOK = "Nesimokantys" + std::to_string(a) + ".txt";
@@ -450,7 +371,7 @@ void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPaga
     f.clear();
     buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
     buferis << "----------------------------------------------------" << endl;
-    for (Stud j : studentai)//PAKEICIAU IS PIRMUNU I STUDENTUS
+    for (Stud j : studentai)
     {
         buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
     }
@@ -469,10 +390,7 @@ void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPaga
     }
     F << buferis.rdbuf();
     F.close();
-}
-
-
-
+}*/
 
 template <typename konteineris>
 void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &nesimokantys)
@@ -488,9 +406,6 @@ void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &
         StudentuRusiavimas3(studentai, nesimokantys, visasLaikas, rusiavimasPagal);
         //testavimasPrint(studentai, nesimokantys, nesimokantys, a);
         print(studentai, nesimokantys, rusiavimasPagal, a);
-        /*for(Stud j : nesimokantys){
-            cout << j.vardas << j.pavarde <<j.BalasGalutinisVid << endl;
-        }*/
         cout << "Bendras programos vykdymo laikas: " << visasLaikas << "s" << endl;
     }
 }
