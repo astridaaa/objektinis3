@@ -249,7 +249,7 @@ void PrintVektorius(konteineris &nesimokantys, konteineris &pirmunai, int a, int
         buferis << "----------------------------------------------------" << endl;
         for (Stud j : pirmunai)
         {
-            buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
+            buferis << std::setw(16) << std::left << j.getPavarde() << std::setw(16) << std::left << j.getVardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
         }
         f << buferis.rdbuf();
         buferis.str("");
@@ -261,7 +261,7 @@ void PrintVektorius(konteineris &nesimokantys, konteineris &pirmunai, int a, int
         buferis << "----------------------------------------------------" << endl;
         for (Stud j : nesimokantys)
         {
-            buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
+            buferis << std::setw(16) << std::left << j.getPavarde() << std::setw(16) << std::left << j.getVardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
         }
         f << buferis.rdbuf();
         f.close();
@@ -281,9 +281,9 @@ void vectorIdejimas(int studSkaicius, konteineris &pirmunai, konteineris &nesimo
     for (int c = 0; c < 2; c++)
     {
         auto start1 = std::chrono::high_resolution_clock::now();
-        for ( Stud j : studentaiTest)
+        for ( Stud& j : studentaiTest)
         {
-            if (j.BalasGalutinisVid >= 5)
+            if (j.galutinisBalas() >= 5)
             {
                 pirmunai.push_back(j);
             }

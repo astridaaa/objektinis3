@@ -1,7 +1,7 @@
 
 #include "../functions.h"
-using std::deque;
-using std::list;
+//using std::deque;
+//using std::list;
 
 template <typename konteineris>
 void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &studentai)
@@ -45,7 +45,7 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
             {
                 studentas.setND(pazymys)    //studentas.nd.push_back(pazymys);
             }
-            studentas.setEgzaminas = studentas.grazintiPaskutini();            //studentas.egzaminas = studentas.nd.back();
+            studentas.setEgzaminas(studentas.grazintiPaskutini());            //studentas.egzaminas = studentas.nd.back();
             studentas.removeLast();    //studentas.nd.pop_back();
             studentas.galutinis();      //padaro galutini            //studentas.BalasGalutinisVid = galutinis(studentas, 1);
             studentai.push_back(studentas);
@@ -63,8 +63,7 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
     if constexpr (std::is_same_v<konteineris, vector<Stud>> || std::is_same_v<konteineris, deque<Stud>>)
     {
         studentai.shrink_to_fit();
-    }
-}
+    }}
 
 template <typename konteineris>
 void studentuIsskirstymas(konteineris &studentai, double &visasLaikas, konteineris &pirmunai, konteineris &nesimokantys)
@@ -76,7 +75,7 @@ void studentuIsskirstymas(konteineris &studentai, double &visasLaikas, konteiner
         auto start1 = std::chrono::high_resolution_clock::now();
         for (Stud& j : studentai)
         {
-            if (j.BalasGalutinisVid >= 5)
+            if (j.galutinisBalas() >= 5)
             {
                 pirmunai.push_back(j);
             }
@@ -190,7 +189,7 @@ void testavimasPrint(konteineris &studentai, konteineris &pirmunai, konteineris 
     buferis << "----------------------------------------------------" << endl;
     for (Stud j : studentai)//PAKEICIAU IS PIRMUNU I STUDENTUS
     {
-        buferis << std::setw(16) << std::left << j.pavarde() << std::setw(16) << std::left << j.vardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
+        buferis << std::setw(16) << std::left << j.getPavarde() << std::setw(16) << std::left << j.getVardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
     }
 
     f << buferis.rdbuf();
@@ -203,7 +202,7 @@ void testavimasPrint(konteineris &studentai, konteineris &pirmunai, konteineris 
     buferis << "----------------------------------------------------" << endl;
     for (Stud j : nesimokantys)
     {
-        buferis << std::setw(16) << std::left << j.pavarde() << std::setw(16) << std::left << j.vardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
+        buferis << std::setw(16) << std::left << j.getPavarde() << std::setw(16) << std::left << j.getVardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
     }
 
     F << buferis.rdbuf();
@@ -251,7 +250,7 @@ void studentuIsskirstymas2(konteineris &studentai, double &visasLaikas, konteine
     while (true)
     {
         --it; // nes pointina ne i galutini elementa, bet i adresa po galutinio elemento
-        if (it->BalasGalutinisVid < 5)
+        if (it->galutinisBalas() < 5)
         {
             nesimokantys.push_back(*it);
             studentai.pop_back();
