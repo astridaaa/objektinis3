@@ -43,10 +43,6 @@ using konteinerisVector = std::vector<Stud>;
 using konteinerisList = std::list<Stud>;
 using konteinerisDeque = std::deque<Stud>;
 
-/*void setVardas(const string& vardas){this->vardas=vardas;};
-void setPavarde(const string& pavarde){this->pavarde=pavarde;};
-void setEgzaminas(const int& egzaminas){this->egzaminas=egzaminas;};
-void setBalasGalutinisVid(const int& BalasGalutinisVid){this->BalasGalutinisVid=BalasGalutinisVid;};*/
 /*struct Stud
 {
     string vardas, pavarde;
@@ -62,21 +58,41 @@ class Stud{
         vector<int> nd;
         double BalasGalutinisVid;
     public:
-        Stud() : egzaminas{0}, nd{}, BalasGalutinisVid{0} {};
-        Stud(std::istream& is);
+        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0) {};
+        //Stud(std::istream& is);
         ~Stud() {};
-        //setteriai
-        std::istream& skaitytiStudentas(std::istream&);
-        //getteriai
-        inline string vardas() const {return vardas;};   
-        inline string pavarde() const {return pavarde;};
-        inline double galutinisBalas() const {return BalasGalutinisVid;};
+        //set
+        //std::istream& skaitytiStudentas(std::istream&);
+        void setVardas(const string& var){vardas=var;};
+        void setPavarde(const string& pav){pavarde=pav;};
+        void setEgzaminas(const int& egz){egzaminas=egz;};
+        void setBalasGalutinisVid(const int& Balas){BalasGalutinisVid=Balas;};
+        void setPaz(const int& Paz){paz=Paz;};
         void setND(int& paz){nd.push_back(paz);};
+        //get
+        inline string getVardas() const {return vardas;};   
+        inline string getPavarde() const {return pavarde;};
+        inline int getEgzaminas() const {return egzaminas;};
+        inline double getGalutinisBalas() const {return BalasGalutinisVid;};
+        inline const vector<int>& getND() const {return nd;};
+        
+        void removeLast(){nd.pop_back();};
+        double galutinis(){
+            double suma =0;
+            double vidurkis;
+            if(nd.size() == 1){
+                vidurkis = nd[0];
+            }
+            else{
+                for (size_t ss = 0; ss < nd.size(); ss++){
+                suma += nd[ss];}
+                vidurkis = suma / nd.size();}
+            return round((0.4 * vidurkis + 0.6 * egzaminas) * 100) / 100;}
+
 };
 
-Stud::Stud(std::istream& is){   //realizacija konstruktoriaus Stud(std::istream& is);
-    skaitytiStudentas(is);
-}
+
+
 
 // Studentas::skaitytiStudentas realizacija
 std::istream& Stud::skaitytiStudentas(std::istream&) {
