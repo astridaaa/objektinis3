@@ -331,23 +331,13 @@ string filePasirinkimas()
 
 bool PalygintiVardas(const Stud &stud1, const Stud &stud2)
 {
-    return stud1.vardas() < stud2.vardas();
+    return stud1.getVardas() < stud2.getVardas();
 }
 
 bool PalygintiPavardes(const Stud &stud1, const Stud &stud2)
 {
-    return stud1.pavarde() < stud2.pavarde();
+    return stud1.getPavarde() < stud2.getPavarde();
 }
-
-/*bool PalygintiBalaMed(const Stud &stud1, const Stud &stud2)
-{
-    return galutinis(stud1, 0) > galutinis(stud2, 0);
-}
-
-bool PalygintiBalaVid(const Stud &stud1, const Stud &stud2)
-{
-    return galutinis(stud1, 1) > galutinis(stud2, 1);
-}*/
 
 bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2){
     return stud1.galutinisBalas() > stud2.galutinisBalas();

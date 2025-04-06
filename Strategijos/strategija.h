@@ -7,7 +7,7 @@ template <typename konteineris>
 void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &studentai)
 {
     double laikas = 0.0;
-    std::vector<string> visaeil;
+   std::vector<string> visaeil;
     Stud studentas; //klase studentas
     int pazymys;
     string eilute;
@@ -22,6 +22,7 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
         bufferis.str("");
         auto start = std::chrono::high_resolution_clock::now();
         bufferis << f.rdbuf();
+        f.close();
         getline(bufferis, eilute1);
         while (bufferis)
         {
@@ -33,9 +34,11 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
             else
                 break;
         }
-        string var, pav;
-        for (string s : visaeil)
+
+        for (const string& s : visaeil)
         {
+            string var, pav; 
+            Stud studentas; 
             std::istringstream f(s);
             f >> var >> pav;
             studentas.setVardas(var);
@@ -43,12 +46,13 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
             //studentas.nd.clear();
             while (f >> pazymys)
             {
-                studentas.setND(pazymys)    //studentas.nd.push_back(pazymys);
+                studentas.setND(pazymys);    //studentas.nd.push_back(pazymys);
             }
             studentas.setEgzaminas(studentas.grazintiPaskutini());            //studentas.egzaminas = studentas.nd.back();
             studentas.removeLast();    //studentas.nd.pop_back();
             studentas.galutinis();      //padaro galutini            //studentas.BalasGalutinisVid = galutinis(studentas, 1);
             studentai.push_back(studentas);
+            
         }
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> diff = end - start;
@@ -57,13 +61,14 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
             laikas += diff.count();
         }
     }
-    f.close();
+
     visasLaikas += (laikas / 2);
     cout << "Failo nuskaitymas vidutiniskai truko: " << laikas / 2 << "s" << endl;
     if constexpr (std::is_same_v<konteineris, vector<Stud>> || std::is_same_v<konteineris, deque<Stud>>)
     {
         studentai.shrink_to_fit();
-    }}
+    }visaeil.clear();
+}
 
 template <typename konteineris>
 void studentuIsskirstymas(konteineris &studentai, double &visasLaikas, konteineris &pirmunai, konteineris &nesimokantys)
@@ -187,7 +192,7 @@ void testavimasPrint(konteineris &studentai, konteineris &pirmunai, konteineris 
     f.clear();
     buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
     buferis << "----------------------------------------------------" << endl;
-    for (Stud j : studentai)//PAKEICIAU IS PIRMUNU I STUDENTUS
+    for (Stud& j : studentai)//PAKEICIAU IS PIRMUNU I STUDENTUS
     {
         buferis << std::setw(16) << std::left << j.getPavarde() << std::setw(16) << std::left << j.getVardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
     }
@@ -200,7 +205,7 @@ void testavimasPrint(konteineris &studentai, konteineris &pirmunai, konteineris 
     F.clear();
     buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
     buferis << "----------------------------------------------------" << endl;
-    for (Stud j : nesimokantys)
+    for (Stud& j : nesimokantys)
     {
         buferis << std::setw(16) << std::left << j.getPavarde() << std::setw(16) << std::left << j.getVardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
     }
@@ -213,6 +218,9 @@ template <typename konteineris>
 void vykdomaPrograma(int &rusiavimasPagal, konteineris &studentai, konteineris &pirmunai, konteineris &nesimokantys){
     for (int a = 1000; a <= 10000000; a *= 10)
     {
+        studentai.clear();
+        nesimokantys.clear();
+        pirmunai.clear();
         double visasLaikas = 0.0;
         string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
         cout << "...\n"
@@ -288,6 +296,8 @@ void vykdomaPrograma2(int rusiavimasPagal, konteineris &studentai, konteineris &
 {
     for (int a = 1000; a <= 10000000; a *= 10)
     {
+        studentai.clear();
+        nesimokantys.clear();
         double visasLaikas = 0.0;
         string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
         cout << "...\n"
@@ -399,6 +409,8 @@ void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &
 {
     for (int a = 1000; a <= 10000000; a *= 10)
     {
+        studentai.clear();
+        nesimokantys.clear();
         double visasLaikas = 0.0;
         string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
         cout << "...\n" << std::to_string(a) + ".txt" << endl;
