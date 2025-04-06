@@ -97,6 +97,7 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
             studentas.setPavarde(pavarde);
             //f >> studentas.vardas >> studentas.pavarde;
             //studentas.nd.clear();
+            studentas.resetND();
             while (f >> pazymys)
             {
                 studentas.setND(pazymys)
