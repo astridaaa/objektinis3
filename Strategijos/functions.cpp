@@ -25,7 +25,7 @@ bool tinkamas_int(int skaicius)
     return true;
 }
 
-double galutinis(Stud studentas, int PagalSkaiciavimas)
+/*double galutinis(Stud studentas, int PagalSkaiciavimas)
 {
     if (PagalSkaiciavimas == 0)
     {
@@ -65,9 +65,9 @@ double galutinis(Stud studentas, int PagalSkaiciavimas)
         }
         return round((0.4 * vidurkis + 0.6 * studentas.egzaminas) * 100) / 100;
     }
-}
+}*/
 
-void pazymiu_ivedimas(Stud &studentas)
+/*void pazymiu_ivedimas(Stud &studentas)
 {
     bool stop1 = false;
     cout << "Iveskite studento pazymius (-i), baige iveskite 0" << endl;
@@ -108,9 +108,9 @@ void pazymiu_ivedimas(Stud &studentas)
         }
 
     } while (!stop1);
-}
+}*/
 
-void paz_gener(Stud &studentas)
+/*void paz_gener(Stud &studentas)
 {
     int A = rand() % 10 + 2;
     for (int i = 0; i < A; i++)
@@ -119,9 +119,9 @@ void paz_gener(Stud &studentas)
         studentas.nd.push_back(P);
     }
     cout << endl;
-}
+}*/
 
-Stud vardai(Stud &studentas)
+/*Stud vardai(Stud &studentas)
 {
     int vsuma = 0;
     string F, m, n;
@@ -165,9 +165,9 @@ Stud vardai(Stud &studentas)
         studentas.pavarde = Pmasyvas[W];
         return studentas;
     }
-}
+}*/
 
-void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
+/*void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
 {
     bool stop;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -256,9 +256,9 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
         cout << "..." << endl;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     } while (!stop);
-}
+}*/
 
-void duomenu_generavimas(vector<Stud> &studentai)
+/*void duomenu_generavimas(vector<Stud> &studentai)
 {
     int Q = rand() % 10 + 1;
     for (int i = 0; i < Q; i++)
@@ -269,7 +269,7 @@ void duomenu_generavimas(vector<Stud> &studentai)
         paz_gener(studentas);
         studentai.push_back(studentas);
     }
-}
+}*/
 
 string filePasirinkimas()
 {
@@ -329,32 +329,31 @@ string filePasirinkimas()
     return txtfiles[pasirinkimas - 1];
 }
 
-bool PalygintiVardas(Stud &stud1, Stud &stud2)
+bool PalygintiVardas(const Stud &stud1, const Stud &stud2)
 {
-    return stud1.vardas < stud2.vardas;
+    return stud1.vardas() < stud2.vardas();
 }
 
-bool PalygintiPavardes(Stud &stud1, Stud &stud2)
+bool PalygintiPavardes(const Stud &stud1, const Stud &stud2)
 {
-    return stud1.pavarde < stud2.pavarde;
+    return stud1.pavarde() < stud2.pavarde();
 }
 
-bool PalygintiBalaMed(Stud &stud1, Stud &stud2)
+/*bool PalygintiBalaMed(const Stud &stud1, const Stud &stud2)
 {
     return galutinis(stud1, 0) > galutinis(stud2, 0);
 }
 
-bool PalygintiBalaVid(Stud &stud1, Stud &stud2)
+bool PalygintiBalaVid(const Stud &stud1, const Stud &stud2)
 {
     return galutinis(stud1, 1) > galutinis(stud2, 1);
+}*/
+
+bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2){
+    return stud1.galutinisBalas() > stud2.galutinisBalas();
 }
 
-bool PalygintiKategorijas(Stud &stud1, Stud &stud2)
-{
-    return stud1.BalasGalutinisVid > stud2.BalasGalutinisVid;
-}
-
-void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
+/*void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
 {
     int SkaiciuotiPagal;
     cout << "Galutinis balas skaiciuojamas pagal: 1 - mediana, 2 - vidurkis" << endl;
@@ -428,7 +427,7 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
             *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << galutinis(j, 1) << endl;
         }
     }
-}
+}*/
 
 double GeneruotiFiles(int StudSkaicius)
 {

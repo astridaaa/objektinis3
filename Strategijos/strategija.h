@@ -8,7 +8,7 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
 {
     double laikas = 0.0;
     std::vector<string> visaeil;
-    Stud studentas;
+    Stud studentas; //klase studentas
     int pazymys;
     string eilute;
     string eilute1;
@@ -33,18 +33,21 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
             else
                 break;
         }
+        string var, pav;
         for (string s : visaeil)
         {
             std::istringstream f(s);
-            f >> studentas.vardas >> studentas.pavarde;
-            studentas.nd.clear();
+            f >> var >> pav;
+            studentas.setVardas(var);
+            studentas.setPavarde(pav);
+            //studentas.nd.clear();
             while (f >> pazymys)
             {
-                studentas.nd.push_back(pazymys);
+                studentas.setND(pazymys)    //studentas.nd.push_back(pazymys);
             }
-            studentas.egzaminas = studentas.nd.back();
-            studentas.nd.pop_back();
-            studentas.BalasGalutinisVid = galutinis(studentas, 1);
+            studentas.setEgzaminas = studentas.grazintiPaskutini();            //studentas.egzaminas = studentas.nd.back();
+            studentas.removeLast();    //studentas.nd.pop_back();
+            studentas.galutinis();      //padaro galutini            //studentas.BalasGalutinisVid = galutinis(studentas, 1);
             studentai.push_back(studentas);
         }
         auto end = std::chrono::high_resolution_clock::now();
@@ -71,7 +74,7 @@ void studentuIsskirstymas(konteineris &studentai, double &visasLaikas, konteiner
     for (int i = 0; i < 3; i++)
     {
         auto start1 = std::chrono::high_resolution_clock::now();
-        for (Stud j : studentai)
+        for (Stud& j : studentai)
         {
             if (j.BalasGalutinisVid >= 5)
             {
@@ -187,7 +190,7 @@ void testavimasPrint(konteineris &studentai, konteineris &pirmunai, konteineris 
     buferis << "----------------------------------------------------" << endl;
     for (Stud j : studentai)//PAKEICIAU IS PIRMUNU I STUDENTUS
     {
-        buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
+        buferis << std::setw(16) << std::left << j.pavarde() << std::setw(16) << std::left << j.vardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
     }
 
     f << buferis.rdbuf();
@@ -200,7 +203,7 @@ void testavimasPrint(konteineris &studentai, konteineris &pirmunai, konteineris 
     buferis << "----------------------------------------------------" << endl;
     for (Stud j : nesimokantys)
     {
-        buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
+        buferis << std::setw(16) << std::left << j.pavarde() << std::setw(16) << std::left << j.vardas() << std::setw(16) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
     }
 
     F << buferis.rdbuf();
@@ -304,7 +307,7 @@ void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, doub
 {
     nesimokantys.clear();
     auto start = std::chrono::high_resolution_clock::now();
-    auto it = std::partition(studentai.begin(), studentai.end(), [](Stud &studentas){ return studentas.BalasGalutinisVid >= 5; });
+    auto it = std::partition(studentai.begin(), studentai.end(), [](Stud &studentas){ return studentas.galutinisBalas() >= 5; });
     nesimokantys.resize(std::distance(it, studentai.end()));
     std::copy(it, studentai.end(), nesimokantys.begin());
     studentai.erase(it, studentai.end());

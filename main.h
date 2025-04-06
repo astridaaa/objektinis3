@@ -57,8 +57,9 @@ class Stud{
         int egzaminas;
         vector<int> nd;
         double BalasGalutinisVid;
+        bool balasSuskaiciuotas;
     public:
-        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0) {};
+        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {};
         //Stud(std::istream& is);
         ~Stud() {};
         //set
@@ -66,38 +67,33 @@ class Stud{
         void setVardas(const string& var){vardas=var;};
         void setPavarde(const string& pav){pavarde=pav;};
         void setEgzaminas(const int& egz){egzaminas=egz;};
-        void setBalasGalutinisVid(const int& Balas){BalasGalutinisVid=Balas;};
-        void setPaz(const int& Paz){paz=Paz;};
+        void setBalasGalutinisVid(const int& Balas){BalasGalutinisVid=Balas; balasSuskaiciuotas = true;};
+        //void setPaz(const int& Paz){paz=Paz;};
         void setND(int& paz){nd.push_back(paz);};
         //get
         inline string getVardas() const {return vardas;};   
         inline string getPavarde() const {return pavarde;};
         inline int getEgzaminas() const {return egzaminas;};
-        inline double getGalutinisBalas() const {return BalasGalutinisVid;};
+        inline double galutinisBalas() const {return BalasGalutinisVid;}; //nezinau ar reikia, nes jau yar metodas sitam
         inline const vector<int>& getND() const {return nd;};
+        inline const grazintiPaskutini() const {return nd.back();};
         
         void removeLast(){nd.pop_back();};
-        double galutinis(){
-            double suma =0;
-            double vidurkis;
-            if(nd.size() == 1){
-                vidurkis = nd[0];
+        double galutinis() {
+            if(!balasSuskaiciuotas){
+                double suma = 0;
+                double vidurkis;
+                if (nd.size() == 1) {
+                    vidurkis = nd[0];} 
+                    else {
+                    for (size_t ss = 0; ss < nd.size(); ss++) {
+                        suma += nd[ss];}
+                    vidurkis = suma / nd.size();}
+                BalasGalutinisVid = round((0.4 * vidurkis + 0.6 * egzaminas) * 100) / 100;
+                balasSuskaiciuotas = true; 
             }
-            else{
-                for (size_t ss = 0; ss < nd.size(); ss++){
-                suma += nd[ss];}
-                vidurkis = suma / nd.size();}
-            return round((0.4 * vidurkis + 0.6 * egzaminas) * 100) / 100;}
-
+            return BalasGalutinisVid;
+        }
 };
-
-
-
-
-// Studentas::skaitytiStudentas realizacija
-std::istream& Stud::skaitytiStudentas(std::istream&) {
-    // Member funkcijos realizacija paremta ankstesniojo 2-ojo darbo funkcija: 
-    // std::istream& skaitytiStudentas(std::istream&, Studentas&)
-  }
 
 #endif

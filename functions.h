@@ -6,27 +6,19 @@ bool tinkamas_char(string vardas);
 
 bool tinkamas_int(int skaicius);
 
-double galutinis(Stud studentas, int PagalSkaiciavimas);
+//double galutinis(Stud studentas, int PagalSkaiciavimas);
 
-void pazymiu_ivedimas(Stud &studentas);
+//void pazymiu_ivedimas(Stud &studentas);
 
-void paz_gener(Stud &studentas);
+//void paz_gener(Stud &studentas);
 
-Stud vardai(Stud &studentas);
+//Stud vardai(Stud &studentas);
 
-void duomenu_ivedimas(vector<Stud> &studentai, int meniu);
+//void duomenu_ivedimas(vector<Stud> &studentai, int meniu);
 
-void duomenu_generavimas(vector<Stud> &studentai);
+//void duomenu_generavimas(vector<Stud> &studentai);
 
 string filePasirinkimas();
-
-Stud::Stud(std::istream& is){   //realizacija konstruktoriaus Stud(std::istream& is);
-    skaitytiStudentas(is);
-}
-std::istream& Stud::skaitytiStudentas(std::istream&) {
-    // Member funkcijos realizacija paremta ankstesniojo 2-ojo darbo funkcija: 
-    // std::istream& skaitytiStudentas(std::istream&, Studentas&)
-  }
 
 template <typename konteineris>
 void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLaikas)
@@ -96,18 +88,23 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
             else
                 break;
         }
+        string vardas, pavarde;
         for ( string s : visaeil)
         {
             std::istringstream f(s);
-            f >> studentas.vardas >> studentas.pavarde;
-            studentas.nd.clear();
+            f>>vardas>>pavarde;
+            studentas.setVardas(vardas);
+            studentas.setPavarde(pavarde);
+            //f >> studentas.vardas >> studentas.pavarde;
+            //studentas.nd.clear();
             while (f >> pazymys)
             {
-                studentas.nd.push_back(pazymys);
+                studentas.setND(pazymys)
+                //studentas.nd.push_back(pazymys);
             }
-            studentas.egzaminas = studentas.nd.back();
-            studentas.nd.pop_back();
-            studentas.BalasGalutinisVid = galutinis(studentas, 1);
+            studentas.setEgzaminas(studentas.grazintiPaskutini());            //studentas.egzaminas = studentas.nd.back();
+            studentas.removeLast();            //studentas.nd.pop_back();
+            studentas.galutinis();            //studentas.BalasGalutinisVid = galutinis(studentas, 1);
             studentai.push_back(studentas);
         }
         auto end = std::chrono::high_resolution_clock::now();
@@ -140,13 +137,13 @@ bool PalygintiVardas(Stud &stud1, Stud &stud2);
 
 bool PalygintiPavardes(Stud &stud1, Stud &stud2);
 
-bool PalygintiBalaMed(Stud &stud1, Stud &stud2);
+//bool PalygintiBalaMed(Stud &stud1, Stud &stud2);
 
-bool PalygintiBalaVid(Stud &stud1, Stud &stud2);
+//bool PalygintiBalaVid(Stud &stud1, Stud &stud2);
 
 bool PalygintiKategorijas(Stud &stud1, Stud &stud2);
 
-void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
+//void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
 
 double GeneruotiFiles(int StudSkaicius);
 
