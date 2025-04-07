@@ -83,6 +83,14 @@ Pagrindinės funkcijos:
     </tbody>
 </table>
 
+![image](https://github.com/user-attachments/assets/104a89cd-87d2-456e-a9f2-890a434c034f)
+
+![image](https://github.com/user-attachments/assets/a10f7e54-e4fe-48ef-b793-c06ade5b914e)
+
+![image](https://github.com/user-attachments/assets/4d3b6f9f-1f16-48e4-a388-ff54d30b1d3b)
+
+
+
 
 
 ## v0.4 implementacija naudojant funkcijų šablonus
