@@ -58,37 +58,20 @@ class Stud{
         bool balasSuskaiciuotas;
     public:
         Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {};
-        //Stud(std::istream& is);
         ~Stud() {};
-        //set
-        //std::istream& skaitytiStudentas(std::istream&);
+
         void setVardas(const string& var){vardas=var;}
         void setPavarde(const string& pav){pavarde=pav;}
         void setEgzaminas(const int& egz){egzaminas=egz;}
         void setBalasGalutinisVid(const double& Balas){BalasGalutinisVid=Balas; balasSuskaiciuotas = true;}
-        //void setPaz(const int& Paz){paz=Paz;};
         void setND(int paz){nd.push_back(paz);}
-        //get
-       /* inline string getVardas() const {return vardas;}   
-        inline string getPavarde() const {return pavarde;}
-        inline int getEgzaminas() const {return egzaminas;}
-        inline double galutinisBalas() const {return BalasGalutinisVid;} //nezinau ar reikia, nes jau yar metodas sitam
-        inline const vector<int>& getND() const {return nd;}
-        inline const int& grazintiPaskutini() const { return nd.back();}*/
-
+      
         string getVardas() const {return vardas;}
         string getPavarde() const {return pavarde;}
         int getEgzaminas() const {return egzaminas;}
         double galutinisBalas() const {return BalasGalutinisVid;}
         const std::vector<int>& getND() const {return nd;}
         const int& grazintiPaskutini() const {return nd.back();}
-
-
-
-
-
-        //void resetND(){
-          //  nd.clear();}
         void removeLast(){nd.pop_back();}
         double galutinis() {
             if(!balasSuskaiciuotas){
