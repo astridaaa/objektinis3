@@ -10,11 +10,11 @@ Strategija2: Strategija2.o functions.o
 	g++ -std=c++17 -O3 Strategija2.o functions.o -o Strategija2
 
 Strategija3: Strategija3.o functions.o
-	g++ -std=c++17 -O3 Strategija3.o functions.o -o Strategija3
+	g++ -std=c++17 Strategija3.o functions.o -o Strategija3
 
 #objektiniaifailai
 functions.o:functions.cpp
-	g++ -std=c++17 -O3 -c functions.cpp 
+	g++ -std=c++17 -c functions.cpp 
 
 main.o: main.cpp
 	g++ -std=c++17 -O3 -c main.cpp 
@@ -26,7 +26,7 @@ Strategija2.o:Strategija2.cpp
 	g++ -std=c++17 -O3 -c Strategija2.cpp 
 
 Strategija3.o:Strategija3.cpp
-	g++ -std=c++17 -O3 -c Strategija3.cpp
+	g++ -std=c++17 -c Strategija3.cpp
 
 clean:
 	del *.o *.exe
