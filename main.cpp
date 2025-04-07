@@ -39,22 +39,22 @@ int main()
     {
     case 1:
     {
-        duomenu_ivedimas(visi, meniu);
-        print(visi, false, 4);
+        //duomenu_ivedimas(visi, meniu);
+        //print(visi, false, 4);
         break;
     }
 
     case 2:
     {
-        duomenu_ivedimas(visi, meniu);
-        print(visi, false, 4);
+        //duomenu_ivedimas(visi, meniu);
+        //print(visi, false, 4);
         break;
     }
 
     case 3:
     {
-        duomenu_generavimas(visi);
-        print(visi, false, 4);
+        //duomenu_generavimas(visi);
+        //print(visi, false, 4);
         break;
     }
 
@@ -119,10 +119,10 @@ int main()
     }
     case 5:
     {
-        konteinerisVector pirmunai;
-        konteinerisVector nesimokantys;
-        konteinerisVector studentaiTest;
-        tyrimai(1, pirmunai, nesimokantys, studentaiTest);
+        //konteinerisVector pirmunai;
+        //konteinerisVector nesimokantys;
+        //konteinerisVector studentaiTest;
+        //tyrimai(1, pirmunai, nesimokantys, studentaiTest);
         break;
     }
     case 6:
@@ -156,11 +156,11 @@ int main()
         }
 
         break;
-
+}
     case 7:
     {
         return 0;
     }
     }
-    }
+    
 }

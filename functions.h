@@ -25,7 +25,7 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
 {
     double visasLaikas = 0.0;
     vector<string> visaeil;
-    Stud studentas;
+    //stud studentas
     int pazymys;
     string eilute;
     string eilute1;
@@ -88,19 +88,21 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
             else
                 break;
         }
-        string vardas, pavarde;
+
         for ( string s : visaeil)
         {
+            string vardas, pavarde;
+            Stud studentas;
             std::istringstream f(s);
             f>>vardas>>pavarde;
             studentas.setVardas(vardas);
             studentas.setPavarde(pavarde);
             //f >> studentas.vardas >> studentas.pavarde;
             //studentas.nd.clear();
-            studentas.resetND();
+            //studentas.resetND();
             while (f >> pazymys)
             {
-                studentas.setND(pazymys)
+                studentas.setND(pazymys);
                 //studentas.nd.push_back(pazymys);
             }
             studentas.setEgzaminas(studentas.grazintiPaskutini());            //studentas.egzaminas = studentas.nd.back();
@@ -134,19 +136,13 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
     }
 }
 
-bool PalygintiVardas(Stud &stud1, Stud &stud2);
-
-bool PalygintiPavardes(Stud &stud1, Stud &stud2);
-
-//bool PalygintiBalaMed(Stud &stud1, Stud &stud2);
-
-//bool PalygintiBalaVid(Stud &stud1, Stud &stud2);
-
-bool PalygintiKategorijas(Stud &stud1, Stud &stud2);
-
 //void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
 
 double GeneruotiFiles(int StudSkaicius);
+
+bool PalygintiVardas(const Stud &stud1, const Stud &stud2);
+bool PalygintiPavardes(const Stud &stud1, const Stud &stud2);
+bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2);
 
 template <typename konteineris>
 void PrintVektorius(konteineris &nesimokantys, konteineris &pirmunai, int a, int RusiavimasPagal, double &BendrasLaikas)

@@ -332,45 +332,59 @@ void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, doub
     if constexpr (std::is_same_v<konteineris, std::list<Stud>>)
     {
         auto start = std::chrono::high_resolution_clock::now();
-        std::thread t1([&](){
-            if (RusiuotiPagal == 1) Studentai.sort(PalygintiVardas);
-            else if (RusiuotiPagal == 2) Studentai.sort(PalygintiPavardes);
-            else if (RusiuotiPagal == 3) Studentai.sort(PalygintiKategorijas);
-            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
 
-        std::thread t2([&](){
-            if (RusiuotiPagal == 1) nesimokantys.sort(PalygintiVardas);
-            else if (RusiuotiPagal == 2) nesimokantys.sort(PalygintiPavardes);
-            else if (RusiuotiPagal == 3) nesimokantys.sort(PalygintiKategorijas);
-            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
-        t1.join();
-        t2.join();
+        if (RusiuotiPagal == 1) 
+            Studentai.sort(PalygintiVardas);
+        else if (RusiuotiPagal == 2) 
+            Studentai.sort(PalygintiPavardes);
+        else if (RusiuotiPagal == 3) 
+            Studentai.sort(PalygintiKategorijas);
+        else 
+            cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl;
+
+        if (RusiuotiPagal == 1) 
+            nesimokantys.sort(PalygintiVardas);
+        else if (RusiuotiPagal == 2) 
+            nesimokantys.sort(PalygintiPavardes);
+        else if (RusiuotiPagal == 3) 
+            nesimokantys.sort(PalygintiKategorijas);
+        else 
+            cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl;
+
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> diff = end - start;
         cout << "Studentu rusiavimas uztruko: " << diff.count() << endl;
         visasLaikas += diff.count();
     }
-    else{
+    else
+    {
         auto start = std::chrono::high_resolution_clock::now();
 
-        std::thread t1([&](){
-            if(RusiuotiPagal == 1) std::sort(Studentai.begin(), Studentai.end(), PalygintiVardas);
-            else if(RusiuotiPagal == 2) std::sort(Studentai.begin(), Studentai.end(), PalygintiPavardes);
-            else if(RusiuotiPagal == 3) std::sort(Studentai.begin(), Studentai.end(), PalygintiKategorijas);
-            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
+        if (RusiuotiPagal == 1) 
+            std::sort(Studentai.begin(), Studentai.end(), PalygintiVardas);
+        else if (RusiuotiPagal == 2) 
+            std::sort(Studentai.begin(), Studentai.end(), PalygintiPavardes);
+        else if (RusiuotiPagal == 3) 
+            std::sort(Studentai.begin(), Studentai.end(), PalygintiKategorijas);
+        else 
+            cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl;
 
-        std::thread t2([&](){
-            if(RusiuotiPagal == 1) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiVardas);
-            else if(RusiuotiPagal == 2) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiPavardes);
-            else if(RusiuotiPagal == 3) std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiKategorijas);
-            else cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl; });
-            t1.join();
-            t2.join();
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> difference = end - start;
-            cout << "Studentu rusiavimas uztruko: " << difference.count() << "s" << endl;
-            visasLaikas += difference.count();}
+        if (RusiuotiPagal == 1) 
+            std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiVardas);
+        else if (RusiuotiPagal == 2) 
+            std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiPavardes);
+        else if (RusiuotiPagal == 3) 
+            std::sort(nesimokantys.begin(), nesimokantys.end(), PalygintiKategorijas);
+        else 
+            cout << "Elementu rusiavimas vidutiniskai truko: 0.000s" << endl;
+
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> difference = end - start;
+        cout << "Studentu rusiavimas uztruko: " << difference.count() << "s" << endl;
+        visasLaikas += difference.count();
+    }
 }
+
 
 /*template <typename konteineris>
 void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPagal, int a){
@@ -407,7 +421,7 @@ void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPaga
 template <typename konteineris>
 void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &nesimokantys)
 {
-    for (int a = 1000; a <= 10000000; a *= 10)
+    for (int a = 100000; a <= 1000000; a *= 10)
     {
         studentai.clear();
         nesimokantys.clear();
