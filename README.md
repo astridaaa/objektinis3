@@ -23,6 +23,66 @@ Pagrindinės funkcijos:
 -    `studentuIsskirstymas2()` - studentų išskirstymas nuo galo naudojant iteratorių
 -    `studentuSkirstymas3()` - studentų išskirstymas "nesimokančius" perkeliant į kitą konteinerį
 -    `studentuRusiavimas() / studentuRusiavimas2() / studentuRusiavimas3()` - studentai rikiuojami pagal pasirinktus kriterijus: vardą, pavardę arba galutinį balą, skaičiuojamą pagal vidurkį
+## v1.1 versija | klasių implementacija
+- Pasirinkta strategija: 3 strategija (STL algoritmų implementacija);
+- Pasirinktas konteineris: sąrašas;
+<table class ="fixed">
+    <thead>
+        <tr>
+            <th width=100px></th>
+            <th colspan =3><h2>Klasė</h2></th>
+            <th colspan =3><h2> Struktūra</h2></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Kompiliavimo vėliava</b></td>
+            <td><b>Studentai100000.txt bendras programos vidutinis vykdymo laikas (s)</b></td>
+            <td><b>Studentai1000000.txt bendras programos vidutinis vykdymo laikas (s)</b></td>
+            <td><b>.exe failo dydis (KB)</b></td>
+            <td><b>Studentai100000.txt bendras programos vidutinis vykdymo laikas (s)</b></td>
+            <td><b>Studentai1000000.txt bendras programos vidutinis vykdymo laikas (s)</b></td>
+            <td><b>.exe failo dydis (KB)</b></td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>0.558468</td>
+            <td>6.91962</td>
+            <td>504</td>
+            <td>0.409334</td>
+            <td>4.94592</td>
+            <td>659</td>
+        </tr>
+        <tr>
+            <td>-O1</td>
+            <td>0.322322</td>
+            <td>4.40381</td>
+            <td>283</td>
+            <td>0.262666</td>
+            <td>3.46008</td>
+            <td>328</td>
+        </tr>
+        <tr>
+            <td>-O2</td>
+            <td>0.323005</td>
+            <td>4.32484</td>
+            <td>277</td>
+            <td>0.255264</td>
+            <td>3.59824</td>
+            <td>325</td>
+        </tr>
+        <tr>
+            <td>-O3</td>
+            <td>0.370384</td>
+            <td>4.12048</td>
+            <td>273</td>
+            <td>0.256171</td>
+            <td>3.65432</td>
+            <td>337</td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 ## v0.4 implementacija naudojant funkcijų šablonus
