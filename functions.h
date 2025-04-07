@@ -192,22 +192,19 @@ void PrintVektorius(konteineris &nesimokantys, konteineris &pirmunai, int a, int
             }
             auto t2 = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double> difft = t2 - t1;
-            if (t != 0)
-            {
+            if (t != 0){
                 LaikasRusiavimo += difft.count();
             }
         }
         cout << "Rusiavimas vidutiniskai uztruko: " << LaikasRusiavimo / 2 << "s" << endl;
         BendrasLaikas += (LaikasRusiavimo / 2);
     }
-    else if (RusiavimasPagal == 4)
-    {
+    else if (RusiavimasPagal == 4){
         cout << "Rusiavimas uztruko: 0.000 s" << endl;
     }
 
     double IsvedimoLaikas = 0.0;
-    for (int k = 0; k < 2; k++)
-    {
+    for (int k = 0; k < 2; k++){
         auto start2 = std::chrono::high_resolution_clock::now();
         buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
         buferis << "----------------------------------------------------" << endl;
@@ -292,8 +289,7 @@ void tyrimai(int pasirinkimasTyrimo, konteineris &pirmunai, konteineris &nesimok
     {
         int RusiavimasPagal;
         cout << "Studentus rusiuoti pagal: 1 - vardus, 2 - pavardes, 3 - galutini bala, 4 - duomenu nerusiuoti\n";
-        while (true)
-        {
+        while (true){
             try
             {
                 cin >> RusiavimasPagal;
@@ -304,18 +300,14 @@ void tyrimai(int pasirinkimasTyrimo, konteineris &pirmunai, konteineris &nesimok
                     throw "Neteisingas pasirinkimas, iveskite skaiciu 1-4";
                     break;
                 }
-                else if (RusiavimasPagal > 4 || RusiavimasPagal < 1)
-                {
+                else if (RusiavimasPagal > 4 || RusiavimasPagal < 1){
                     throw "Neteisingas pasirinkimas, iveskite skaiciu 1-4";
                     break;
                 }
-
                 break;
             }
-            catch (const char *masyvas)
-            {
-                cout << masyvas << endl;
-            }
+            catch (const char *masyvas){
+                cout << masyvas << endl;}
         }
         for (int a = 1000; a <= 10000000; a *= 10)
         {

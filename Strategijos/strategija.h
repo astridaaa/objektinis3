@@ -1,14 +1,12 @@
 
 #include "../functions.h"
-//using std::deque;
-//using std::list;
 
 template <typename konteineris>
 void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &studentai)
 {
     double laikas = 0.0;
    std::vector<string> visaeil;
-    Stud studentas; //klase studentas
+    //Stud studentas; //changed
     int pazymys;
     string eilute;
     string eilute1;
@@ -43,14 +41,13 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
             f >> var >> pav;
             studentas.setVardas(var);
             studentas.setPavarde(pav);
-            //studentas.nd.clear();
             while (f >> pazymys)
             {
-                studentas.setND(pazymys);    //studentas.nd.push_back(pazymys);
+                studentas.setND(pazymys);  
             }
-            studentas.setEgzaminas(studentas.grazintiPaskutini());            //studentas.egzaminas = studentas.nd.back();
-            studentas.removeLast();    //studentas.nd.pop_back();
-            studentas.galutinis();      //padaro galutini            //studentas.BalasGalutinisVid = galutinis(studentas, 1);
+            studentas.setEgzaminas(studentas.grazintiPaskutini());      
+            studentas.removeLast();   
+            studentas.galutinis();  
             studentai.push_back(studentas);
             
         }

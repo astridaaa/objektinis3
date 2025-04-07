@@ -119,9 +119,9 @@ int main()
     }
     case 5:
     {
-        //konteinerisVector pirmunai;
-        //konteinerisVector nesimokantys;
-        //konteinerisVector studentaiTest;
+        konteinerisVector pirmunai;
+        konteinerisVector nesimokantys;
+        konteinerisVector studentaiTest;
         //tyrimai(1, pirmunai, nesimokantys, studentaiTest);
         break;
     }
