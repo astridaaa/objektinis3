@@ -6,17 +6,12 @@ bool tinkamas_char(string vardas);
 
 bool tinkamas_int(int skaicius);
 
-//double galutinis(Stud studentas, int PagalSkaiciavimas);
-
-//void pazymiu_ivedimas(Stud &studentas);
-
-//void paz_gener(Stud &studentas);
-
-//Stud vardai(Stud &studentas);
-
-//void duomenu_ivedimas(vector<Stud> &studentai, int meniu);
-
-//void duomenu_generavimas(vector<Stud> &studentai);
+/*double galutinis(Stud studentas, int PagalSkaiciavimas);
+void pazymiu_ivedimas(Stud &studentas);
+void paz_gener(Stud &studentas);
+Stud vardai(Stud &studentas);
+void duomenu_ivedimas(vector<Stud> &studentai, int meniu);
+void duomenu_generavimas(vector<Stud> &studentai);*/
 
 string filePasirinkimas();
 
