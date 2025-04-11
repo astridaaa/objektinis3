@@ -40,14 +40,10 @@ using std::vector;
 using std::deque;
 using std::list;
 
+//move konstruktoriu (move instead of copy)
+/*use it to create a deep copy quickly and without extensive recopying, simply by transferring the memory handles from
+ one object to the next. We can also very easily express ownership of data and transfer responsibility for blocks of heap memory.*/
 
-/*struct Stud
-{
-    string vardas, pavarde;
-    int egzaminas;
-    vector<int> nd;
-    double BalasGalutinisVid;
-};*/
 
 class Stud{
     private:
@@ -58,7 +54,7 @@ class Stud{
         bool balasSuskaiciuotas;
     public:
         Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {};
-        ~Stud() {};
+        ~Stud() {nd.clear();}
 
         void setVardas(const string& var){vardas=var;}
         void setPavarde(const string& pav){pavarde=pav;}
