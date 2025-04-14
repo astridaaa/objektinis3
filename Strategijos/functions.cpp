@@ -67,8 +67,9 @@ bool tinkamas_int(int skaicius)
     }
 }*/
 
-/*void pazymiu_ivedimas(Stud &studentas)
+void pazymiu_ivedimas(Stud &studentas)
 {
+    studentas.removeND();
     bool stop1 = false;
     cout << "Iveskite studento pazymius (-i), baige iveskite 0" << endl;
     do
@@ -89,7 +90,7 @@ bool tinkamas_int(int skaicius)
                 {
                     throw "Neteisingai ivestas skaicius";
                 }
-                if (paz == 0 && studentas.nd.empty())
+                if (paz == 0 && studentas.pazKiekis() == 0)   
                 {
                     throw "Iveskite bent viena pazymi";
                 }
@@ -98,7 +99,7 @@ bool tinkamas_int(int skaicius)
                     stop1 = true;
                 }
                 else
-                    studentas.nd.push_back(paz);
+                    studentas.setND(paz);
                 break;
             }
             catch (const char *masyvas)
@@ -107,21 +108,26 @@ bool tinkamas_int(int skaicius)
             }
         }
 
-    } while (!stop1);
-}*/
 
-/*void paz_gener(Stud &studentas)
+    } while (!stop1);
+    cout << "Pazymiai: ";
+    for(int j =0; j < studentas.pazKiekis(); j++){
+        cout << studentas.getPaz(j) << "      ";
+    }
+}
+
+void paz_gener(Stud &studentas)
 {
     int A = rand() % 10 + 2;
     for (int i = 0; i < A; i++)
     {
         int P = rand() % 10 + 1;
-        studentas.nd.push_back(P);
+        studentas.setND(P);
     }
     cout << endl;
-}*/
+}
 
-/*Stud vardai(Stud &studentas)
+Stud vardai(Stud &studentas)
 {
     int vsuma = 0;
     string F, m, n;
@@ -148,8 +154,8 @@ bool tinkamas_int(int skaicius)
             Pmasyvas.push_back(n);
         }
         f.close();
-        studentas.vardas = Vmasyvas[C];
-        studentas.pavarde = Pmasyvas[W];
+        studentas.setVardas(Vmasyvas[C]);
+        studentas.setPavarde(Pmasyvas[W]);
         return studentas;
     }
     else
@@ -161,17 +167,17 @@ bool tinkamas_int(int skaicius)
             Pmasyvas.push_back(n);
         }
         l.close();
-        studentas.vardas = Vmasyvas[C];
-        studentas.pavarde = Pmasyvas[W];
+        studentas.setVardas(Vmasyvas[C]);
+        studentas.setPavarde(Pmasyvas[W]);
         return studentas;
     }
-}*/
+}
 
-/*void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
+void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
 {
     bool stop;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+    string vardas, pavarde;
     do
     {
         Stud studentas;
@@ -183,8 +189,8 @@ bool tinkamas_int(int skaicius)
             {
                 try
                 {
-                    getline(cin, studentas.vardas);
-                    if (tinkamas_char(studentas.vardas) == false)
+                    getline(cin, vardas);
+                    if (tinkamas_char(vardas) == false)
                     {
                         cin.clear();
                         throw "Neteisingai ivedete studento varda";
@@ -196,18 +202,18 @@ bool tinkamas_int(int skaicius)
                     cout << masyvas << endl;
                 }
             }
-            if (studentas.vardas == "stop")
-            {
+            if (vardas == "stop"){
                 stop = true;
                 break;
             }
+            studentas.setVardas(vardas);
             cout << "Iveskite studento pavarde" << endl;
             while (true)
             {
                 try
                 {
-                    getline(cin, studentas.pavarde);
-                    if (tinkamas_char(studentas.pavarde) == false)
+                    getline(cin, pavarde);
+                    if (tinkamas_char(pavarde) == false)
                     {
                         cin.clear();
                         throw "Neteisingai ivedete studento pavarde";
@@ -219,19 +225,21 @@ bool tinkamas_int(int skaicius)
                     cout << masyvas << endl;
                 }
             }
+            studentas.setPavarde(pavarde);
             cout << "Iveskite egzamino bala" << endl;
+            int egzaminas;
             while (true)
             {
                 try
                 {
-                    cin >> studentas.egzaminas;
+                    cin >> egzaminas;
                     if (cin.fail())
                     {
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         throw "Iveskite skaiciu";
                     }
-                    if (tinkamas_int(studentas.egzaminas) == false)
+                    if (tinkamas_int(egzaminas) == false)
                     {
                         throw "Iveskite teisinga pazymi";
                     }
@@ -241,7 +249,11 @@ bool tinkamas_int(int skaicius)
                 {
                     cout << masyvas << endl;
                 }
+
+                
             }
+            studentas.setEgzaminas(egzaminas);            
+            cout << "studento egzo pazymys: " << studentas.getEgzaminas() << endl;
         }
         if (meniu == 1)
         {
@@ -251,25 +263,26 @@ bool tinkamas_int(int skaicius)
         {
             paz_gener(studentas);
         }
-        studentai.push_back(studentas);
+        studentai.push_back(studentas); //pushbackina i visi vector
 
         cout << "..." << endl;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     } while (!stop);
-}*/
+}
 
-/*void duomenu_generavimas(vector<Stud> &studentai)
+void duomenu_generavimas(vector<Stud> &studentai)
 {
     int Q = rand() % 10 + 1;
     for (int i = 0; i < Q; i++)
     {
         Stud studentas;
         vardai(studentas);
-        studentas.egzaminas = rand() % 10 + 1;
+        int egz = rand() % 10 + 1;
+        studentas.setEgzaminas(egz);
         paz_gener(studentas);
         studentai.push_back(studentas);
     }
-}*/
+}
 
 string filePasirinkimas()
 {
@@ -343,35 +356,59 @@ bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2){
     return stud1.galutinisBalas() > stud2.galutinisBalas();
 }
 
-/*void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
+void printCases(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
 {
     int SkaiciuotiPagal;
-    cout << "Galutinis balas skaiciuojamas pagal: 1 - mediana, 2 - vidurkis" << endl;
-    while (true)
+    cout << "Galutinis balas skaiciuojamas pagal:" << endl;
+    cout << "1 - mediana\n";
+    cout << "2 - vidurki\n";
+    cin >> SkaiciuotiPagal;
+    std::ostream *out;
+    std::ofstream f;
+    f.open("isvedimas.txt");
+
+    if (outputFILE){
+        out = &f;}
+    else{
+        out = &cout;}
+
+    if (RusiavimasPagal == 1){
+        sort(visi.begin(), visi.end(), PalygintiVardas);
+    }
+    else if (RusiavimasPagal == 2){
+        sort(visi.begin(), visi.end(), PalygintiPavardes);
+    }
+    // pagal mediana
+    if (SkaiciuotiPagal == 1)
     {
-        try
+        if (RusiavimasPagal == 3)
         {
-            int sk;
-            cin >> sk;
-            if (cin.fail())
-            {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                throw "Neteisingas pasirinkimas, iveskite skaiciu 1 arba 2";
-            }
-            if (sk != 1 && sk != 2)
-            {
-                throw "Neteisingas pasirinkimas, iveskite skaiciu 1 arba 2";
-            }
-            SkaiciuotiPagal = sk;
-            break;
+            sort(visi.begin(), visi.end(), PalygintiKategorijas);
         }
-        catch (const char *masyvas)
+        *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Med.)\n";
+        *out << "----------------------------------------------------" << endl;
+        for (Stud& j : visi)
         {
-            cout << masyvas << endl;
+            *out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinis() << endl;
         }
     }
+    // skaiciuojam rn pagal vidurki
+    else
+    {
+        if (RusiavimasPagal == 3)
+        {
+            sort(visi.begin(), visi.end(), PalygintiKategorijas);
+        }
+        *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Vid.)\n";
+        *out << "----------------------------------------------------" << endl;
+        for (Stud j : visi)
+        {
+            *out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinis() << endl;
+        }
+    }
+}
 
+void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal){
     std::ostream *out;
     std::ofstream f;
     f.open("isvedimas.txt");
@@ -385,39 +422,23 @@ bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2){
     }
     if (RusiavimasPagal == 1)
     {
-        sort(visi.begin(), visi.end(), PalygintiVardas);
+        sort(visi.begin(), visi.end(), PalygintiVardas); //palyginti vardas ir visas compare functions cj reikes praziuret
     }
     else if (RusiavimasPagal == 2)
     {
         sort(visi.begin(), visi.end(), PalygintiPavardes);
     }
-    if (SkaiciuotiPagal == 1)
-    {
-        if (RusiavimasPagal == 3)
+        else if (RusiavimasPagal == 3)
         {
-            sort(visi.begin(), visi.end(), PalygintiBalaMed);
+            sort(visi.begin(), visi.end(), PalygintiKategorijas);
         }
         *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Med.)\n";
         *out << "----------------------------------------------------" << endl;
-        for (Stud j : visi)
+        for (Stud& j : visi)
         {
-            *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << galutinis(j, 0) << endl;
+            *out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
         }
-    }
-    else
-    {
-        if (RusiavimasPagal == 3)
-        {
-            sort(visi.begin(), visi.end(), PalygintiBalaVid);
-        }
-        *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Vid.)\n";
-        *out << "----------------------------------------------------" << endl;
-        for (Stud j : visi)
-        {
-            *out << std::setw(15) << std::left << j.pavarde << std::setw(15) << std::left << j.vardas << std::setw(15) << std::fixed << std::setprecision(2) << galutinis(j, 1) << endl;
-        }
-    }
-}*/
+}
 
 double GeneruotiFiles(int StudSkaicius)
 {
