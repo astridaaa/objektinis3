@@ -103,7 +103,7 @@ Stud::Stud(const Stud& studCopy){
     balasSuskaiciuotas(studCopy.balasSuskaiciuotas);}
 
 //realizuotas copy assignment konstrukorius
-Stud::Stud& operator=(const Stud& studCopy){
+Stud::Stud& operator=(const Stud& studCopy){ 
     if(this != &studCopy){ //patikrint kad nereiktu be reikalo perrasinet
         vardas = studCopy.vardas;
         pavarde = studCopy.pavarde;
@@ -111,6 +111,17 @@ Stud::Stud& operator=(const Stud& studCopy){
         egzaminas = studCopy.egzaminas;
         BalasGalutinisVid = studCopy.BalasGalutinisVid;
         balasSuskaiciuotas = studCopy.balasSuskaiciuotas;}
+    return *this;//this is a pointer that always points to the current object — the one whose method is being called.
+}
+
+//realizuotas move konstruktorius
+Stud::Stud(Stud&& studMove){
+    vardas(std::move(studMove.vardas));
+    pavarde(std::move(studMove.pavarde));
+    nd(std::move(studMove.nd));
+    egzaminas(std::move(studMove.egzaminas));
+    BalasGalutinisVid(std::move(studMove.BalasGalutinisVid));
+    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas));
 }
 
 using konteinerisVector = std::vector<Stud>;
