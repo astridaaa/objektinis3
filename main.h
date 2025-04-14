@@ -94,18 +94,23 @@ class Stud{
 };
 
 //realizuotas copy konstruktorius
-Stud:: Stud(const Stud& studCopy){
+Stud::Stud(const Stud& studCopy){
     vardas(studCopy.vardas);
     pavarde(studCopy.pavarde);
     egzaminas(studCopy.egzaminas);
     nd(studCopy.nd);
     BalasGalutinisVid(studCopy.BalasGalutinisVid);
-    balasSuskaiciuotas(studCopy.balasSuskaiciuotas);
-}
+    balasSuskaiciuotas(studCopy.balasSuskaiciuotas);}
 
 //realizuotas copy assignment konstrukorius
 Stud::Stud& operator=(const Stud& studCopy){
-
+    if(this != &studCopy){ //patikrint kad nereiktu be reikalo perrasinet
+        vardas = studCopy.vardas;
+        pavarde = studCopy.pavarde;
+        nd = studCopy.nd;
+        egzaminas = studCopy.egzaminas;
+        BalasGalutinisVid = studCopy.BalasGalutinisVid;
+        balasSuskaiciuotas = studCopy.balasSuskaiciuotas;}
 }
 
 using konteinerisVector = std::vector<Stud>;
