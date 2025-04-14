@@ -55,7 +55,7 @@ class Stud{
         Stud& operator=(const Stud& studCopy); //copy assignment
 
         Stud(Stud&& studMove); //move konstruktorius
-        Stud& operator=(Stud&& studMove); //copy assignment 
+        Stud& operator=(Stud&& studMove); //move assignment 
 
         //setteriai
         void setVardas(const string& var){vardas=var;}
@@ -94,16 +94,16 @@ class Stud{
 };
 
 //realizuotas copy konstruktorius
-Stud::Stud(const Stud& studCopy){
-    vardas(studCopy.vardas);
-    pavarde(studCopy.pavarde);
-    egzaminas(studCopy.egzaminas);
-    nd(studCopy.nd);
-    BalasGalutinisVid(studCopy.BalasGalutinisVid);
-    balasSuskaiciuotas(studCopy.balasSuskaiciuotas);}
+Stud::Stud(const Stud& studCopy) :
+    vardas(studCopy.vardas),
+    pavarde(studCopy.pavarde),
+    egzaminas(studCopy.egzaminas),
+    nd(studCopy.nd),
+    BalasGalutinisVid(studCopy.BalasGalutinisVid),
+    balasSuskaiciuotas(studCopy.balasSuskaiciuotas), {}
 
 //realizuotas copy assignment konstrukorius
-Stud::Stud& operator=(const Stud& studCopy){ 
+Stud& Stud operator=(const Stud& studCopy){ 
     if(this != &studCopy){ //patikrint kad nereiktu be reikalo perrasinet
         vardas = studCopy.vardas;
         pavarde = studCopy.pavarde;
@@ -115,14 +115,24 @@ Stud::Stud& operator=(const Stud& studCopy){
 }
 
 //realizuotas move konstruktorius
-Stud::Stud(Stud&& studMove){
-    vardas(std::move(studMove.vardas));
-    pavarde(std::move(studMove.pavarde));
-    nd(std::move(studMove.nd));
-    egzaminas(std::move(studMove.egzaminas));
-    BalasGalutinisVid(std::move(studMove.BalasGalutinisVid));
-    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas));
-}
+Stud::Stud(Stud&& studMove) :
+    vardas(std::move(studMove.vardas)),
+    pavarde(std::move(studMove.pavarde)),
+    nd(std::move(studMove.nd)),
+    egzaminas(std::move(studMove.egzaminas)),
+    BalasGalutinisVid(std::move(studMove.BalasGalutinisVid)),
+    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)), {}
+
+//realizuotas move assignment konstruktorius
+Stud::Stud& operator=(Stud&& studMove){
+    if (this != &studMove) {
+        vardas = std::move(studMove.vardas);
+        pavarde = std::move(studMove.pavarde);
+        nd = std::move(studMove.nd);
+        egzaminas = std::move(studMove.egzaminas);
+        BalasGalutinisVid = std::move(studMove.BalasGalutinisVid);
+        balasSuskaiciuotas = std::move(studMove.balasSuskaiciuotas);
+} return *this;}
 
 using konteinerisVector = std::vector<Stud>;
 using konteinerisList = std::list<Stud>;
