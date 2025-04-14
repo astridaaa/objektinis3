@@ -40,11 +40,6 @@ using std::vector;
 using std::deque;
 using std::list;
 
-//move konstruktoriu (move instead of copy)
-/*use it to create a deep copy quickly and without extensive recopying, simply by transferring the memory handles from
- one object to the next. We can also very easily express ownership of data and transfer responsibility for blocks of heap memory.*/
-
-
 class Stud{
     private:
         string vardas, pavarde;
@@ -53,22 +48,34 @@ class Stud{
         double BalasGalutinisVid;
         bool balasSuskaiciuotas;
     public:
-        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {};
-        ~Stud() {nd.clear();}
+        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius
+        ~Stud() {nd.clear();}   //destruktorius
 
+        Stud(const Stud& studCopy/*other*/); //copy konstruktorius
+        Stud& operator=(const Stud& studCopy); //copy assignment
+
+        Stud(Stud&& studMove); //move konstruktorius
+        Stud& operator=(Stud&& studMove); //copy assignment 
+
+        //setteriai
         void setVardas(const string& var){vardas=var;}
         void setPavarde(const string& pav){pavarde=pav;}
         void setEgzaminas(const int& egz){egzaminas=egz;}
         void setBalasGalutinisVid(const double& Balas){BalasGalutinisVid=Balas; balasSuskaiciuotas = true;}
         void setND(int paz){nd.push_back(paz);}
       
+        //getteriai
         string getVardas() const {return vardas;}
         string getPavarde() const {return pavarde;}
         int getEgzaminas() const {return egzaminas;}
+        int getPaz(int i) const {return nd[i];} 
         double galutinisBalas() const {return BalasGalutinisVid;}
         const std::vector<int>& getND() const {return nd;}
+        int pazKiekis() const {return nd.size();}
         const int& grazintiPaskutini() const {return nd.back();}
         void removeLast(){nd.pop_back();}
+        void removeND(){nd.clear();};
+        //galutinio balo skaiciavimo metodas
         double galutinis() {
             if(!balasSuskaiciuotas){
                 double suma = 0;
@@ -86,8 +93,38 @@ class Stud{
         }
 };
 
+//realizuotas copy konstruktorius
+Stud:: Stud(const Stud& studCopy){
+    vardas(studCopy.vardas);
+    pavarde(studCopy.pavarde);
+    egzaminas(studCopy.egzaminas);
+    nd(studCopy.nd);
+    BalasGalutinisVid(studCopy.BalasGalutinisVid);
+    balasSuskaiciuotas(studCopy.balasSuskaiciuotas);
+}
+
+//realizuotas copy assignment konstrukorius
+Stud::Stud& operator=(const Stud& studCopy){
+
+}
+
 using konteinerisVector = std::vector<Stud>;
 using konteinerisList = std::list<Stud>;
 using konteinerisDeque = std::deque<Stud>;
 
 #endif
+
+
+//copy
+//su copy reikia sukurti studento copija ir patikrinti ar visi duomenys sutampa
+
+//su copy assign reikia sukurti studenta3 ir jam pabandyti priskirti pati pirma studenta
+
+//keiciam pradzinius studento duomenis ir ziuirm ar kopijoms all good (visi duomenys neturetu but pasikeite)
+
+
+//move
+
+//sukuriam studenta kuriam movinam kito pagr studento duomenis, patikrinam ar lygus (neturi but lygus)
+
+//move asssign priskiriam 

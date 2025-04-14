@@ -6,7 +6,6 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
 {
     double laikas = 0.0;
    std::vector<string> visaeil;
-    //Stud studentas; //changed
     int pazymys;
     string eilute;
     string eilute1;
@@ -381,7 +380,6 @@ void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, doub
         visasLaikas += difference.count();
     }
 }
-
 
 /*template <typename konteineris>
 void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPagal, int a){

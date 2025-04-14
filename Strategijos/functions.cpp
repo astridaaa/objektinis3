@@ -479,3 +479,7 @@ double GeneruotiFiles(int StudSkaicius)
     std::chrono::duration<double> diff = end - start;
     return diff.count();
 }
+
+Stud::Stud(const Stud& studCopy){
+    
+}

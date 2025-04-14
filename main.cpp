@@ -1,7 +1,6 @@
 #include "functions.h"
 int main()
 {
-
     int meniu;
     int paz;
     string testavimui;
@@ -39,28 +38,28 @@ int main()
     {
     case 1:
     {
-        //duomenu_ivedimas(visi, meniu);
-        //print(visi, false, 4);
+        duomenu_ivedimas(visi, meniu);
+        printCases(visi, false, 4);
         break;
     }
 
     case 2:
     {
-        //duomenu_ivedimas(visi, meniu);
-        //print(visi, false, 4);
+        duomenu_ivedimas(visi, meniu);
+        printCases(visi, false, 4);
         break;
     }
 
     case 3:
     {
-        //duomenu_generavimas(visi);
-        //print(visi, false, 4);
+        duomenu_generavimas(visi);
+        printCases(visi, false, 4);
         break;
     }
 
     case 4:
     {
-        /*double laik;
+        double laik;
         int printinimas;
         fileskait(visi, false, testavimui, laik);
         cout << "Duomenis isvesti terminale - 1, duomenis isvesti faile - 2" << endl;
@@ -111,10 +110,10 @@ int main()
         }
         if (printinimas == 1)
         {
-            print(visi, false, rusiavimas);
+            printCases(visi, false, rusiavimas);
         }
         else
-            print(visi, true, rusiavimas);*/
+            printCases(visi, true, rusiavimas);
         break;
     }
     case 5:
