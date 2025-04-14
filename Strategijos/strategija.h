@@ -1,4 +1,5 @@
-
+#ifndef strategija_h
+#define strategija_h
 #include "../functions.h"
 
 template <typename konteineris>
@@ -432,3 +433,5 @@ void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &
         cout << "Bendras programos vykdymo laikas: " << visasLaikas << "s" << endl;
     }
 }
+
+#endif

@@ -1,6 +1,7 @@
-#include "main.h"
+
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
+#include "main.h"
 
 bool tinkamas_char(string vardas);
 bool tinkamas_int(int skaicius);

@@ -1,5 +1,46 @@
 #include "../functions.h"
 
+//realizuotas copy konstruktorius
+Stud::Stud(const Stud& studCopy) :
+    vardas(studCopy.vardas),
+    pavarde(studCopy.pavarde),
+    egzaminas(studCopy.egzaminas),
+    nd(studCopy.nd),
+    BalasGalutinisVid(studCopy.BalasGalutinisVid),
+    balasSuskaiciuotas(studCopy.balasSuskaiciuotas) {}
+
+//realizuotas copy assignment konstrukorius
+Stud& Stud::operator=(const Stud& studCopy){ 
+    if(this != &studCopy){ //patikrint kad nereiktu be reikalo perrasinet
+        vardas = studCopy.vardas;
+        pavarde = studCopy.pavarde;
+        nd = studCopy.nd;
+        egzaminas = studCopy.egzaminas;
+        BalasGalutinisVid = studCopy.BalasGalutinisVid;
+        balasSuskaiciuotas = studCopy.balasSuskaiciuotas;}
+    return *this;//this is a pointer that always points to the current object — the one whose method is being called.
+}
+
+//realizuotas move konstruktorius
+Stud::Stud(Stud&& studMove) :
+    vardas(std::move(studMove.vardas)),
+    pavarde(std::move(studMove.pavarde)),
+    nd(std::move(studMove.nd)),
+    egzaminas(std::move(studMove.egzaminas)),
+    BalasGalutinisVid(std::move(studMove.BalasGalutinisVid)),
+    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)) {}
+
+//realizuotas move assignment konstruktorius
+Stud& Stud::operator=(Stud&& studMove){
+    if (this != &studMove) {
+        vardas = std::move(studMove.vardas);
+        pavarde = std::move(studMove.pavarde);
+        nd = std::move(studMove.nd);
+        egzaminas = std::move(studMove.egzaminas);
+        BalasGalutinisVid = std::move(studMove.BalasGalutinisVid);
+        balasSuskaiciuotas = std::move(studMove.balasSuskaiciuotas);
+} return *this;}
+
 bool tinkamas_char(string vardas)
 {
     for (char a : vardas)
@@ -480,6 +521,3 @@ double GeneruotiFiles(int StudSkaicius)
     return diff.count();
 }
 
-Stud::Stud(const Stud& studCopy){
-    
-}
