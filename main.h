@@ -48,14 +48,12 @@ class Stud{
         double BalasGalutinisVid;
         bool balasSuskaiciuotas;
     public:
-        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius
-        ~Stud() {nd.clear();}   //destruktorius
-
+        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius defaultinis
         Stud(const Stud& studCopy); //copy konstruktorius
         Stud& operator=(const Stud& studCopy); //copy assignment
-
         Stud(Stud&& studMove); //move konstruktorius
         Stud& operator=(Stud&& studMove); //move assignment 
+        ~Stud() {nd.clear();}   //destruktorius
 
         //setteriai
         void setVardas(const string& var){vardas=var;}
@@ -69,12 +67,14 @@ class Stud{
         string getPavarde() const {return pavarde;}
         int getEgzaminas() const {return egzaminas;}
         int getPaz(int i) const {return nd[i];} 
+        const vector<int>& getND() const {return nd;}
         double galutinisBalas() const {return BalasGalutinisVid;}
         const std::vector<int>& getND() const {return nd;}
         int pazKiekis() const {return nd.size();}
         const int& grazintiPaskutini() const {return nd.back();}
         void removeLast(){nd.pop_back();}
         void removeND(){nd.clear();};
+
         //galutinio balo skaiciavimo metodas
         double galutinis() {
             if(!balasSuskaiciuotas){

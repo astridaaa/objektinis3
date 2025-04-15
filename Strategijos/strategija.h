@@ -432,6 +432,25 @@ void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &
         //print(studentai, nesimokantys, rusiavimasPagal, a);
         cout << "Bendras programos vykdymo laikas: " << visasLaikas << "s" << endl;
     }
+    //copy constructor testas
+    //copy assignment constructor testas
+    //move conctructor testas
+    //move assignment conctructor testas
+    //destructorius patikrinamas
+    //defaultinis constructorius (sukuriam du studentus susilyginam ir tada lyginam ar jie lygus nuliniam parametram)
 }
 
 #endif
+
+/*
+1) susikuriu du studentus juos susilyginu ir sulyginu su null tom reiksem | default constructor
+
+2)pakuriu studento objekta kazkoki ir ji nukopijuoju, susilyginu studentus ir ziuriu ar veikia | copy constructor
+
+3) susikuriu studenta ir jam priskiriu pati pirma studenta, ziuriu ar veikia | copy assignment 
+
+4) pakeiciu duomenis pirmo studento, ziuriu ar jie nera lygus 
+
+
+
+*/

@@ -41,6 +41,69 @@ Stud& Stud::operator=(Stud&& studMove){
         balasSuskaiciuotas = std::move(studMove.balasSuskaiciuotas);
 } return *this;}
 
+bool tikrinimas(const Stud& s, const Stud& s1){
+    if(s.getVardas() == s1.getVardas() && s.getPavarde() == s1.getPavarde() && s.getEgzaminas() == s1.getEgzaminas() && s.getND() == s1.getND()){
+        return true;
+    }
+    else return false;
+}
+//default constructor test
+void constrTest(){
+    Stud s, s1;
+    if(tikrinimas(s, s1)){cout << "Default konstruktorius | +\n";}
+    else cout << "Default konstruktorius | -\n";
+}
+
+//copy constructor test
+void copyConstrTest(){
+    Stud s("Astrida", "Jablonskytė", 10, {7, 7, 7});
+    Stud s1(s); //copy
+    if(tikrinimas(s1, s)){
+        s.setVardas("Amelija"); //testuojama ar kopijos reiksme nepasikeite pakeitus orginala
+        if(!tikrinimas(s1, s)){cout << "Copy konstruktorius | +\n";}} 
+    else cout << "Copy konstruktorius | -\n";
+}
+
+//copy assignment kostruktorius
+void copyAssignTest(){
+    Stud s1, s("Astrida", "Jablonskytė", 10, {7, 7, 7});
+    s1 = s; //iskvieciamas copy konstruktorius
+    if(tikrinimas(s1, s)){
+        s.setVardas("Amelija"); //testuojama ar kopijos reiksme nepasikeite pakeitus orginala
+        if(!tikrinimas(s1, s)){cout << "Copy assignment konstruktorius | +\n";}} 
+    else cout << "Copy assignment konstruktorius | -\n";
+}
+
+
+
+/* string getVardas() const {return vardas;}
+        string getPavarde() const {return pavarde;}
+        int getEgzaminas() const {return egzaminas;}
+        int getPaz(int i) const {return nd[i];} 
+        double galutinisBalas() const {return BalasGalutinisVid;}
+        const std::vector<int>& getND() const {return nd;}
+        int pazKiekis() const {return nd.size();}
+        const int& grazintiPaskutini() const {return nd.back();}
+        void removeLast(){nd.pop_back();}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bool tinkamas_char(string vardas)
 {
     for (char a : vardas)
