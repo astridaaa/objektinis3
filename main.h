@@ -49,6 +49,9 @@ class Stud{
         bool balasSuskaiciuotas;
     public:
         Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius defaultinis
+        Stud(const string& vrd, const string& pvrd, int egzam, const vector<int>& namud): vardas(vrd), pavarde(pvrd), 
+        egzaminas(egzam), nd(namud), BalasGalutinisVid(0), balasSuskaiciuotas(false) {}
+    
         Stud(const Stud& studCopy); //copy konstruktorius
         Stud& operator=(const Stud& studCopy); //copy assignment
         Stud(Stud&& studMove); //move konstruktorius
@@ -69,7 +72,6 @@ class Stud{
         int getPaz(int i) const {return nd[i];} 
         const vector<int>& getND() const {return nd;}
         double galutinisBalas() const {return BalasGalutinisVid;}
-        const std::vector<int>& getND() const {return nd;}
         int pazKiekis() const {return nd.size();}
         const int& grazintiPaskutini() const {return nd.back();}
         void removeLast(){nd.pop_back();}
@@ -99,18 +101,3 @@ using konteinerisList = std::list<Stud>;
 using konteinerisDeque = std::deque<Stud>;
 
 #endif
-
-
-//copy
-//su copy reikia sukurti studento copija ir patikrinti ar visi duomenys sutampa
-
-//su copy assign reikia sukurti studenta3 ir jam pabandyti priskirti pati pirma studenta
-
-//keiciam pradzinius studento duomenis ir ziuirm ar kopijoms all good (visi duomenys neturetu but pasikeite)
-
-
-//move
-
-//sukuriam studenta kuriam movinam kito pagr studento duomenis, patikrinam ar lygus (neturi but lygus)
-
-//move asssign priskiriam 
