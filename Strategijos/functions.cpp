@@ -47,6 +47,7 @@ bool tikrinimas(const Stud& s, const Stud& s1){
     }
     else return false;
 }
+
 //default constructor test
 void constrTest(){
     Stud s, s1;
@@ -64,45 +65,43 @@ void copyConstrTest(){
     else cout << "Copy konstruktorius | -\n";
 }
 
-//copy assignment kostruktorius
+//copy assignment kostruktoriaus test
 void copyAssignTest(){
-    Stud s1, s("Astrida", "Jablonskytė", 10, {7, 7, 7});
-    s1 = s; //iskvieciamas copy konstruktorius
+    Stud s1("Monika", "Moceviciute", 9, {8, 8, 8}), s("Astrida", "Jablonskytė", 10, {7, 7, 7});
+    s1 = s; //iskvieciamas copy assignment konstruktorius
     if(tikrinimas(s1, s)){
         s.setVardas("Amelija"); //testuojama ar kopijos reiksme nepasikeite pakeitus orginala
         if(!tikrinimas(s1, s)){cout << "Copy assignment konstruktorius | +\n";}} 
     else cout << "Copy assignment konstruktorius | -\n";
 }
 
+//move konstruktoriaus test
+void moveConstTest(){
+    Stud s1, s("Astrida", "Jablonskyte", 10, {7, 7, 7});
+    Stud s1(std::move(s));
+    if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
+        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() && s.getEgzaminas() == 0){
+            cout << "Move konstruktorius | +\n";}
+    }else cout << "Move konstruktorius | -\n";
+}
 
+//move assignment konstruktoriaus test
+void moveAssignTest(){
+    Stud s1("Monika", "Moceviciute", 9, {8, 8, 8}), s("Astrida", "Jablonskyte", 10, {7, 7, 7});
+    s1 = std::move(s);
+    if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
+        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() && s.getEgzaminas() == 0){
+            cout << "Move assignment konstruktorius | +\n";}
+    }else cout << "Move assignment konstruktorius | -\n";
+}
 
-/* string getVardas() const {return vardas;}
-        string getPavarde() const {return pavarde;}
-        int getEgzaminas() const {return egzaminas;}
-        int getPaz(int i) const {return nd[i];} 
-        double galutinisBalas() const {return BalasGalutinisVid;}
-        const std::vector<int>& getND() const {return nd;}
-        int pazKiekis() const {return nd.size();}
-        const int& grazintiPaskutini() const {return nd.back();}
-        void removeLast(){nd.pop_back();}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void konstruktoriuTest(){
+    constrTest();
+    copyConstrTest();
+    copyAssignTest();
+    moveConstTest();
+    moveAssignTest();
+}
 
 bool tinkamas_char(string vardas)
 {
