@@ -38,8 +38,6 @@ int main()
     {
     case 1:
     {
-        //Stud studentas("Astrida", "Jablonskyte",  10, {10, 10, 10});
-        //cout<<studentas; => NEVEIKIA GALUTINIO BALO SKAICIAVIMAS
         duomenu_ivedimas(visi, meniu);
         printCases(visi, false, 4);
         break;

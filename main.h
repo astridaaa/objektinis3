@@ -45,8 +45,8 @@ class Stud{
         string vardas, pavarde;
         int egzaminas;
         vector<int> nd;
-        double BalasGalutinisVid;
-        bool balasSuskaiciuotas;
+        mutable double BalasGalutinisVid;
+        mutable bool balasSuskaiciuotas;
     public:
         Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius defaultinis
         Stud(const string& vrd, const string& pvrd, int egzam, const vector<int>& namud): vardas(vrd), pavarde(pvrd), 
@@ -78,7 +78,7 @@ class Stud{
         void removeND(){nd.clear();};
 
         //galutinio balo skaiciavimo metodas
-        double galutinis() {
+        double galutinis() const{
             if(!balasSuskaiciuotas){
                 double suma = 0;
                 double vidurkis;
