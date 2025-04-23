@@ -105,20 +105,24 @@ void moveAssignTest(){
 }
 
 //outputo operatorius
-Stud::ostream &operator<<(ostream &output, /*kur outputins*/ const Stud& studentas){
-    output << std::setw(15) << std::left << studentas.pavarde << std::setw(15) << std::left << studentas.vardas << std::setw(15) << std::fixed << std::setprecision(2) << studentas.BalasGalutinisVid << endl;
+std::ostream& operator<<(std::ostream &output, const Stud& studentas){
+    output << std::setw(15) << std::left << studentas.pavarde 
+    << std::setw(15) << std::left << studentas.vardas 
+    << std::setw(15) << std::fixed << std::setprecision(2) << studentas.BalasGalutinisVid << endl;
+    return output;
 }
 
 //inputo operatorius 
-Stud::istream &operator>>(isteam &input, const Stud& studentas){
+  std::istream& operator>>(std::istream &input, Stud& studentas){
     int paz;
     input >> studentas.vardas >> studentas.pavarde;
-    while(inputas >> paz){
+    while(input >> paz){
         studentas.nd.push_back(paz);}
 
     studentas.egzaminas = studentas.nd.back();
     studentas.nd.pop_back();
-    studenatas.galutinis();
+    studentas.galutinis();
+    return input;
 }
 
 void konstruktoriuTest(){
@@ -197,8 +201,7 @@ bool tinkamas_int(int skaicius)
     }
 }*/
 
-void pazymiu_ivedimas(Stud &studentas)
-{
+void pazymiu_ivedimas(Stud &studentas, string& ss){
     studentas.removeND();
     bool stop1 = false;
     cout << "Iveskite studento pazymius (-i), baige iveskite 0" << endl;
@@ -209,7 +212,7 @@ void pazymiu_ivedimas(Stud &studentas)
             try
             {
                 int paz;
-                cin >> paz;
+                cin>>paz;
                 if (cin.fail())
                 {
                     cin.clear();
@@ -220,16 +223,16 @@ void pazymiu_ivedimas(Stud &studentas)
                 {
                     throw "Neteisingai ivestas skaicius";
                 }
-                if (paz == 0 && studentas.pazKiekis() == 0)   
+                /*if (paz == 0 && studentas.pazKiekis() == 0)   
                 {
                     throw "Iveskite bent viena pazymi";
-                }
+                }*/
                 if (paz == 0)
                 {
                     stop1 = true;
                 }
                 else
-                    studentas.setND(paz);
+                    ss += std::to_string(paz) + " ";
                 break;
             }
             catch (const char *masyvas)
@@ -238,26 +241,21 @@ void pazymiu_ivedimas(Stud &studentas)
             }
         }
 
-
     } while (!stop1);
-    cout << "Pazymiai: ";
-    for(int j =0; j < studentas.pazKiekis(); j++){
-        cout << studentas.getPaz(j) << "      ";
-    }
 }
 
-void paz_gener(Stud &studentas)
+void paz_gener(Stud &studentas, string& ss)
 {
     int A = rand() % 10 + 2;
     for (int i = 0; i < A; i++)
     {
         int P = rand() % 10 + 1;
-        studentas.setND(P);
+        ss += std::to_string(P) + " ";
     }
     cout << endl;
 }
 
-Stud vardai(Stud &studentas)
+Stud vardai(Stud &studentas, string& ss)
 {
     int vsuma = 0;
     string F, m, n;
@@ -284,8 +282,9 @@ Stud vardai(Stud &studentas)
             Pmasyvas.push_back(n);
         }
         f.close();
-        studentas.setVardas(Vmasyvas[C]);
-        studentas.setPavarde(Pmasyvas[W]);
+        ss += Vmasyvas[C] + " " + Pmasyvas[W] + " ";
+        //studentas.setVardas(Vmasyvas[C]);
+        //studentas.setPavarde(Pmasyvas[W]);
         return studentas;
     }
     else
@@ -297,14 +296,20 @@ Stud vardai(Stud &studentas)
             Pmasyvas.push_back(n);
         }
         l.close();
-        studentas.setVardas(Vmasyvas[C]);
-        studentas.setPavarde(Pmasyvas[W]);
+        ss += Vmasyvas[C] + " " + Pmasyvas[W] + " ";
+        //studentas.setVardas(Vmasyvas[C]);
+        //studentas.setPavarde(Pmasyvas[W]);
         return studentas;
     }
 }
 
 void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
 {
+    //string line;
+    //std::cin.ignore(1024, '\n');
+    //getline(cin, line);
+    string fullLine;
+    int egzaminas;
     bool stop;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     string vardas, pavarde;
@@ -336,7 +341,7 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
                 stop = true;
                 break;
             }
-            studentas.setVardas(vardas);
+            //studentas.setVardas(vardas);
             cout << "Iveskite studento pavarde" << endl;
             while (true)
             {
@@ -355,14 +360,14 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
                     cout << masyvas << endl;
                 }
             }
-            studentas.setPavarde(pavarde);
+            //studentas.setPavarde(pavarde);
             cout << "Iveskite egzamino bala" << endl;
-            int egzaminas;
+            
             while (true)
             {
                 try
                 {
-                    cin >> egzaminas;
+                    cin>>egzaminas;
                     if (cin.fail())
                     {
                         cin.clear();
@@ -379,22 +384,26 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
                 {
                     cout << masyvas << endl;
                 }
-
-                
             }
-            studentas.setEgzaminas(egzaminas);            
-            cout << "studento egzo pazymys: " << studentas.getEgzaminas() << endl;
+
+            fullLine = vardas + " " + pavarde + " "; 
+            //ss>>vardas>>" ">>" ">>pavarde>>" ">>" ">>egzaminas;
+            //studentas.setEgzaminas(egzaminas);            
         }
         if (meniu == 1)
         {
-            pazymiu_ivedimas(studentas);
+            pazymiu_ivedimas(studentas, fullLine);
         }
         else if (meniu == 2)
         {
-            paz_gener(studentas);
+            paz_gener(studentas, fullLine);
         }
-        studentai.push_back(studentas); //pushbackina i visi vector
 
+        fullLine += std::to_string(egzaminas) + " ";
+        
+        std::istringstream ss(fullLine);
+        ss>>studentas; //input overload operator KURIS NEVEIKIA BLET
+        studentai.push_back(studentas); //pushbackina i visi vector
         cout << "..." << endl;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     } while (!stop);
@@ -404,13 +413,17 @@ void duomenu_generavimas(vector<Stud> &studentai)
 {
     int Q = rand() % 10 + 1;
     for (int i = 0; i < Q; i++)
-    {
+    {string fullLine;
         Stud studentas;
-        vardai(studentas);
-        int egz = rand() % 10 + 1;
-        studentas.setEgzaminas(egz);
-        paz_gener(studentas);
+        vardai(studentas, fullLine);
+        paz_gener(studentas, fullLine);
+        //studentas.setEgzaminas(rand() % 10 + 1);
+        fullLine += std::to_string(rand() % 10 + 1);
+        std::istringstream ss(fullLine);
+        cout << fullLine;
+        ss>>studentas;
         studentai.push_back(studentas);
+        //ss>>studentas; //input overload operator 
     }
 }
 
@@ -515,11 +528,13 @@ void printCases(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
         {
             sort(visi.begin(), visi.end(), PalygintiKategorijas);
         }
-        *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Med.)\n";
+        *out << std::setw(15) << std::left << "Pavarde" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Med.)\n";
         *out << "----------------------------------------------------" << endl;
         for (Stud& j : visi)
         {
-            *out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinis() << endl;
+            //cout<<studentas; => NEVEIKIA GALUTINIO BALO SKAICIAVIMAS
+            //*out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinis() << endl;
+            *out<<j;
         }
     }
     // skaiciuojam rn pagal vidurki
@@ -529,11 +544,12 @@ void printCases(vector<Stud> visi, bool outputFILE, int RusiavimasPagal)
         {
             sort(visi.begin(), visi.end(), PalygintiKategorijas);
         }
-        *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Vid.)\n";
+        *out << std::setw(15) << std::left << "Pavarde" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Vid.)\n";
         *out << "----------------------------------------------------" << endl;
-        for (Stud j : visi)
+        for (Stud& j : visi)
         {
-            *out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinis() << endl;
+            *out << j;
+            //*out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinis() << endl;
         }
     }
 }
@@ -552,7 +568,7 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal){
     }
     if (RusiavimasPagal == 1)
     {
-        sort(visi.begin(), visi.end(), PalygintiVardas); //palyginti vardas ir visas compare functions cj reikes praziuret
+        sort(visi.begin(), visi.end(), PalygintiVardas); 
     }
     else if (RusiavimasPagal == 2)
     {
@@ -565,9 +581,7 @@ void print(vector<Stud> visi, bool outputFILE, int RusiavimasPagal){
         *out << std::setw(15) << std::left << "Pavardė" << std::setw(15) << std::left << "Vardas" << std::setw(15) << std::left << "Galutinis (Med.)\n";
         *out << "----------------------------------------------------" << endl;
         for (Stud& j : visi)
-        {
-            *out << std::setw(15) << std::left << j.getPavarde() << std::setw(15) << std::left << j.getVardas() << std::setw(15) << std::fixed << std::setprecision(2) << j.galutinisBalas() << endl;
-        }
+        {*out << j;}
 }
 
 double GeneruotiFiles(int StudSkaicius)

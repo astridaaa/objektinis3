@@ -93,8 +93,9 @@ class Stud{
             }
             return BalasGalutinisVid;
         }
+        friend std::ostream& operator<<(std::ostream &output, const Stud& studentas);
+        friend std::istream& operator>>(std::istream &input, Stud& studentas);
 };
-
 
 using konteinerisVector = std::vector<Stud>;
 using konteinerisList = std::list<Stud>;

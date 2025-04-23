@@ -6,8 +6,8 @@
 bool tinkamas_char(string vardas);
 bool tinkamas_int(int skaicius);
 //double galutinis(Stud studentas, int PagalSkaiciavimas);
-void pazymiu_ivedimas(Stud &studentas);
-void paz_gener(Stud &studentas);
+void pazymiu_ivedimas(Stud &studentas, std::istringstream& ss);
+void paz_gener(Stud &studentas, std::istringstream& ss);
 Stud vardai(Stud &studentas);
 void duomenu_ivedimas(vector<Stud> &studentai, int meniu);
 void duomenu_generavimas(vector<Stud> &studentai);
@@ -79,13 +79,12 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
             else
                 break;
         }
-
-        for ( string s : visaeil)
-        {
+        for ( string& s : visaeil){
             string vardas, pavarde;
             Stud studentas;
             std::istringstream f(s);
-            f>>vardas>>pavarde;
+            f >> studentas;
+            /*f>>vardas>>pavarde;
             studentas.setVardas(vardas);
             studentas.setPavarde(pavarde);
             while (f >> pazymys)
@@ -95,7 +94,7 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
             studentas.setEgzaminas(studentas.grazintiPaskutini());
             studentas.removeLast();
             studentas.galutinis();
-            studentai.push_back(studentas);
+            studentai.push_back(studentas);*/
         }
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> diff = end - start;
