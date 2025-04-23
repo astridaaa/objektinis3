@@ -1,4 +1,11 @@
 #include "../functions.h"
+//liko padaryti inputo outputo operatorius ir juos pratestint
+
+/*3 balai - pilnai veikianti programa v1.2 (reiks atsakyti į pateiktus klausymus dėl specifinių kodo vietų).    
+1,5 balo - perdengti įvesties ir išvesties metodai darbui su Studentų klasę. 
+1,5 balo - visi realizuoti metodai pilnai patikrinti (Visi konstruktoriai, destruktorius ir įvesties/išvesties metodai). 
+1 balas - darbas išsamiai aprašytas README.md faile su lentelėmis ir nuotraukomis, taip pat aprašas privalo turėti aiškų išaiškinimą apie perdengtus metodus (t.y. duomenų įvestis (rankiniu būdu, automatiniu, iš failo), išvestis - į ekraną, į failą).      
+*/
 
 //realizuotas copy konstruktorius
 Stud::Stud(const Stud& studCopy) :
@@ -80,12 +87,11 @@ void moveConstTest(){
     Stud s("Astrida", "Jablonskyte", 10, {7, 7, 7});
     Stud s1(std::move(s));
     if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
-        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() /*&& s.getEgzaminas() == 0*/){
+        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() /*&& s.getEgzaminas() == 0*/){ 
             cout << std::left << std::setw(31) << "Move konstruktorius"<<"| +\n";}
         else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
     }else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
 }
-//problema egzaminas nenusinullina
 
 //move assignment konstruktoriaus test
 void moveAssignTest(){
@@ -96,6 +102,23 @@ void moveAssignTest(){
            cout << "Move assignment konstruktorius | +\n";}
            else cout << "Move assignment konstruktorius | -\n";
     }else cout << "Move assignment konstruktorius | -\n";
+}
+
+//outputo operatorius
+Stud::ostream &operator<<(ostream &output, /*kur outputins*/ const Stud& studentas){
+    output << std::setw(15) << std::left << studentas.pavarde << std::setw(15) << std::left << studentas.vardas << std::setw(15) << std::fixed << std::setprecision(2) << studentas.BalasGalutinisVid << endl;
+}
+
+//inputo operatorius 
+Stud::istream &operator>>(isteam &input, const Stud& studentas){
+    int paz;
+    input >> studentas.vardas >> studentas.pavarde;
+    while(inputas >> paz){
+        studentas.nd.push_back(paz);}
+
+    studentas.egzaminas = studentas.nd.back();
+    studentas.nd.pop_back();
+    studenatas.galutinis();
 }
 
 void konstruktoriuTest(){
