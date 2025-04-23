@@ -11,14 +11,14 @@ Stud::Stud(const Stud& studCopy) :
 
 //realizuotas copy assignment konstrukorius
 Stud& Stud::operator=(const Stud& studCopy){ 
-    if(this != &studCopy){ //patikrint kad nereiktu be reikalo perrasinet
+    if(this != &studCopy){ 
         vardas = studCopy.vardas;
         pavarde = studCopy.pavarde;
         nd = studCopy.nd;
         egzaminas = studCopy.egzaminas;
         BalasGalutinisVid = studCopy.BalasGalutinisVid;
         balasSuskaiciuotas = studCopy.balasSuskaiciuotas;}
-    return *this;//this is a pointer that always points to the current object — the one whose method is being called.
+    return *this;
 }
 
 //realizuotas move konstruktorius
@@ -80,7 +80,7 @@ void moveConstTest(){
     Stud s("Astrida", "Jablonskyte", 10, {7, 7, 7});
     Stud s1(std::move(s));
     if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
-        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() /*&& s.getEgzaminas() == 0*/){ 
+        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() ){ 
             cout << std::left << std::setw(31) << "Move konstruktorius"<<"| +\n";}
         else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
     }else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
@@ -295,8 +295,6 @@ Stud vardai(Stud &studentas, string& ss)
         }
         f.close();
         ss += Vmasyvas[C] + " " + Pmasyvas[W] + " ";
-        //studentas.setVardas(Vmasyvas[C]);
-        //studentas.setPavarde(Pmasyvas[W]);
         return studentas;
     }
     else
@@ -309,17 +307,13 @@ Stud vardai(Stud &studentas, string& ss)
         }
         l.close();
         ss += Vmasyvas[C] + " " + Pmasyvas[W] + " ";
-        //studentas.setVardas(Vmasyvas[C]);
-        //studentas.setPavarde(Pmasyvas[W]);
         return studentas;
     }
 }
 
 void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
 {
-    //string line;
-    //std::cin.ignore(1024, '\n');
-    //getline(cin, line);
+
     string fullLine;
     int egzaminas;
     bool stop;
@@ -353,7 +347,6 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
                 stop = true;
                 break;
             }
-            //studentas.setVardas(vardas);
             cout << "Iveskite studento pavarde" << endl;
             while (true)
             {
@@ -372,7 +365,6 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
                     cout << masyvas << endl;
                 }
             }
-            //studentas.setPavarde(pavarde);
             cout << "Iveskite egzamino bala" << endl;
             
             while (true)
@@ -399,8 +391,6 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
             }
 
             fullLine = vardas + " " + pavarde + " "; 
-            //ss>>vardas>>" ">>" ">>pavarde>>" ">>" ">>egzaminas;
-            //studentas.setEgzaminas(egzaminas);            
         }
         if (meniu == 1)
         {
@@ -414,8 +404,8 @@ void duomenu_ivedimas(vector<Stud> &studentai, int meniu)
         fullLine += std::to_string(egzaminas) + " ";
         
         std::istringstream ss(fullLine);
-        ss>>studentas; //input overload operator KURIS NEVEIKIA BLET
-        studentai.push_back(studentas); //pushbackina i visi vector
+        ss>>studentas; 
+        studentai.push_back(studentas); 
         cout << "..." << endl;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     } while (!stop);
@@ -429,13 +419,11 @@ void duomenu_generavimas(vector<Stud> &studentai)
         Stud studentas;
         vardai(studentas, fullLine);
         paz_gener(studentas, fullLine);
-        //studentas.setEgzaminas(rand() % 10 + 1);
         fullLine += std::to_string(rand() % 10 + 1);
         std::istringstream ss(fullLine);
         cout << fullLine;
         ss>>studentas;
         studentai.push_back(studentas);
-        //ss>>studentas; //input overload operator 
     }
 }
 

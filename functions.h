@@ -80,20 +80,9 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
                 break;
         }
         for (string& s : visaeil){
-            //string vardas, pavarde;
             Stud studentas;
             std::istringstream f(s);
             f >> studentas;
-            /*f>>vardas>>pavarde;
-            studentas.setVardas(vardas);
-            studentas.setPavarde(pavarde);
-            while (f >> pazymys)
-            {
-                studentas.setND(pazymys);
-            }
-            studentas.setEgzaminas(studentas.grazintiPaskutini());
-            studentas.removeLast();
-            studentas.galutinis();*/
             studentai.push_back(studentas);
         }
         auto end = std::chrono::high_resolution_clock::now();
