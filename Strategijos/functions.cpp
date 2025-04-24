@@ -139,6 +139,17 @@ void outputTest(){
     else cout << std::left << std::setw(31) << "Isvesties operatorius" << "| -\n";
 }
 
+//destruktoriaus testas
+void destructorTest(){
+    Stud* studentas = new Stud();
+    for(int i = 2; i < 7; i++){studentas->setND(i);}
+    studentas->~Stud();
+    if (studentas->getND().empty()){cout << std::left << std::setw(31) << "Destruktorius" << "| +\n";}
+    else cout << std::left << std::setw(31) << "Destruktorius" << "| -\n";
+    operator delete(studentas); 
+}
+
+
 void konstruktoriuTest(){
     cout << "...\n";
     constrTest();
@@ -148,6 +159,7 @@ void konstruktoriuTest(){
     moveAssignTest();
     inputTest();
     outputTest();
+    destructorTest();
 }
 
 bool tinkamas_char(string vardas)
