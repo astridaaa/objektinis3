@@ -71,7 +71,7 @@ void copyAssignTest(){
     s1 = s; //iskvieciamas copy assignment konstruktorius
     if(tikrinimas(s1, s)){
         s.setVardas("Amelija"); //testuojama ar kopijos reiksme nepasikeite pakeitus orginala
-        if(!tikrinimas(s1, s)){cout << "Copy assignment operatorius | +\n";}} 
+        if(!tikrinimas(s1, s)){cout << "Copy assignment operatorius    | +\n";}} 
     else cout << "Copy assignment operatorius | -\n";
 }
 
@@ -92,7 +92,7 @@ void moveAssignTest(){
     s1 = std::move(s);
     if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
         if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() /*&& s.getEgzaminas() == 0*/){
-           cout << "Move assignment operatorius | +\n";}
+           cout << "Move assignment operatorius    | +\n";}
            else cout << "Move assignment operatorius | -\n";
     }else cout << "Move assignment operatorius | -\n";
 }

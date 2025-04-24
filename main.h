@@ -40,7 +40,20 @@ using std::vector;
 using std::deque;
 using std::list;
 
-class Stud{
+class zmogus{
+    protected:
+        string vardas;
+        string pavarde;
+    public:
+        zmogus() : vardas(""), pavarde("") {}
+        virtual ~zmogus() {}
+
+        virtual void setVardas(const string& var) = 0;
+        virtual void setPavarde(const string& pav) = 0;
+};
+
+
+class Stud : public zmogus{
     private:
         string vardas, pavarde;
         int egzaminas;
@@ -59,8 +72,8 @@ class Stud{
         ~Stud() {nd.clear();}   //destruktorius
 
         //setteriai
-        void setVardas(const string& var){vardas=var;}
-        void setPavarde(const string& pav){pavarde=pav;}
+        void setVardas(const string& var)override{vardas=var;}
+        void setPavarde(const string& pav)override{pavarde=pav;}
         void setEgzaminas(const int& egz){egzaminas=egz;}
         void setBalasGalutinisVid(const double& Balas){BalasGalutinisVid=Balas; balasSuskaiciuotas = true;}
         void setND(int paz){nd.push_back(paz);}
