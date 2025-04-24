@@ -9,7 +9,7 @@ Stud::Stud(const Stud& studCopy) :
     BalasGalutinisVid(studCopy.BalasGalutinisVid),
     balasSuskaiciuotas(studCopy.balasSuskaiciuotas) {}
 
-//realizuotas copy assignment konstrukorius
+//realizuotas copy assignment operatorius
 Stud& Stud::operator=(const Stud& studCopy){ 
     if(this != &studCopy){ 
         vardas = studCopy.vardas;
@@ -30,7 +30,7 @@ Stud::Stud(Stud&& studMove) :
     BalasGalutinisVid(std::move(studMove.BalasGalutinisVid)),
     balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)) {}
 
-//realizuotas move assignment konstruktorius
+//realizuotas move assignment operatorius
 Stud& Stud::operator=(Stud&& studMove){
     if (this != &studMove) {
         vardas = std::move(studMove.vardas);
@@ -65,14 +65,14 @@ void copyConstrTest(){
     else cout<< std::left << std::setw(31) << "Copy konstruktorius" <<"| -\n";
 }
 
-//copy assignment kostruktoriaus test
+//copy assignment test
 void copyAssignTest(){
     Stud s1("Monika", "Moceviciute", 9, {8, 8, 8}), s("Astrida", "Jablonskytė", 10, {7, 7, 7});
     s1 = s; //iskvieciamas copy assignment konstruktorius
     if(tikrinimas(s1, s)){
         s.setVardas("Amelija"); //testuojama ar kopijos reiksme nepasikeite pakeitus orginala
-        if(!tikrinimas(s1, s)){cout << "Copy assignment konstruktorius | +\n";}} 
-    else cout << "Copy assignment konstruktorius | -\n";
+        if(!tikrinimas(s1, s)){cout << "Copy assignment operatorius | +\n";}} 
+    else cout << "Copy assignment operatorius | -\n";
 }
 
 //move konstruktoriaus test
@@ -86,15 +86,15 @@ void moveConstTest(){
     }else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
 }
 
-//move assignment konstruktoriaus test
+//move assignment test
 void moveAssignTest(){
     Stud s1("Monika", "Moceviciute", 9, {8, 8, 8}), s("Astrida", "Jablonskyte", 10, {7, 7, 7});
     s1 = std::move(s);
     if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
         if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() /*&& s.getEgzaminas() == 0*/){
-           cout << "Move assignment konstruktorius | +\n";}
-           else cout << "Move assignment konstruktorius | -\n";
-    }else cout << "Move assignment konstruktorius | -\n";
+           cout << "Move assignment operatorius | +\n";}
+           else cout << "Move assignment operatorius | -\n";
+    }else cout << "Move assignment operatorius | -\n";
 }
 
 //outputo operatorius
