@@ -417,6 +417,7 @@ void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPaga
 template <typename konteineris>
 void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &nesimokantys)
 {
+    //zmogus asmuo;
     for (int a = 100000; a <= 1000000; a *= 10)
     {
         studentai.clear();
