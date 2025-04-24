@@ -23,6 +23,20 @@ Pagrindinės funkcijos:
 -    `studentuIsskirstymas2()` - studentų išskirstymas nuo galo naudojant iteratorių
 -    `studentuSkirstymas3()` - studentų išskirstymas "nesimokančius" perkeliant į kitą konteinerį
 -    `studentuRusiavimas() / studentuRusiavimas2() / studentuRusiavimas3()` - studentai rikiuojami pagal pasirinktus kriterijus: vardą, pavardę arba galutinį balą, skaičiuojamą pagal vidurkį
+
+## v1.2 versija | rule of five ir įvesties/išvesties operatorių implementacija
+Realizuoti:
+-    `copy konstruktorius`
+-    `copy-assignment operatorius`
+-    `move konstruktorius`
+-    `move-assignment operatorius`
+-    `įvesties operatorius` - naudojamas duomenų įvedimui ranka, jų generavimui arba skaitymui iš failo
+-    `išvesties operatorius` - naudojamas duomenų išvedimui į terminalą arba failą 
+
+Visi operatoriai, konstruktoriai ir destruktoriai programoje atlikus testavimą veikia korektiškai:
+![image](https://github.com/user-attachments/assets/bcb99f17-f36d-4af0-a4a5-a20bf9207964)
+
+
 ## v1.1 versija | klasių implementacija
 - Pasirinkta strategija: 3 strategija (STL algoritmų implementacija);
 - Pasirinktas konteineris: sąrašas;
