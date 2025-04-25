@@ -47,10 +47,13 @@ class zmogus{
     public:
         zmogus() : vardas(""), pavarde("") {}
         zmogus(const string& var, const string& pav) : vardas(var), pavarde(pav) {}
-        virtual ~zmogus() {}
+        virtual ~zmogus() =0;
 
-        virtual void setVardas(const string& var) = 0;
-        virtual void setPavarde(const string& pav) = 0;
+        void setVardas(const string& var){vardas=var;}
+        void setPavarde(const string& pav){pavarde=pav;}
+
+        string getVardas(){return vardas;}
+        string getPavarde(){return pavarde;}
 };
 
 
