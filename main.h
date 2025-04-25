@@ -76,8 +76,8 @@ class Stud : public zmogus{
         ~Stud() {nd.clear();}   //destruktorius
 
         //setteriai
-        void setVardas(const string& var)override{vardas=var;}
-        void setPavarde(const string& pav)override{pavarde=pav;}
+        //void setVardas(const string& var){vardas=var;}
+        //void setPavarde(const string& pav){pavarde=pav;}
         void setEgzaminas(const int& egz){egzaminas=egz;}
         void setBalasGalutinisVid(const double& Balas){BalasGalutinisVid=Balas; balasSuskaiciuotas = true;}
         void setND(int paz){nd.push_back(paz);}
