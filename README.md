@@ -23,6 +23,16 @@ Pagrindinės funkcijos:
 -    `studentuIsskirstymas2()` - studentų išskirstymas nuo galo naudojant iteratorių
 -    `studentuSkirstymas3()` - studentų išskirstymas "nesimokančius" perkeliant į kitą konteinerį
 -    `studentuRusiavimas() / studentuRusiavimas2() / studentuRusiavimas3()` - studentai rikiuojami pagal pasirinktus kriterijus: vardą, pavardę arba galutinį balą, skaičiuojamą pagal vidurkį
+## v1.5 versija | abstrakti klasė 
+Implementuota abstrakti bazinė klasė žmogus turinti du apsaugotus atributus: vardas ir pavardė. Studentas - išvestinė žmogus klasė. Visi realizuoti metodai išpildyti v1.2 versijoje veikia ir naujoje v1.5 versijoje.
+
+
+Kadangi klasė žmogus yra abstrakti, jos objektų kurti negalime. Bandydami juos kurti gauname klaidą:
+```ruby
+Strategija3.cpp:7:12: error: cannot declare variable 'asmuo' to be of abstract type 'zmogus'
+    7 |     zmogus asmuo;
+      |            ^~~~~
+```
 
 ## v1.2 versija | rule of five ir įvesties/išvesties operatorių implementacija
 Realizuoti:
