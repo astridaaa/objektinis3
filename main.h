@@ -47,10 +47,10 @@ class zmogus{
     public:
         zmogus() : vardas(""), pavarde("") {}
         zmogus(const string& var, const string& pav) : vardas(var), pavarde(pav) {}
-        virtual ~zmogus() =0;
+        virtual ~zmogus() {}
 
-        void setVardas(const string& var){vardas=var;}
-        void setPavarde(const string& pav){pavarde=pav;}
+        virtual void setVardas(const string& var) = 0;
+        virtual void setPavarde(const string& pav) = 0;
 
         string getVardas()const{return vardas;}
         string getPavarde()const{return pavarde;}
@@ -76,15 +76,13 @@ class Stud : public zmogus{
         ~Stud() {nd.clear();}   //destruktorius
 
         //setteriai
-        //void setVardas(const string& var){vardas=var;}
-        //void setPavarde(const string& pav){pavarde=pav;}
+        void setVardas(const string& var)override{vardas=var;}
+        void setPavarde(const string& pav)override{pavarde=pav;}
         void setEgzaminas(const int& egz){egzaminas=egz;}
         void setBalasGalutinisVid(const double& Balas){BalasGalutinisVid=Balas; balasSuskaiciuotas = true;}
         void setND(int paz){nd.push_back(paz);}
       
         //getteriai
-        string getVardas() const {return vardas;}
-        string getPavarde() const {return pavarde;}
         int getEgzaminas() const {return egzaminas;}
         int getPaz(int i) const {return nd[i];} 
         const vector<int>& getND() const {return nd;}
