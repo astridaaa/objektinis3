@@ -52,8 +52,8 @@ class zmogus{
         void setVardas(const string& var){vardas=var;}
         void setPavarde(const string& pav){pavarde=pav;}
 
-        string getVardas(){return vardas;}
-        string getPavarde(){return pavarde;}
+        string getVardas()const{return vardas;}
+        string getPavarde()const{return pavarde;}
 };
 
 
