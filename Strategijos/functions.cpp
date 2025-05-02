@@ -2,8 +2,9 @@
 
 //realizuotas copy konstruktorius
 Stud::Stud(const Stud& studCopy) :
-    vardas(studCopy.vardas),
-    pavarde(studCopy.pavarde),
+    /*vardas(studCopy.vardas),
+    pavarde(studCopy.pavarde),*/
+    zmogus(studCopy.getVardas(), studCopy.getPavarde()),
     egzaminas(studCopy.egzaminas),
     nd(studCopy.nd),
     BalasGalutinisVid(studCopy.BalasGalutinisVid),
@@ -12,8 +13,10 @@ Stud::Stud(const Stud& studCopy) :
 //realizuotas copy assignment operatorius
 Stud& Stud::operator=(const Stud& studCopy){ 
     if(this != &studCopy){ 
-        vardas = studCopy.vardas;
-        pavarde = studCopy.pavarde;
+        //vardas = studCopy.vardas;
+        //pavarde = studCopy.pavarde;
+        setVardas(studCopy.getVardas());
+        setPavarde(studCopy.getPavarde());
         nd = studCopy.nd;
         egzaminas = studCopy.egzaminas;
         BalasGalutinisVid = studCopy.BalasGalutinisVid;
@@ -22,24 +25,28 @@ Stud& Stud::operator=(const Stud& studCopy){
 }
 
 //realizuotas move konstruktorius
-Stud::Stud(Stud&& studMove) :
-    vardas(std::move(studMove.vardas)),
-    pavarde(std::move(studMove.pavarde)),
+Stud::Stud(Stud&& studMove) :       //normalu destruktoriu pasidaryti ji iskviesti ir tada tikrinti ar yra lygus 0
+    /*vardas(std::move(studMove.vardas)),
+    pavarde(std::move(studMove.pavarde)),*/
+    zmogus(std::move(studMove)),
     nd(std::move(studMove.nd)),
     egzaminas(std::move(studMove.egzaminas)),
     BalasGalutinisVid(std::move(studMove.BalasGalutinisVid)),
-    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)) {}
+    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)){studMove.clear();}
 
 //realizuotas move assignment operatorius
 Stud& Stud::operator=(Stud&& studMove){
     if (this != &studMove) {
-        vardas = std::move(studMove.vardas);
-        pavarde = std::move(studMove.pavarde);
+        //vardas = std::move(studMove.vardas);
+        //pavarde = std::move(studMove.pavarde);
+        zmogus::operator=(std::move(studMove));
         nd = std::move(studMove.nd);
         egzaminas = std::move(studMove.egzaminas);
         BalasGalutinisVid = std::move(studMove.BalasGalutinisVid);
         balasSuskaiciuotas = std::move(studMove.balasSuskaiciuotas);
-} return *this;}
+        studMove.clear();
+} 
+return *this;}
 
 bool tikrinimas(const Stud& s, const Stud& s1){
     if(s.getVardas() == s1.getVardas() && s.getPavarde() == s1.getPavarde() && s.getEgzaminas() == s1.getEgzaminas() && s.getND() == s1.getND()){
@@ -79,8 +86,9 @@ void copyAssignTest(){
 void moveConstTest(){
     Stud s("Astrida", "Jablonskyte", 10, {7, 7, 7});
     Stud s1(std::move(s));
+    s.~Stud();
     if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
-        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() ){ 
+        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() && s.getEgzaminas() ==0 ){ 
             cout << std::left << std::setw(31) << "Move konstruktorius"<<"| +\n";}
         else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
     }else cout << std::left << std::setw(31)<< "Move konstruktorius"<<"| -\n";
@@ -90,11 +98,12 @@ void moveConstTest(){
 void moveAssignTest(){
     Stud s1("Monika", "Moceviciute", 9, {8, 8, 8}), s("Astrida", "Jablonskyte", 10, {7, 7, 7});
     s1 = std::move(s);
+    s.~Stud();
     if(s1.getVardas() == "Astrida" && s1.getPavarde() == "Jablonskyte" && s1.getEgzaminas() == 10 && s1.getND() == vector<int>{7,7,7}){
-        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() /*&& s.getEgzaminas() == 0*/){
+        if(s.getVardas().empty() && s.getPavarde().empty() && s.getND().empty() && s.getEgzaminas() == 0){
            cout << "Move assignment operatorius    | +\n";}
-           else cout << "Move assignment operatorius | -\n";
-    }else cout << "Move assignment operatorius | -\n";
+           else cout << "Move assignment operatorius    | -\n";
+    }else cout << "Move assignment operatorius    | -\n";
 }
 
 //outputo operatorius
@@ -106,7 +115,7 @@ std::ostream& operator<<(std::ostream &output, const Stud& studentas){
 }
 
 //inputo operatorius 
-  std::istream& operator>>(std::istream &input, Stud& studentas){
+  std::istream& operator>>(std::istream &input, Stud& studentas){ //naudoti ifstreama
     int paz;
     input >> studentas.vardas >> studentas.pavarde;
     while(input >> paz){
@@ -148,7 +157,6 @@ void destructorTest(){
     else cout << std::left << std::setw(31) << "Destruktorius" << "| -\n";
     operator delete(studentas); 
 }
-
 
 void konstruktoriuTest(){
     cout << "...\n";

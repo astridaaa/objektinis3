@@ -47,33 +47,44 @@ class zmogus{
     public:
         zmogus() : vardas(""), pavarde("") {}
         zmogus(const string& var, const string& pav) : vardas(var), pavarde(pav) {}
-        virtual ~zmogus() {}
+        virtual ~zmogus() { vardas = ""; pavarde="";}
 
         virtual void setVardas(const string& var) = 0;
         virtual void setPavarde(const string& pav) = 0;
 
         string getVardas()const{return vardas;}
         string getPavarde()const{return pavarde;}
+
+        //Move constructor
+        zmogus(zmogus&& z): vardas(std::move(z.vardas)), pavarde(std::move(z.pavarde)) {}
+
+        //Move assignment operator
+        zmogus& operator=(zmogus&& z) {
+        if (this != &z) {
+            vardas = std::move(z.vardas);
+            pavarde = std::move(z.pavarde);}
+        return *this;}
 };
 
 
 class Stud : public zmogus{
     private:
-        string vardas, pavarde;
+        //string vardas, pavarde;
         int egzaminas;
         vector<int> nd;
         mutable double BalasGalutinisVid;
         mutable bool balasSuskaiciuotas;
     public:
-        Stud() : vardas(""), pavarde(""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius defaultinis
-        Stud(const string& vrd, const string& pvrd, int egzam, const vector<int>& namud): vardas(vrd), pavarde(pvrd), 
+        Stud() : zmogus("", ""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius defaultinis
+        Stud(const string& vrd, const string& pvrd, int egzam, const vector<int>& namud): zmogus(vrd, pvrd), 
         egzaminas(egzam), nd(namud), BalasGalutinisVid(0), balasSuskaiciuotas(false) {}
     
         Stud(const Stud& studCopy); //copy konstruktorius
         Stud& operator=(const Stud& studCopy); //copy assignment
         Stud(Stud&& studMove); //move konstruktorius
         Stud& operator=(Stud&& studMove); //move assignment 
-        ~Stud() {nd.clear();}   //destruktorius
+        void clear(){nd.clear(); egzaminas=0; BalasGalutinisVid=0;balasSuskaiciuotas=false;}   
+        ~Stud()override{clear();} //destruktorius
 
         //setteriai
         void setVardas(const string& var)override{vardas=var;}
