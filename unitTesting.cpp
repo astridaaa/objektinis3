@@ -36,5 +36,17 @@ TEST_CASE("Destructor", "[Destructor]"){
     operator delete(s);
 }
 
+//default konstruktorius
+TEST_CASE("Constructor", "[Constructor]"){
+    Stud s, s1;
+    CHECK(s == Stud("","",0,{}));
+    REQUIRE(s==s1);
+}
 
+//getters
+TEST_CASE("Getter", "[Getter]"){
+    Stud s("Astrida", "Jablonskyte", 10, {10, 10, 10});
+    REQUIRE(s.getEgzaminas() == 10);
+    REQUIRE_FALSE(s.getPavarde() == "Jablonskyteeee");
+}
 
