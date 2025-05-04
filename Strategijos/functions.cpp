@@ -1,48 +1,5 @@
 #include "../functions.h"
 
-//realizuotas copy konstruktorius
-/*Stud::Stud(const Stud& studCopy) :
-    /*vardas(studCopy.vardas),
-    pavarde(studCopy.pavarde), uzkomentint
-    zmogus(studCopy.getVardas(), studCopy.getPavarde()),
-    egzaminas(studCopy.egzaminas),
-    nd(studCopy.nd),
-    BalasGalutinisVid(studCopy.BalasGalutinisVid),
-    balasSuskaiciuotas(studCopy.balasSuskaiciuotas) {}*/
-
-//realizuotas copy assignment operatorius
-/*Stud& Stud::operator=(const Stud& studCopy){ 
-    if(this != &studCopy){ 
-        setVardas(studCopy.getVardas());
-        setPavarde(studCopy.getPavarde());
-        nd = studCopy.nd;
-        egzaminas = studCopy.egzaminas;
-        BalasGalutinisVid = studCopy.BalasGalutinisVid;
-        balasSuskaiciuotas = studCopy.balasSuskaiciuotas;}
-    return *this;
-}*/
-
-//realizuotas move konstruktorius
-/*Stud::Stud(Stud&& studMove) :       //normalu destruktoriu pasidaryti ji iskviesti ir tada tikrinti ar yra lygus 0
-
-    zmogus(std::move(studMove)),
-    nd(std::move(studMove.nd)),
-    egzaminas(std::move(studMove.egzaminas)),
-    BalasGalutinisVid(std::move(studMove.BalasGalutinisVid)),
-    balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)){studMove.clear();}*/
-
-//realizuotas move assignment operatorius
-/*Stud& Stud::operator=(Stud&& studMove){
-    if (this != &studMove) {
-        zmogus::operator=(std::move(studMove));
-        nd = std::move(studMove.nd);
-        egzaminas = std::move(studMove.egzaminas);
-        BalasGalutinisVid = std::move(studMove.BalasGalutinisVid);
-        balasSuskaiciuotas = std::move(studMove.balasSuskaiciuotas);
-        studMove.clear();
-} 
-return *this;}*/
-
 bool tikrinimas(const Stud& s, const Stud& s1){
     if(s.getVardas() == s1.getVardas() && s.getPavarde() == s1.getPavarde() && s.getEgzaminas() == s1.getEgzaminas() && s.getND() == s1.getND()){
         return true;

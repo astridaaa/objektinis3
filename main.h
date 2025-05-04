@@ -66,7 +66,6 @@ class zmogus{
         return *this;}
 };
 
-
 class Stud : public zmogus{
     private:
         //string vardas, pavarde;
@@ -78,11 +77,6 @@ class Stud : public zmogus{
         Stud() : zmogus("", ""), egzaminas(0), nd{}, BalasGalutinisVid(0), balasSuskaiciuotas(false) {}; //konstruktorius defaultinis
         Stud(const string& vrd, const string& pvrd, int egzam, const vector<int>& namud): zmogus(vrd, pvrd), 
         egzaminas(egzam), nd(namud), BalasGalutinisVid(0), balasSuskaiciuotas(false) {}
-    
-        /*Stud(const Stud& studCopy); //copy konstruktorius
-        Stud& operator=(const Stud& studCopy); //copy assignment
-        Stud(Stud&& studMove); //move konstruktorius
-        Stud& operator=(Stud&& studMove); //move assignment */
 
         /**copy konstruktorius*/
         Stud(const Stud& studCopy) :
