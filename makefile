@@ -12,6 +12,9 @@ Strategija2: Strategija2.o functions.o
 Strategija3: Strategija3.o functions.o
 	g++ -std=c++17 -O3 Strategija3.o functions.o -o Strategija3
 
+test: unitTesting.o functions.o
+	g++ -std=c++17 -O3 unitTesting.o functions.o -o Strategija3
+
 #objektiniaifailai
 functions.o: Strategijos/functions.cpp
 	g++ -std=c++17 -O3 -c Strategijos/functions.cpp 
@@ -42,5 +45,8 @@ run2: Strategija2
 
 run3: Strategija3
 	./Strategija3.exe
+
+runtest: test
+	./unitTesting.exe
 
 

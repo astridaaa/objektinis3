@@ -79,10 +79,57 @@ class Stud : public zmogus{
         Stud(const string& vrd, const string& pvrd, int egzam, const vector<int>& namud): zmogus(vrd, pvrd), 
         egzaminas(egzam), nd(namud), BalasGalutinisVid(0), balasSuskaiciuotas(false) {}
     
-        Stud(const Stud& studCopy); //copy konstruktorius
+        /*Stud(const Stud& studCopy); //copy konstruktorius
         Stud& operator=(const Stud& studCopy); //copy assignment
         Stud(Stud&& studMove); //move konstruktorius
-        Stud& operator=(Stud&& studMove); //move assignment 
+        Stud& operator=(Stud&& studMove); //move assignment */
+
+        /**copy konstruktorius*/
+        Stud(const Stud& studCopy) :
+        zmogus(studCopy.getVardas(), studCopy.getPavarde()),
+        egzaminas(studCopy.egzaminas),
+        nd(studCopy.nd),
+        BalasGalutinisVid(studCopy.BalasGalutinisVid),
+        balasSuskaiciuotas(studCopy.balasSuskaiciuotas) {}
+        friend std::ostream& operator<<(std::ostream &output, const Stud& studentas);
+        friend std::istream& operator>>(std::istream &input, Stud& studentas);
+
+        /**copy assignment operatorius*/
+        Stud& operator=(const Stud& studCopy){ 
+            if(this != &studCopy){ 
+                setVardas(studCopy.getVardas());
+                setPavarde(studCopy.getPavarde());
+                nd = studCopy.nd;
+                egzaminas = studCopy.egzaminas;
+                BalasGalutinisVid = studCopy.BalasGalutinisVid;
+                balasSuskaiciuotas = studCopy.balasSuskaiciuotas;}
+            return *this;
+        }
+
+        /**move konstruktorius*/
+        Stud(Stud&& studMove) :    
+        zmogus(std::move(studMove)),
+        nd(std::move(studMove.nd)),
+        egzaminas(std::move(studMove.egzaminas)),
+        BalasGalutinisVid(std::move(studMove.BalasGalutinisVid)),
+        balasSuskaiciuotas(std::move(studMove.balasSuskaiciuotas)){studMove.clear();}
+
+        /**move assignment operatorius*/
+        Stud operator=(Stud &&studMove)
+        {
+            if (this != &studMove)
+            {
+                zmogus::operator=(std::move(studMove));
+                nd = std::move(studMove.nd);
+                egzaminas = std::move(studMove.egzaminas);
+                BalasGalutinisVid = std::move(studMove.BalasGalutinisVid);
+                balasSuskaiciuotas = std::move(studMove.balasSuskaiciuotas);
+                studMove.clear();
+            }
+            return *this;
+        }
+
+
         void clear(){nd.clear(); egzaminas=0; BalasGalutinisVid=0;balasSuskaiciuotas=false;}   
         ~Stud()override{clear();} //destruktorius
 
@@ -103,7 +150,7 @@ class Stud : public zmogus{
         void removeLast(){nd.pop_back();}
         void removeND(){nd.clear();};
 
-        //galutinio balo skaiciavimo metodas
+        /**galutinio balo skaiciavimo metodas*/
         double galutinis() const{
             if(!balasSuskaiciuotas){
                 double suma = 0;
@@ -119,8 +166,6 @@ class Stud : public zmogus{
             }
             return BalasGalutinisVid;
         }
-        friend std::ostream& operator<<(std::ostream &output, const Stud& studentas);
-        friend std::istream& operator>>(std::istream &input, Stud& studentas);
 };
 
 using konteinerisVector = std::vector<Stud>;
