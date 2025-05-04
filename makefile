@@ -1,4 +1,3 @@
-
 #failai	
 main: main.o functions.o
 	g++ -std=c++17 -O3 main.o functions.o -o main
@@ -12,8 +11,8 @@ Strategija2: Strategija2.o functions.o
 Strategija3: Strategija3.o functions.o
 	g++ -std=c++17 -O3 Strategija3.o functions.o -o Strategija3
 
-test: unitTesting.o functions.o
-	g++ -std=c++17 -O3 unitTesting.o functions.o -o Strategija3
+unitTesting: unitTesting.o functions.o 
+	g++ -std=c++17 -O3 unitTesting.o functions.o -o unitTesting.exe
 
 #objektiniaifailai
 functions.o: Strategijos/functions.cpp
@@ -31,6 +30,9 @@ Strategija2.o: Strategijos/Strategija2.cpp
 Strategija3.o: Strategijos/Strategija3.cpp
 	g++ -std=c++17 -O3 -c Strategijos/Strategija3.cpp
 
+unitTesting.o: unitTesting.cpp
+	g++ -std=c++17 -O3 -c unitTesting.cpp
+
 clean:
 	del *.o *.exe
 
@@ -46,7 +48,5 @@ run2: Strategija2
 run3: Strategija3
 	./Strategija3.exe
 
-runtest: test
-	./unitTesting.exe
-
-
+runtest: unitTesting
+	./unitTesting.exe -s

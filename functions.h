@@ -14,6 +14,7 @@ void duomenu_generavimas(vector<Stud> &studentai);
 void printCases(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
 void konstruktoriuTest();
 string filePasirinkimas();
+bool tikrinimas(const Stud& s, const Stud& s1);
 
 template <typename konteineris>
 void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLaikas)

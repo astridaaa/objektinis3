@@ -91,8 +91,8 @@ class Stud : public zmogus{
         nd(studCopy.nd),
         BalasGalutinisVid(studCopy.BalasGalutinisVid),
         balasSuskaiciuotas(studCopy.balasSuskaiciuotas) {}
-        friend std::ostream& operator<<(std::ostream &output, const Stud& studentas);
-        friend std::istream& operator>>(std::istream &input, Stud& studentas);
+
+
 
         /**copy assignment operatorius*/
         Stud& operator=(const Stud& studCopy){ 
@@ -129,10 +129,10 @@ class Stud : public zmogus{
             return *this;
         }
 
-
+        
         void clear(){nd.clear(); egzaminas=0; BalasGalutinisVid=0;balasSuskaiciuotas=false;}   
         ~Stud()override{clear();} //destruktorius
-
+        
         //setteriai
         void setVardas(const string& var)override{vardas=var;}
         void setPavarde(const string& pav)override{pavarde=pav;}
@@ -149,7 +149,7 @@ class Stud : public zmogus{
         const int& grazintiPaskutini() const {return nd.back();}
         void removeLast(){nd.pop_back();}
         void removeND(){nd.clear();};
-
+        
         /**galutinio balo skaiciavimo metodas*/
         double galutinis() const{
             if(!balasSuskaiciuotas){
@@ -158,16 +158,31 @@ class Stud : public zmogus{
                 if (nd.size() == 1) {
                     vidurkis = nd[0];} 
                     else {
-                    for (size_t ss = 0; ss < nd.size(); ss++) {
-                        suma += nd[ss];}
-                    vidurkis = suma / nd.size();}
-                BalasGalutinisVid = round((0.4 * vidurkis + 0.6 * egzaminas) * 100) / 100;
-                balasSuskaiciuotas = true; 
-            }
-            return BalasGalutinisVid;
+                        for (size_t ss = 0; ss < nd.size(); ss++) {
+                            suma += nd[ss];}
+                            vidurkis = suma / nd.size();}
+                            BalasGalutinisVid = round((0.4 * vidurkis + 0.6 * egzaminas) * 100) / 100;
+                            balasSuskaiciuotas = true; 
+                        }
+                        return BalasGalutinisVid;
+                    }
+        //lygybes operatorius testavimui
+        bool operator==(const Stud &s) const{
+            if(getVardas()==s.getVardas() && getPavarde()==s.getPavarde() && getEgzaminas()==s.getEgzaminas()
+            && getND()== s.getND()){return true;}
+        else return false;
         }
-};
-
+        //nelygybes operatorius testavimui
+        bool operator!=(const Stud &s)const{
+            if(getVardas()!= s.getVardas() || getPavarde()!=s.getPavarde() || getEgzaminas()!= s.getEgzaminas()
+            || getND()!=s.getND()){return true;}
+        else return false;
+        }
+        
+        friend std::ostream& operator<<(std::ostream &output, const Stud& studentas);
+        friend std::istream& operator>>(std::istream &input, Stud& studentas);
+    };
+                
 using konteinerisVector = std::vector<Stud>;
 using konteinerisList = std::list<Stud>;
 using konteinerisDeque = std::deque<Stud>;
