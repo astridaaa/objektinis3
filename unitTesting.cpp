@@ -33,6 +33,8 @@ TEST_CASE("Destructor", "[Destructor]"){
     Stud *s = new Stud("Astrida", "Jablonskyte", 10, {10, 10, 10});
     s->~Stud();
     REQUIRE(s->getND().empty());
+    REQUIRE(s->getVardas()=="");
+    REQUIRE(s->getEgzaminas()==0);
     operator delete(s);
 }
 
