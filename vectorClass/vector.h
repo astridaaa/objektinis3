@@ -98,7 +98,17 @@ template <typename T> class Vector{
         capacity=0;
     }
 
-    //dar netikrinta
+    void shrink_to_fit(){
+        if(size==capacity) {return;}
+        *T Nvec= new *T[size];
+        std::move(vec, vec+size, Nvec);
+        delete[] vec;
+        vec=Nvec;
+        capacity=size;
+    }
+
+    //dar netikrinta viskas
+
 };
 
 #endif
