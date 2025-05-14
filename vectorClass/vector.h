@@ -1,6 +1,13 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <cstddef> 
+#include <utility>    
+#include <algorithm>  
+#include <stdexcept>  
+
+
+
 template <typename T> class Vector{
 
     private:
@@ -53,7 +60,7 @@ template <typename T> class Vector{
 
     bool operator==(const Vector &vv){
         if(size != vv.size()){return false;}
-        for(auto i : size){
+        for (auto i = 0; i < size; ++i){
             if(vec[i] != vv[i]){
                 return false;}}
         return true;
@@ -63,7 +70,7 @@ template <typename T> class Vector{
         return !(*this == vv);
     }
 
-    &T operator[](size_t &index){
+    T &operator[](size_t index){
         if(index>size){
             throw std::exception("index out of range");
         }
@@ -72,7 +79,7 @@ template <typename T> class Vector{
 
     void push_back(const T &ent){
         if(size>=capacity){
-            size_t* Nvec = new T[capacity*2];
+            T* Nvec = new T[capacity*2];
             std::copy(vec, vec+size, Nvec);
             delete[] vec;
             vec = Nvec;
@@ -100,7 +107,7 @@ template <typename T> class Vector{
 
     void shrink_to_fit(){
         if(size==capacity) {return;}
-        *T Nvec= new *T[size];
+        T* Nvec= new T[size];
         std::move(vec, vec+size, Nvec);
         delete[] vec;
         vec=Nvec;
