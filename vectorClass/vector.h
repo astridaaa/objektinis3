@@ -56,6 +56,8 @@ template <typename T> class Vector{
 
     size_t capacity()const{return this->capacity;}
 
+    //max size 
+
     bool empty(){return size==0;}
 
     bool operator==(const Vector &vv){
@@ -65,6 +67,14 @@ template <typename T> class Vector{
                 return false;}}
         return true;
     }
+
+    //assign
+
+    //assign range 
+
+    //front
+
+    //back
     
     bool operator!=(const Vector& vv)const{
         return !(*this == vv);
@@ -76,6 +86,14 @@ template <typename T> class Vector{
         }
         return vec[index];
     }
+
+    T* end(){return vec+size;}
+
+    T* begin(){return vec;}
+
+    //cbegin - iterator cannot modify the value of the element it is pointing to (c)
+
+    //cend
 
     void push_back(const T &ent){
         if(size>=capacity){
@@ -105,7 +123,7 @@ template <typename T> class Vector{
         capacity=0;
     }
 
-    void shrink_to_fit(){
+    void shrink_to_fit(){ // siaip su resize galejau
         if(size==capacity) {return;}
         T* Nvec= new T[size];
         std::move(vec, vec+size, Nvec);
@@ -113,8 +131,20 @@ template <typename T> class Vector{
         vec=Nvec;
         capacity=size;
     }
+    //reserve
+    
+    //insert
 
-    //dar netikrinta viskas
+    //insert range
+
+    //erase
+
+    //append range
+
+    //resize
+
+    //swap
+
 
 };
 
