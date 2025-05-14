@@ -9,8 +9,8 @@ template <typename T> class Vector{
     size_t size;
 
     public:
-    Vector() = vec(nullptr), capacity(0), size(0) {} //constructor
-    Vector(size_t Size): size(Size), capacity(Size){ //with initial size
+    Vector() = vec(nullptr), capacity(0), size(0) {} 
+    Vector(size_t Size): size(Size), capacity(Size){ 
         vec = new T[capacity];
     }
     //vector initialization dar galimai testavimui reikes bet siaip visur puchbacka naudoju
@@ -63,9 +63,16 @@ template <typename T> class Vector{
         return !(*this == vv);
     }
 
-    void push_back(size_t &ent){
+    &T operator[](size_t &index){
+        if(index>size){
+            throw std::exception("index out of range");
+        }
+        return vec[index];
+    }
+
+    void push_back(const T &ent){
         if(size>=capacity){
-            size_t* Nvec = new size_t[capacity*2];
+            size_t* Nvec = new T[capacity*2];
             std::copy(vec, vec+size, Nvec);
             delete[] vec;
             vec = Nvec;
@@ -73,8 +80,25 @@ template <typename T> class Vector{
         }
         vec[size++]=ent;
     }
-    //gal gerai kiek yra netikrinau
     
+    void pop_back(const T &ent){
+        if(size==0){throw std::exception("nothing to remove");}
+        --size;
+    }
+
+    size_t at(const size_t index){
+        if(index>=size || index<0){throw std::exception("index out of range");}
+        return vec[index];
+    }
+
+    void clear(){
+        delete[] vec;
+        vec=nullptr;
+        size=0;
+        capacity=0;
+    }
+
+    //dar netikrinta
 };
 
 #endif
