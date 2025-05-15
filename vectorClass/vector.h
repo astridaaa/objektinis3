@@ -6,6 +6,7 @@
 #include <algorithm>  
 #include <stdexcept>  
 
+//VISUR KUR CAPACITY DEJAU *= TAI REIKES I RESIZE PAKEISTI
 
 
 template <typename T> class Vector{
@@ -71,9 +72,40 @@ template <typename T> class Vector{
         return true;
     }
 
-    //assign
+    //assing values po kiek kartu bet dar ir kitokio tipo yar tie assignai
+    void assign(size_t amount, T& value){
+        if(amount>capacity){
+            delete[] vec;
+            capacity*=2;
+            vec = new T[capacity];      //bet cia tsg i resize pakeist
+        }
+        std::fill_n(vec, amount, value);
+        size=amount; 
+    } 
+//yra assing su paprastais skaiciais ir tada yra assign su adresais DAR SU KAZKUO LIKO PADARYT NEPRISIMENU
+    void assign(T* begin, T* end){
+        size_t amount= begin-end; //idk ar is sizeof T nereikia padalinti
+        if(amount>capacity){
+            delete[] vec;
+            capacity*=2;
+            vec=new T[capacity];
+        };   
+        sdt::copy(begin, end, vec);
+        size=amount;
+    }
 
-    //assign range 
+    void assign(std::initializer_list<T> list){
+        size=list.size();
+        if(size>capacity){capacity*=2};//i resize pakeist kai realizuosiu
+        std::copy(list.begin(), list.end(), vec);
+    }
+
+    void append_range(td::initializer_list<T> list){//PAKEIST
+        if(size+list.size()>capacity){
+            //rezervuoju vieta vketoriui
+        }
+        std::copy(list.begin(), list.end(), vec+size);
+    }
 
     T& front(){return vec[0];}
 
