@@ -8,7 +8,6 @@
 
 //VISUR KUR CAPACITY DEJAU *= TAI REIKES I RESIZE PAKEISTI
 
-
 template <typename T> class Vector{
 
     private:
@@ -17,7 +16,7 @@ template <typename T> class Vector{
     size_t size;
 
     public:
-    Vector() = vec(nullptr), capacity(0), size(0) {} 
+    Vector(): vec(nullptr), capacity(0), size(0) {} 
     Vector(size_t Size): size(Size), capacity(Size){ 
         vec = new T[capacity];
     }
@@ -58,6 +57,8 @@ template <typename T> class Vector{
 
     size_t size()const{return this->size;}
 
+    T* data() const {return vec;}
+
     size_t capacity()const{return this->capacity;}
 
     size_t max_size(){return std::numeric_limits<T>::max()/sizeof(T);}
@@ -77,7 +78,7 @@ template <typename T> class Vector{
         if(amount>capacity){
             delete[] vec;
             capacity*=2;
-            vec = new T[capacity];      //bet cia tsg i resize pakeist
+            vec = new T[capacity];  //reikes viska i resize pakeisti
         }
         std::fill_n(vec, amount, value);
         size=amount; 
@@ -176,41 +177,27 @@ template <typename T> class Vector{
         std::swap(capacity, v.capacity);
         std::swap(vec, v.vec);}
 
-    //reserve
+    void reserve(size_t Ncap){
+    if(size>capacity){
+        T* Nvec=new T[capacity];
+        std::copy(vec, vec+size, Nvec);
+        delete[] vec;
+        vec=Nvec;
+        capacity=Ncap;}
+}
     
     //insert single element
 
     //insert elements repeatedly
 
-    //insert range
+    //dar ==
 
-    //erase
+    //erase viena ir range 
 
-    //append range
+    //resize 3 skitingi
 
-    //resize
-
-
+    //jau 37 yra 
+    //TODO: resize(3), erase(2), operator==, insert(2)
 };
 
 #endif
-
-
-/*shift_right( std::vector<T> &v, typename std::vector<T>::size_type pos )
-{
-    v.resize( v.size() + 1 );
-
-    typename std::vector<T>::iterator result = std::end( v );
-
-    if ( pos < v.size() )
-    {
-        result = std::move_backward( std::next( std::begin( v ), pos ), 
-                                     std::prev( std::end( v  )),
-                                     std::end( v ) );
-    }
-
-    result = std::prev( result );
-    *result = T();
-
-    return result; 
-}*/ //gal kai darysiu inserta reikes?

@@ -7,11 +7,14 @@
 
 //testukai
 TEST_CASE("Constructor", "[Constructor]"){
-
+    Vector v;
+    CHECK(v.data() == nullptr);
+    REQUIRE(v.capacity==0);
+    REQUIRE(v.size==0);
 }
 
 TEST_CASE("Destructor", "[Destructor]"){
-    
+
 }
 
 TEST_CASE("Copy constructor", "[Copy][constructor]"){
