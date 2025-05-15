@@ -8,6 +8,8 @@
 
 //VISUR KUR CAPACITY DEJAU *= TAI REIKES I RESIZE PAKEISTI
 
+//realizintos visos 39 funckijos bet ten kur su resize reikes greiciausiai tikrai kazka pakeisti
+
 template <typename T> class Vector{
 
     private:
@@ -184,20 +186,43 @@ template <typename T> class Vector{
         delete[] vec;
         vec=Nvec;
         capacity=Ncap;}
-}
+    }
     
     //insert single element
+    void insert(T* index, T& element){
+        if(index<vec || index>vec+size){
+            throw std::exception("out of range");
+        }
+        if(size>capacity){
+            //resize
+        }
+        size_t position=index-vec;
+        std::copy_backward(vec+position, vec+size, vec+size+1);
+        vec[position]=element;
+        size++;
+    }
+    //GAL GERAI
+    void insert(T* index, size_t times, T& element){ 
+        if(index<vec || index>vec+size){
+            throw std::out_of_range("position out of range");
+        }
+        if(size+times>capacity){
+            //resize
+        }
+        size_t position = index-vec;
+        //std::copy_backward(vec+position, vec+size);
+        std::copy_backward(vec+position, vec+size, vec+size+times);
+        std::fill(vec + position, vec + position + times, element);
 
-    //insert elements repeatedly
-
-    //dar ==
+        size+=times;
+    }
 
     //erase viena ir range 
 
     //resize 3 skitingi
 
-    //jau 37 yra 
-    //TODO: resize(3), erase(2), operator==, insert(2)
+    //jau 39 yra 
+    //TODO: resize(3), erase(2), 
 };
 
 #endif
