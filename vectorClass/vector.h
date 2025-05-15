@@ -146,7 +146,9 @@ template <typename T> class Vector{
 
     //reserve
     
-    //insert
+    //insert single element
+
+    //insert elements repeatedly
 
     //insert range
 
