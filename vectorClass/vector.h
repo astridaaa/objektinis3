@@ -20,7 +20,10 @@ template <typename T> class Vector{
     Vector(size_t Size): size(Size), capacity(Size){ 
         vec = new T[capacity];
     }
-    //vector initialization dar galimai testavimui reikes bet siaip visur puchbacka naudoju
+
+    Vector(std::initializer_list<T> list): size(list.size()), capacity(list.size()){
+        vec=new T[size];
+        std::copy(list.begin(), list.end(), vec);}
 
     ~Vector(){capacity=0; size=0; delete[] vec;}
 
@@ -56,7 +59,7 @@ template <typename T> class Vector{
 
     size_t capacity()const{return this->capacity;}
 
-    //max size 
+    size_t max_size(){return std::numeric_limits<T>::max()/sizeof(T);}
 
     bool empty(){return size==0;}
 
@@ -72,9 +75,9 @@ template <typename T> class Vector{
 
     //assign range 
 
-    //front
+    T& front(){return vec[0];}
 
-    //back
+    T& back(){return vec[size-1];}
     
     bool operator!=(const Vector& vv)const{
         return !(*this == vv);
@@ -91,9 +94,17 @@ template <typename T> class Vector{
 
     T* begin(){return vec;}
 
-    //cbegin - iterator cannot modify the value of the element it is pointing to (c)
+    const T* cbegin()const{return vec;}
 
-    //cend
+    const T* cend()const{return vec+size;}
+
+    T* rbegin(){return size==0 ? nullptr : vec+size-1;}
+
+    T* rend(){return size==0 ? nullptr: vec-1;}
+
+    const T* crbegin()const{return size==0 ? nullptr : vec+size-1;}
+
+    const T* crend()const{return size==0 ? nullptr: vec-1;}
 
     void push_back(const T &ent){
         if(size>=capacity){
