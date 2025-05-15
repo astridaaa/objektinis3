@@ -91,19 +91,15 @@ template <typename T> class Vector{
     }
 
     T* end(){return vec+size;}
-
     T* begin(){return vec;}
 
     const T* cbegin()const{return vec;}
-
     const T* cend()const{return vec+size;}
 
     T* rbegin(){return size==0 ? nullptr : vec+size-1;}
-
     T* rend(){return size==0 ? nullptr: vec-1;}
 
     const T* crbegin()const{return size==0 ? nullptr : vec+size-1;}
-
     const T* crend()const{return size==0 ? nullptr: vec-1;}
 
     void push_back(const T &ent){
@@ -142,6 +138,12 @@ template <typename T> class Vector{
         vec=Nvec;
         capacity=size;
     }
+    
+    void swap(Vector &v){
+        std::swap(size, v.size);
+        std::swap(capacity, v.capacity);
+        std::swap(vec, v.vec);}
+
     //reserve
     
     //insert
@@ -154,9 +156,27 @@ template <typename T> class Vector{
 
     //resize
 
-    //swap
-
 
 };
 
 #endif
+
+
+/*shift_right( std::vector<T> &v, typename std::vector<T>::size_type pos )
+{
+    v.resize( v.size() + 1 );
+
+    typename std::vector<T>::iterator result = std::end( v );
+
+    if ( pos < v.size() )
+    {
+        result = std::move_backward( std::next( std::begin( v ), pos ), 
+                                     std::prev( std::end( v  )),
+                                     std::end( v ) );
+    }
+
+    result = std::prev( result );
+    *result = T();
+
+    return result; 
+}*/ //gal kai darysiu inserta reikes?
