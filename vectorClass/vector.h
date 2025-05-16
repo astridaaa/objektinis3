@@ -2,6 +2,7 @@
 #define VECTOR_H
 
 #include <cstddef> 
+#include <limits>
 #include <utility>    
 #include <algorithm>  
 #include <stdexcept>  
@@ -56,13 +57,13 @@ template <typename T> class Vector{
         }return *this;
         ~Vector();}
 
-    size_t size()const{return this->size;}
+    size_t Size()const{return this->size;}
 
-    T* data() const {return vec;}
+    T* Data() const {return vec;}
 
-    size_t capacity()const{return this->capacity;}
+    size_t Capacity()const{return this->capacity;}
 
-    size_t max_size(){return std::numeric_limits<T>::max()/sizeof(T);}
+    size_t max_size(){return std::numeric_limits<T>::std::max()/sizeof(T);}
 
     bool empty(){return size==0;}
 
@@ -74,39 +75,35 @@ template <typename T> class Vector{
         return true;
     }
 
-    //assing values po kiek kartu bet dar ir kitokio tipo yar tie assignai
     void assign(size_t amount, T& value){
         if(amount>capacity){
-            delete[] vec;
-            capacity*=2;
-            vec = new T[capacity];  //reikes viska i resize pakeisti
+            resize(amount);
         }
         std::fill_n(vec, amount, value);
         size=amount; 
     } 
-//yra assing su paprastais skaiciais ir tada yra assign su adresais DAR SU KAZKUO LIKO PADARYT NEPRISIMENU
+
     void assign(T* begin, T* end){
-        size_t amount= begin-end; //idk ar is sizeof T nereikia padalinti
+        size_t amount= begin-end; //std::distance alternative
         if(amount>capacity){
-            delete[] vec;
-            capacity*=2;
-            vec=new T[capacity];
+            resize(amount);
         };   
-        sdt::copy(begin, end, vec);
+        std::copy(begin, end, vec);
         size=amount;
     }
 
     void assign(std::initializer_list<T> list){
         size=list.size();
-        if(size>capacity){capacity*=2};//i resize pakeist kai realizuosiu
+        if(size>capacity){resize(size);}
         std::copy(list.begin(), list.end(), vec);
     }
 
-    void append_range(td::initializer_list<T> list){//PAKEIST
+    void append_range(std::initializer_list<T> list){//PAKEIST
         if(size+list.size()>capacity){
-            //rezervuoju vieta vketoriui
+            reserve(size+list.size());
         }
         std::copy(list.begin(), list.end(), vec+size);
+        size += list.size();
     }
 
     T& front(){return vec[0];}
@@ -114,12 +111,11 @@ template <typename T> class Vector{
     T& back(){return vec[size-1];}
     
     bool operator!=(const Vector& vv)const{
-        return !(*this == vv);
-    }
+        return !(*this == vv);}
 
     T &operator[](size_t index){
         if(index>size){
-            throw std::exception("index out of range");
+            throw std::out_of_range("index out of range");
         }
         return vec[index];
     }
@@ -136,15 +132,11 @@ template <typename T> class Vector{
     const T* crbegin()const{return size==0 ? nullptr : vec+size-1;}
     const T* crend()const{return size==0 ? nullptr: vec-1;}
 
-    void push_back(const T &ent){
+    void push_back(const T &value){
         if(size>=capacity){
-            T* Nvec = new T[capacity*2];
-            std::copy(vec, vec+size, Nvec);
-            delete[] vec;
-            vec = Nvec;
-            capacity*=2;
+            reserve(capacity==0 ? 1 : capacity*2);
         }
-        vec[size++]=ent;
+        vec[size++]=value;
     }
     
     void pop_back(const T &ent){
@@ -193,7 +185,7 @@ template <typename T> class Vector{
             throw std::exception("out of range");
         }
         if(size>capacity){
-            //resize
+            resize(size);
         }
         size_t position=index-vec;
         std::copy_backward(vec+position, vec+size, vec+size+1);
@@ -206,7 +198,7 @@ template <typename T> class Vector{
             throw std::out_of_range("position out of range");
         }
         if(size+times>capacity){
-            //resize
+            resize(times+size);
         }
         size_t position = index-vec;
         //std::copy_backward(vec+position, vec+size);
@@ -218,7 +210,7 @@ template <typename T> class Vector{
 
     void erase(T* index){
         size_t position=index-vec;
-        if(index>vec+size || position<0){throw std::out_of_range("out of range")};
+        if(index>vec+size || position<0){throw std::out_of_range("out of range");}
         for(size_t i=position; i+1<size; i++){
             vec[i]=std::move(vec[i+1]);
         }
@@ -234,7 +226,47 @@ template <typename T> class Vector{
         size-=amount;
     }
 
-    //TODO: resize(3), 
+    void resize(size_t newCap){
+        if(newCap<size){size=newCap;}
+        else
+        capacity=newCap;
+        T* Nvec= new T[capacity];
+        std::copy(vec, vec+size, Nvec);
+        delete[] vec;
+        vec=Nvec;
+    }
+
+    void resize(size_t newCap, const T& element){
+        if(newCap<size){size=newCap;}
+        capacity=newCap;
+        T* Nvec= new T[capacity];
+        std::copy(vec, vec+size, Nvec);
+        for(size_t i=size; i<capacity; ++i){
+            Nvec[i]=element;
+        }
+        delete[] vec;
+        vec=Nvec;
+        size=newCap;
+    }
+
+    bool operator<(const Vector& v)const{
+        size_t minSize = std::min(size, v.size);
+        for(size_t i=0; i<minSize; ++i) {
+            if(vec[i]<v.vec[i]) return true;
+            if(vec[i]> v.vec[i]) return false;
+        }
+        return size < v.size;
+    }
+
+    bool operator<=(const Vector& v)const{
+        return !(*this>v);}
+
+    bool operator>(const Vector& v)const{
+        return v<*this;}
+
+    bool operator>=(const Vector& v)const{
+        return !(*this<v);}
+
 };
 
 #endif

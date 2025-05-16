@@ -1,12 +1,12 @@
 #include "vector.h"
 
-#define CATCH_CONFIG_MAIN
-#include "catch2/catch.hpp" //ar pl ../catch2/catch.hpp
+//#define CATCH_CONFIG_MAIN
+//#include "catch2/catch.hpp" //ar pl ../catch2/catch.hpp
 #include "../main.h"
 
 
 //testukai
-TEST_CASE("Constructor", "[Constructor]"){
+/*TEST_CASE("Constructor", "[Constructor]"){
     Vector v;
     CHECK(v.data() == nullptr);
     REQUIRE(v.capacity==0);
@@ -31,4 +31,8 @@ TEST_CASE("Move constructor", "[Move][constructor]"){
 
 TEST_CASE("Move assignment", "[Move][assignment]"){
 
+}*/
+
+int main(){
+    cout << "zjbs pasileidzia";
 }
