@@ -4,10 +4,6 @@
 #include "vector.h"
 #include "iostream"
 
-//destruktoriaus nepamirst
-
-//INSERTAS NEPRAEINA IR MOVE ASSIGNMENT
-
 TEST_CASE("Constructor", "[Constructor]"){
     Vector<int> v, v2;
     CHECK(v.Data() == nullptr);
@@ -39,11 +35,10 @@ TEST_CASE("Move assignment", "[Move][assignment]"){
     Vector<int> v{1,1,1}, v2;
     v2= std::move(v);
     REQUIRE_FALSE(v==v2);
-    REQUIRE(v2==Vector<int>{1,1,1}); //NEPRAEINA
+    REQUIRE(v2==Vector<int>{1,1,1}); 
 
 }
 
-//push back, operator[], at
 TEST_CASE("push back", "[push][back]"){
     Vector<int> v{1,1,1};
     v.push_back(7);
@@ -186,7 +181,7 @@ TEST_CASE("resize", "[resize]") {
     Vector<int> v{1,2,3};
     size_t old = v.Capacity();
     v.reserve(10);
-    REQUIRE_FALSE(v.Capacity() == old); //NEPRAEJO
+    REQUIRE_FALSE(v.Capacity() == old); 
     v.resize(2); 
     REQUIRE(v.Size()==2);
 

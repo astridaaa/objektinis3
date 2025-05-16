@@ -33,6 +33,7 @@ public:
         capacity = 0;
         size = 0;
         delete[] vec;
+        vec=nullptr;
     }
 
     // copy constructor
@@ -83,42 +84,20 @@ public:
         return !(*this == vv);
     }
 
-    // move assignment operator
-Vector& operator=(Vector&& v) noexcept {
-    if (this != &v) {
-        delete[] vec;          // Free current resources
-        vec = v.vec;           // Steal the pointer
-        size = v.size;         // Copy size and capacity
-        capacity = v.capacity;
-
-        v.vec = nullptr;       // Reset moved-from vector
-        v.size = 0;
-        v.capacity = 0;
-    }
-    return *this;
-}
-
-
-    /*    Vector &operator=(Vector &&v) noexcept
+    Vector &operator=(Vector &&v) noexcept
     {
         if (this != &v)
         {
-            delete[] duomenys;
-            dydis = v.dydis;
-            talpa = v.talpa;
-            {
-                duomenys = new T[talpa];
-                for (size_t i = 0; i < dydis; i++)
-                {
-                    duomenys[i] = v.duomenys[i];
-                }
-            }
+            delete[] vec;
+            vec = v.vec;
+            size = v.size;
+            capacity = v.capacity;
+            v.vec = nullptr;
+            v.size = 0;
+            v.capacity = 0;
         }
-        v.duomenys = nullptr;
-        v.talpa = 0;
-        v.dydis = 0;
         return *this;
-    }*/
+    }
 
     size_t Size() const { return this->size; }
 
@@ -143,7 +122,6 @@ Vector& operator=(Vector&& v) noexcept {
     void assign(T *begin, T *end)
     {
         size_t amount = end - begin;
-        // std::distance alternative
         if (amount > capacity)
         {
             resize(amount);
@@ -299,7 +277,7 @@ Vector& operator=(Vector&& v) noexcept {
 
     void erase(T *begin, T *end)
     {
-        size_t amount = end - begin; // gali ir neveikt tai distance reikes naudoti
+        size_t amount = end - begin;
         size_t index = begin - vec;
         for (size_t i = index; i + amount < size; i++)
         {
