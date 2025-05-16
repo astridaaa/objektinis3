@@ -2,6 +2,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 #include "main.h"
+#include "Strategijos/strategija.h"
 #include "vectorClass/vector.h"
 
 bool tinkamas_char(string vardas);
@@ -17,7 +18,6 @@ void konstruktoriuTest();
 string filePasirinkimas();
 void pushbackTest();
 bool tikrinimas(const Stud& s, const Stud& s1);
-
 template <typename konteineris>
 void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLaikas)
 {
@@ -114,10 +114,6 @@ void fileskait(konteineris &studentai, bool a, string filePav, double &BendrasLa
 }
 
 double GeneruotiFiles(int StudSkaicius);
-bool PalygintiVardas(const Stud &stud1, const Stud &stud2);
-bool PalygintiPavardes(const Stud &stud1, const Stud &stud2);
-bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2);
-
 template <typename konteineris>
 void PrintVektorius(konteineris &nesimokantys, konteineris &pirmunai, int a, int RusiavimasPagal, double &BendrasLaikas)
 {

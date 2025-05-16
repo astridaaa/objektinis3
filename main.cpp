@@ -1,13 +1,15 @@
 #include "functions.h"
 int main()
 {
+    bool repeat=true;
+    while(repeat){
     int meniu;
     int paz;
     string testavimui;
     vector<Stud> visi;
     srand(time(NULL));
     int rusiavimas;
-    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - atlikti 1 tyrima/ generuoti files, 6 - atlikti 2 tyrima, 7 - std::vector ir class Vector push_back() lyginimas, 8 - baigti programa" << endl;
+    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - atlikti 1 tyrima/ generuoti files, 6 - atlikti 2 tyrima, 7 - std::vector ir class Vector push_back() lyginimas, 8 - pirmoji strategija, 9 - antroji strategija, 10 - trecioji strategija, 11 - baigti programa" << endl;
     while (true)
     {
         try
@@ -20,7 +22,7 @@ int main()
                 throw "Neteisingas pasirinkimas, iveskite skaiciu 1-7";
                 break;
             }
-            else if (meniu > 7 || meniu < 1)
+            else if (meniu > 11 || meniu < 1)
             {
                 throw "Neteisingas pasirinkimas, iveskite skaiciu 1-7";
                 break;
@@ -161,7 +163,13 @@ int main()
         pushbackTest();
         break;
     }
-    case 8:{ return 0;}
+    case 8:{paleistiStrategija1();break;}
+    
+    case 9:{paleistiStrategija2();break;}
+ 
+    case 10:{paleistiStrategija3();break;}
+
+    case 11:{return 0;}
     }
     
-}
+}}

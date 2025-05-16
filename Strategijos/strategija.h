@@ -1,10 +1,13 @@
 #ifndef strategija_h
 #define strategija_h
-#include "../functions.h"
 #include "../vectorClass/vector.h"
 
-//template <typename konteineris>
-void nuskaitymasFile(string filePavadinimas, double &visasLaikas, Vector<Stud> &studentai)//cia pakeisti
+bool PalygintiVardas(const Stud &stud1, const Stud &stud2);
+bool PalygintiPavardes(const Stud &stud1, const Stud &stud2);
+bool PalygintiKategorijas(const Stud &stud1, const Stud &stud2);
+
+template <typename konteineris>
+void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &studentai)//cia pakeisti
 {
     double laikas = 0.0;
     Vector<string> visaeil;
@@ -62,12 +65,13 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, Vector<Stud> &
 
     visasLaikas += (laikas / 2);
     cout << "Failo nuskaitymas vidutiniskai truko: " << laikas / 2 << "s" << endl;
-    studentai.shrink_to_fit();
     visaeil.clear();
-    /*if constexpr (std::is_same_v<konteineris, vector<Stud>> || std::is_same_v<konteineris, deque<Stud>>)
+    if constexpr (!std::is_same_v<konteineris, std::list<Stud>>)
     {
         studentai.shrink_to_fit();
-    }visaeil.clear();*/
+    }
+
+    visaeil.clear();
 }
 
 template <typename konteineris>
@@ -222,7 +226,7 @@ void vykdomaPrograma(int &rusiavimasPagal, konteineris &studentai, konteineris &
         nesimokantys.clear();
         pirmunai.clear();
         double visasLaikas = 0.0;
-        string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
+        string testavimoFile = "Strategijos\\Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
         cout << "...\n"
              << std::to_string(a) + ".txt" << endl;
         nuskaitymasFile(testavimoFile, visasLaikas, studentai);
@@ -299,7 +303,7 @@ void vykdomaPrograma2(int rusiavimasPagal, konteineris &studentai, konteineris &
         studentai.clear();
         nesimokantys.clear();
         double visasLaikas = 0.0;
-        string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
+        string testavimoFile = "Strategijos\\Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
         cout << "...\n"
              << std::to_string(a) + ".txt" << endl;
         double rusiavimoLaikas = 0.0;
@@ -311,8 +315,8 @@ void vykdomaPrograma2(int rusiavimasPagal, konteineris &studentai, konteineris &
     }
 }
 
-//template <typename konteineris>
-void studentuSkirstymas3(Vector<Stud> &studentai, Vector<Stud> &nesimokantys, double &visasLaikas)
+template <typename konteineris>
+void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, double &visasLaikas)
 {
     nesimokantys.clear();
     auto start = std::chrono::high_resolution_clock::now();
@@ -326,10 +330,10 @@ void studentuSkirstymas3(Vector<Stud> &studentai, Vector<Stud> &nesimokantys, do
     visasLaikas += diff.count();
 }
 
-//template <typename konteineris>
-void StudentuRusiavimas3(Vector<Stud> &Studentai, Vector<Stud> &nesimokantys, double &visasLaikas, int RusiuotiPagal)
+template <typename konteineris>
+void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, double &visasLaikas, int RusiuotiPagal)
 {
-    /*if constexpr (std::is_same_v<konteineris, std::list<Stud>>)
+    if constexpr (std::is_same_v<konteineris, std::list<Stud>>)
     {
         auto start = std::chrono::high_resolution_clock::now();
 
@@ -357,7 +361,7 @@ void StudentuRusiavimas3(Vector<Stud> &Studentai, Vector<Stud> &nesimokantys, do
         visasLaikas += diff.count();
     }
     else
-    {*/
+    {
         auto start = std::chrono::high_resolution_clock::now();
 
         if (RusiuotiPagal == 1) 
@@ -382,18 +386,18 @@ void StudentuRusiavimas3(Vector<Stud> &Studentai, Vector<Stud> &nesimokantys, do
         std::chrono::duration<double> difference = end - start;
         cout << "Studentu rusiavimas uztruko: " << difference.count() << "s" << endl;
         visasLaikas += difference.count();
-    //}
+    }
 }
 
-//template <typename konteineris>
-void vykdomaPrograma3(int rusiavimasPagal, Vector<Stud> &studentai, Vector<Stud> &nesimokantys)
+template <typename konteineris>
+void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &nesimokantys)
 {
     for (int a = 1000; a <= 10000000; a *= 10)
     {
         studentai.clear();
         nesimokantys.clear();
         double visasLaikas = 0.0;
-        string testavimoFile = "Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
+        string testavimoFile = "Strategijos\\Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
         cout << "...\n" << std::to_string(a) + ".txt" << endl;
         double rusiavimoLaikas = 0.0;
         nuskaitymasFile(testavimoFile, visasLaikas, studentai);
@@ -406,4 +410,183 @@ void vykdomaPrograma3(int rusiavimasPagal, Vector<Stud> &studentai, Vector<Stud>
     //konstruktoriuTest();
 }
 
+inline void paleistiStrategija3(){
+    int konteineriuTipas;
+    int rusiavimasPagal;
+    cout << "Programa testuojama su:\n";
+    cout << "1 | vector tipo konteineriu\n";
+    cout << "2 | deque tipo konteineriu\n";
+    cout << "3 | list tipo konteineriu\n";
+    while (true)
+    {   try
+        {   cin >> konteineriuTipas;
+            if (cin.fail())
+            {   cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw "Iveskite skaiciu";
+                break;}
+            else if (konteineriuTipas > 3 || konteineriuTipas < 1)
+                {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-3";
+                break;}
+            break;
+        }
+        catch (const char *masyvas)
+        {cout << masyvas << endl;}
+    }
+    cout << "Studentus rusiuoti pagal:\n";
+    cout << "1 | Vardus\n";
+    cout << "2 | Pavardes\n";
+    cout << "3 | Galutini bala\n";
+    cout << "4 | Duomenu nerusiuoti\n";
+    while (true)
+    {   try
+        {   cin >> rusiavimasPagal;
+            if (cin.fail())
+            {   cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw "Iveskite skaiciu";
+                break;}
+            else if (rusiavimasPagal > 4 || rusiavimasPagal < 1)
+                {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-4";
+                break;}
+            break;
+        }
+        catch (const char *masyvas)
+        {cout << masyvas << endl;}
+    }
+
+    if (konteineriuTipas == 1) {
+        //konteinerisVector studentai, nesimokantys; std::vector
+        Vector<Stud> studentai;
+        Vector<Stud> nesimokantys;
+        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    }
+    else if (konteineriuTipas == 2) {
+        konteinerisDeque studentai, nesimokantys;
+        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    }
+    else{
+        konteinerisList studentai, nesimokantys;
+        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    }
+}
+
+inline void paleistiStrategija2(){
+    int konteineriuTipas;
+    int rusiavimasPagal;
+    cout << "Programa testuojama su:\n";
+    cout << "1 | vector tipo konteineriu\n";
+    cout << "2 | deque tipo konteineriu\n";
+    cout << "3 | list tipo konteineriu\n";
+    while (true)
+    {   try
+        {   cin >> konteineriuTipas;
+            if (cin.fail())
+            {   cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw "Iveskite skaiciu";
+                break;}
+            else if (konteineriuTipas > 3 || konteineriuTipas < 1)
+                {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-3";
+                break;}
+            break;
+        }
+        catch (const char *masyvas)
+        {cout << masyvas << endl;}
+    }
+    cout << "Studentus rusiuoti pagal:\n";
+    cout << "1 | Vardus\n";
+    cout << "2 | Pavardes\n";
+    cout << "3 | Galutini bala\n";
+    cout << "4 | Duomenu nerusiuoti\n";
+    while (true)
+    {   try
+        {   cin >> rusiavimasPagal;
+            if (cin.fail())
+            {   cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw "Iveskite skaiciu";
+                break;}
+            else if (rusiavimasPagal > 4 || rusiavimasPagal < 1)
+                {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-4";
+                break;}
+            break;
+        }
+        catch (const char *masyvas)
+        {cout << masyvas << endl;}
+    }
+
+    if (konteineriuTipas == 1) {
+        konteinerisVector studentai, nesimokantys;
+        vykdomaPrograma2(rusiavimasPagal, studentai, nesimokantys);
+    }
+    else if (konteineriuTipas == 2) {
+        konteinerisDeque studentai, nesimokantys;
+        vykdomaPrograma2(rusiavimasPagal, studentai, nesimokantys);
+    }
+    else{
+        konteinerisList studentai, nesimokantys;
+        vykdomaPrograma2(rusiavimasPagal, studentai, nesimokantys);
+    }
+}
+
+inline void paleistiStrategija1(){
+    int konteineriuTipas;
+    int rusiavimasPagal;
+    cout << "Programa testuojama su:" << endl;
+    cout << "1 | vector tipo konteineriu" << endl;
+    cout << "2 | deque tipo konteineriu" << endl;
+    cout << "3 | list tipo konteineriu" << endl;
+    while (true)
+    {   try
+        {   cin >> konteineriuTipas;
+            if (cin.fail())
+            {   cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw "Iveskite skaiciu";
+                break;}
+            else if (konteineriuTipas > 3 || konteineriuTipas < 1)
+                {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-3";
+                break;}
+            break;
+        }
+        catch (const char *masyvas)
+        {cout << masyvas << endl;}
+    }
+
+    cout << "Studentus rusiuoti pagal:" << endl;
+    cout << "1 | Vardus\n";
+    cout << "2 | Pavardes\n";
+    cout << "3 | Galutini bala\n";
+    cout << "4 | Duomenu nerusiuoti\n";
+    while (true)
+    {   try
+        {   cin >> rusiavimasPagal;
+            if (cin.fail())
+            {   cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw "Iveskite skaiciu";
+                break;}
+            else if (rusiavimasPagal > 4 || rusiavimasPagal < 1)
+                {throw "Neteisingas pasirinkimas, iveskite skaiciu 1-4";
+                break;}
+            break;
+        }
+        catch (const char *masyvas)
+        {cout << masyvas << endl;}
+    }
+
+    if (konteineriuTipas == 1) {
+        konteinerisVector studentai, pirmunai, nesimokantys;
+       vykdomaPrograma(rusiavimasPagal, studentai, pirmunai, nesimokantys);
+    }
+    else if (konteineriuTipas == 2) {
+        konteinerisDeque studentai, pirmunai, nesimokantys;
+       vykdomaPrograma(rusiavimasPagal, studentai, pirmunai, nesimokantys);
+    }
+    else{
+        konteinerisList studentai, pirmunai, nesimokantys;
+        vykdomaPrograma(rusiavimasPagal, studentai, pirmunai, nesimokantys);
+    }
+}
 #endif

@@ -59,3 +59,4 @@ int main(){
         vykdomaPrograma2(rusiavimasPagal, studentai, nesimokantys);
     }
 }
+

@@ -2,9 +2,9 @@
 #include "strategija.h"
 
 int main(){
-    //int konteineriuTipas;
+    int konteineriuTipas;
     int rusiavimasPagal;
-    /*cout << "Programa testuojama su:\n";
+    cout << "Programa testuojama su:\n";
     cout << "1 | vector tipo konteineriu\n";
     cout << "2 | deque tipo konteineriu\n";
     cout << "3 | list tipo konteineriu\n";
@@ -23,7 +23,7 @@ int main(){
         }
         catch (const char *masyvas)
         {cout << masyvas << endl;}
-    }*/
+    }
     cout << "Studentus rusiuoti pagal:\n";
     cout << "1 | Vardus\n";
     cout << "2 | Pavardes\n";
@@ -46,8 +46,18 @@ int main(){
         {cout << masyvas << endl;}
     }
 
-    Vector<Stud> studentai;
-    Vector<Stud> nesimokantys;
-    //std::vector<Stud> studentai, nesimokantys;
-    vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    if (konteineriuTipas == 1) {
+        //konteinerisVector studentai, nesimokantys; std::vector
+        Vector<Stud> studentai;
+        Vector<Stud> nesimokantys;
+        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    }
+    else if (konteineriuTipas == 2) {
+        konteinerisDeque studentai, nesimokantys;
+        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    }
+    else{
+        konteinerisList studentai, nesimokantys;
+        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
+    }
 }
