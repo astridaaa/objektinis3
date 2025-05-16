@@ -14,8 +14,8 @@ Strategija3: Strategija3.o functions.o
 unitTesting: unitTesting.o functions.o 
 	g++ -std=c++17 -O3 unitTesting.o functions.o -o unitTesting.exe
 
-vectorTest: vectorFunctions.o
-	g++ -std=c++17 -O3 vectorFunctions.o -o vectorFunctions.exe
+vectorTest: vectorUnitTests.o
+	g++ -std=c++17 -O3 vectorUnitTests.o -o vectorUnitTests.exe
 
 #objektiniaifailai
 functions.o: Strategijos/functions.cpp
@@ -36,8 +36,8 @@ Strategija3.o: Strategijos/Strategija3.cpp
 unitTesting.o: unitTesting.cpp
 	g++ -std=c++17 -O3 -c unitTesting.cpp
 
-vectorFunctions.o: vectorClass/vectorFunctions.cpp
-	g++ -std=c++17 -O3 -c vectorClass/vectorFunctions.cpp
+vectorUnitTests.o: vectorClass/vectorUnitTests.cpp
+	g++ -std=c++17 -O3 -c vectorClass/vectorUnitTests.cpp
 
 clean:
 	del *.o *.exe
@@ -58,4 +58,4 @@ runtest: unitTesting
 	./unitTesting.exe -s
 
 vecTest: vectorTest
-	./vectorFunctions.exe -s
+	./vectorUnitTests.exe -s

@@ -2,6 +2,7 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 #include "main.h"
+#include "vectorClass/vector.h"
 
 bool tinkamas_char(string vardas);
 bool tinkamas_int(int skaicius);
@@ -14,6 +15,7 @@ void duomenu_generavimas(vector<Stud> &studentai);
 void printCases(vector<Stud> visi, bool outputFILE, int RusiavimasPagal);
 void konstruktoriuTest();
 string filePasirinkimas();
+void pushbackTest();
 bool tikrinimas(const Stud& s, const Stud& s1);
 
 template <typename konteineris>

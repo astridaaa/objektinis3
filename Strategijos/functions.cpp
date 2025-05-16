@@ -596,3 +596,23 @@ double GeneruotiFiles(int StudSkaicius)
     return diff.count();
 }
 
+void pushbackTest(){
+    for(size_t sz =10000; sz<= 100000000; sz*=10){
+        cout << "Vektoriaus dydis: " << std::to_string(sz) << endl;
+
+        std::vector<int> v1;
+        auto start1 = std::chrono::high_resolution_clock::now();
+        for (int i = 1; i <= sz; ++i) v1.push_back(i);
+        auto end1 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diffV1 = end1 - start1;
+        cout << std::setw(15)<< std::left<<"std::vector  | "<< diffV1.count()<<"s"<<endl;
+
+        Vector<int> v2;
+        auto start2 = std::chrono::high_resolution_clock::now();
+        for (int i = 1; i <= sz; ++i) v2.push_back(i);
+        auto end2 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diffV2 = end2 - start2;
+        cout<< std::setw(15)<< std::left << "class Vector | "<< diffV2.count()<<"s"<<endl;
+        cout << "..."<<endl;
+    }
+}

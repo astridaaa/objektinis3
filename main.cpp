@@ -7,7 +7,7 @@ int main()
     vector<Stud> visi;
     srand(time(NULL));
     int rusiavimas;
-    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - atlikti 1 tyrima/ generuoti files, 6 - atlikti 2 tyrima, 7 - baigti programa" << endl;
+    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - atlikti 1 tyrima/ generuoti files, 6 - atlikti 2 tyrima, 7 - std::vector ir class Vector push_back() lyginimas, 8 - baigti programa" << endl;
     while (true)
     {
         try
@@ -158,8 +158,10 @@ int main()
 }
     case 7:
     {
-        return 0;
+        pushbackTest();
+        break;
     }
+    case 8:{ return 0;}
     }
     
 }
