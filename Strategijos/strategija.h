@@ -1,12 +1,13 @@
 #ifndef strategija_h
 #define strategija_h
 #include "../functions.h"
+#include "../vectorClass/vector.h"
 
-template <typename konteineris>
-void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &studentai)
+//template <typename konteineris>
+void nuskaitymasFile(string filePavadinimas, double &visasLaikas, Vector<Stud> &studentai)
 {
     double laikas = 0.0;
-   std::vector<string> visaeil;
+    Vector<string> visaeil;
     int pazymys;
     string eilute;
     string eilute1;
@@ -61,10 +62,12 @@ void nuskaitymasFile(string filePavadinimas, double &visasLaikas, konteineris &s
 
     visasLaikas += (laikas / 2);
     cout << "Failo nuskaitymas vidutiniskai truko: " << laikas / 2 << "s" << endl;
-    if constexpr (std::is_same_v<konteineris, vector<Stud>> || std::is_same_v<konteineris, deque<Stud>>)
+    studentai.shrink_to_fit();
+    visaeil.clear();
+    /*if constexpr (std::is_same_v<konteineris, vector<Stud>> || std::is_same_v<konteineris, deque<Stud>>)
     {
         studentai.shrink_to_fit();
-    }visaeil.clear();
+    }visaeil.clear();*/
 }
 
 template <typename konteineris>
@@ -308,8 +311,8 @@ void vykdomaPrograma2(int rusiavimasPagal, konteineris &studentai, konteineris &
     }
 }
 
-template <typename konteineris>
-void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, double &visasLaikas)
+//template <typename konteineris>
+void studentuSkirstymas3(Vector<Stud> &studentai, Vector<Stud> &nesimokantys, double &visasLaikas)
 {
     nesimokantys.clear();
     auto start = std::chrono::high_resolution_clock::now();
@@ -323,10 +326,10 @@ void studentuSkirstymas3(konteineris &studentai, konteineris &nesimokantys, doub
     visasLaikas += diff.count();
 }
 
-template <typename konteineris>
-void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, double &visasLaikas, int RusiuotiPagal)
+//template <typename konteineris>
+void StudentuRusiavimas3(Vector<Stud> &Studentai, Vector<Stud> &nesimokantys, double &visasLaikas, int RusiuotiPagal)
 {
-    if constexpr (std::is_same_v<konteineris, std::list<Stud>>)
+    /*if constexpr (std::is_same_v<konteineris, std::list<Stud>>)
     {
         auto start = std::chrono::high_resolution_clock::now();
 
@@ -354,7 +357,7 @@ void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, doub
         visasLaikas += diff.count();
     }
     else
-    {
+    {*/
         auto start = std::chrono::high_resolution_clock::now();
 
         if (RusiuotiPagal == 1) 
@@ -379,46 +382,13 @@ void StudentuRusiavimas3(konteineris &Studentai, konteineris &nesimokantys, doub
         std::chrono::duration<double> difference = end - start;
         cout << "Studentu rusiavimas uztruko: " << difference.count() << "s" << endl;
         visasLaikas += difference.count();
-    }
+    //}
 }
 
-/*template <typename konteineris>
-void print(konteineris& studentai, konteineris& nesimokantys, int rusiavimasPagal, int a){
-    string FILEMOK = "Pirmunai" + std::to_string(a) + ".txt";
-    string FILENESIMOK = "Nesimokantys" + std::to_string(a) + ".txt";
-    std::stringstream buferis;
-    std::ofstream f, F;
-
-    f.open(FILEMOK, ios::app);
-    f.clear();
-    buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
-    buferis << "----------------------------------------------------" << endl;
-    for (Stud j : studentai)
-    {
-        buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
-    }
-
-    f << buferis.rdbuf();
-    buferis.str("");
-    buferis.clear();
-    f.close();
-    F.open(FILENESIMOK, ios::app);
-    F.clear();
-    buferis << std::setw(16) << std::left << "Pavarde" << std::setw(16) << std::left << "Vardas" << std::setw(16) << std::left << "Galutinis (Vid.)\n";
-    buferis << "----------------------------------------------------" << endl;
-    for (Stud j : nesimokantys)
-    {
-        buferis << std::setw(16) << std::left << j.pavarde << std::setw(16) << std::left << j.vardas << std::setw(16) << std::fixed << std::setprecision(2) << j.BalasGalutinisVid << endl;
-    }
-    F << buferis.rdbuf();
-    F.close();
-}*/
-
-template <typename konteineris>
-void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &nesimokantys)
+//template <typename konteineris>
+void vykdomaPrograma3(int rusiavimasPagal, Vector<Stud> &studentai, Vector<Stud> &nesimokantys)
 {
-    //zmogus asmuo;
-    for (int a = 100000; a <= 1000000; a *= 10)
+    for (int a = 1000; a <= 10000000; a *= 10)
     {
         studentai.clear();
         nesimokantys.clear();
@@ -433,7 +403,7 @@ void vykdomaPrograma3(int rusiavimasPagal, konteineris &studentai, konteineris &
         //print(studentai, nesimokantys, rusiavimasPagal, a);
         cout << "Bendras programos vykdymo laikas: " << visasLaikas << "s" << endl;
     }
-    konstruktoriuTest();
+    //konstruktoriuTest();
 }
 
 #endif
