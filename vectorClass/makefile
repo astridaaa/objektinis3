@@ -36,8 +36,8 @@ Strategija3.o: Strategijos/Strategija3.cpp
 unitTesting.o: unitTesting.cpp
 	g++ -std=c++17 -O3 -c unitTesting.cpp
 
-vectorFunctions.o: vectorClass/vectorFunctions.cpp
-	g++ -std=c++17 -O3 -c vectorClass/vectorFunctions.cpp
+vectorFunctions.o: vectorFunctions.cpp
+	g++ -std=c++17 -O3 -c vectorFunctions.cpp
 
 clean:
 	del *.o *.exe
