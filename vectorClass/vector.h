@@ -11,7 +11,6 @@
 //realizintos visos 39 funckijos bet ten kur su resize reikes greiciausiai tikrai kazka pakeisti
 
 template <typename T> class Vector{
-
     private:
     T* vec; 
     size_t capacity; 
@@ -217,12 +216,25 @@ template <typename T> class Vector{
         size+=times;
     }
 
-    //erase viena ir range 
+    void erase(T* index){
+        size_t position=index-vec;
+        if(index>vec+size || position<0){throw std::out_of_range("out of range")};
+        for(size_t i=position; i+1<size; i++){
+            vec[i]=std::move(vec[i+1]);
+        }
+        size--;
+    }
 
-    //resize 3 skitingi
+    void erase(T* begin, T* end){
+        size_t amount= end-begin; //gali ir neveikt tai distance reikes naudoti
+        size_t index=begin-vec;
+        for(size_t i=index; i+amount<size; i++){
+            vec[i]=std::move(vec[i+amount]);
+        }
+        size-=amount;
+    }
 
-    //jau 39 yra 
-    //TODO: resize(3), erase(2), 
+    //TODO: resize(3), 
 };
 
 #endif
