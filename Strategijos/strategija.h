@@ -4,7 +4,7 @@
 #include "../vectorClass/vector.h"
 
 //template <typename konteineris>
-void nuskaitymasFile(string filePavadinimas, double &visasLaikas, Vector<Stud> &studentai)
+void nuskaitymasFile(string filePavadinimas, double &visasLaikas, Vector<Stud> &studentai)//cia pakeisti
 {
     double laikas = 0.0;
     Vector<string> visaeil;

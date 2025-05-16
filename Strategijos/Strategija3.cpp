@@ -48,32 +48,6 @@ int main(){
 
     Vector<Stud> studentai;
     Vector<Stud> nesimokantys;
+    //std::vector<Stud> studentai, nesimokantys;
     vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
-
-    /*if (konteineriuTipas == 1) {
-        int konteinerTipas;
-        
-        cout << "Naudojamas std::vector  | 1"<<endl;
-        cout << "Naudojamas class Vector | 2"<<endl;
-        cin>>konteinerTipas;
-        if(konteinerTipas==1){
-            konteinerisVector studentai, nesimokantys;
-            vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
-        }
-        else {
-            Vector<Stud> studentai;
-            Vector<Stud> nesimokantys;
-            vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
-        }
-
-        
-    }*/
-    /*else if (konteineriuTipas == 2) {
-        konteinerisDeque studentai, nesimokantys;
-        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
-    }
-    else{
-        konteinerisList studentai, nesimokantys;
-        vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
-    }*/
 }
