@@ -226,9 +226,7 @@ void vykdomaPrograma(int &rusiavimasPagal, konteineris &studentai, konteineris &
         nesimokantys.clear();
         pirmunai.clear();
         double visasLaikas = 0.0;
-        string testavimoFile = "Strategijos\\Tyrimo_files\\Studentai" + std::to_string(a) + ".txt";
-        cout << "...\n"
-             << std::to_string(a) + ".txt" << endl;
+        string testavimoFile = "Strategijos\\Tyrimo_files\\Studentai" + std::to_string(a) + ".txt"; 
         nuskaitymasFile(testavimoFile, visasLaikas, studentai);
         studentuIsskirstymas(studentai, visasLaikas, pirmunai, nesimokantys);
         studentuRusiavimas(rusiavimasPagal, pirmunai, nesimokantys, visasLaikas);
