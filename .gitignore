@@ -27,7 +27,7 @@
 *.lib
 
 # Executables
-*.exe
+main.exe
 *.out
 *.app
 studentai10.txt
