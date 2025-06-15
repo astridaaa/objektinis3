@@ -1,13 +1,26 @@
 #include "functions.h"
 int main()
 {
+    bool repeat=true;
+    while(repeat){
     int meniu;
     int paz;
     string testavimui;
     vector<Stud> visi;
     srand(time(NULL));
     int rusiavimas;
-    cout << "Pasirinkite: 1 - duomenys ivedinejami ranka, 2 - pazymiai generuojami, 3 - generuojami visi studentu duomenys, 4 - duomenys nuskaitomi is failo, 5 - atlikti 1 tyrima/ generuoti files, 6 - atlikti 2 tyrima, 7 - baigti programa" << endl;
+    cout << "Pasirinkite:"<<endl;
+    cout<<" 1 - duomenys ivedinejami ranka"<<endl;
+    cout<<" 2 - pazymiai generuojami"<<endl;
+    cout<<" 3 - generuojami visi studentu duomenys"<<endl;
+    cout<<" 4 - duomenys nuskaitomi is failo"<<endl;
+    cout<<" 5 - atlikti 1 tyrima/ generuoti files"<<endl;
+    cout<<" 6 - atlikti 2 tyrima"<<endl;
+    cout<<" 7 - std::vector ir class Vector push_back() lyginimas"<<endl;
+    cout<<" 8 - pirmoji strategija"<<endl;
+    cout<<" 9 - antroji strategija"<<endl;
+    cout<<" 10 -trecioji strategija"<<endl;
+    cout<<" 11 -baigti programa" << endl;
     while (true)
     {
         try
@@ -20,7 +33,7 @@ int main()
                 throw "Neteisingas pasirinkimas, iveskite skaiciu 1-7";
                 break;
             }
-            else if (meniu > 7 || meniu < 1)
+            else if (meniu > 11 || meniu < 1)
             {
                 throw "Neteisingas pasirinkimas, iveskite skaiciu 1-7";
                 break;
@@ -121,7 +134,7 @@ int main()
         konteinerisVector pirmunai;
         konteinerisVector nesimokantys;
         konteinerisVector studentaiTest;
-        //tyrimai(1, pirmunai, nesimokantys, studentaiTest);
+        tyrimai(1, pirmunai, nesimokantys, studentaiTest);
         break;
     }
     case 6:
@@ -158,8 +171,16 @@ int main()
 }
     case 7:
     {
-        return 0;
+        pushbackTest();
+        break;
     }
+    case 8:{paleistiStrategija1();break;}
+    
+    case 9:{paleistiStrategija2();break;}
+ 
+    case 10:{paleistiStrategija3();break;}
+
+    case 11:{return 0;}
     }
     
-}
+}}

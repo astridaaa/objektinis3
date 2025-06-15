@@ -596,3 +596,35 @@ double GeneruotiFiles(int StudSkaicius)
     return diff.count();
 }
 
+void pushbackTest(){
+    for(size_t sz =1000; sz<= 100000000; sz*=10){
+        cout << "Vektoriaus dydis: " << std::to_string(sz) << endl;
+        cout<<endl;
+        int countV1=0;
+        std::vector<int> v1;
+        auto start1 = std::chrono::high_resolution_clock::now();
+        for (int i = 1; i <= sz; ++i){
+            if(v1.size()==v1.capacity()){countV1+=1;}
+            v1.push_back(i);
+        }
+        
+        auto end1 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diffV1 = end1 - start1;
+        cout << std::setw(15)<< std::left<<"std::vector  | "<< diffV1.count()<<"s"<<endl;
+        cout<<"Atminties perskirstymu skaicius: "<<countV1<<endl;
+
+        Vector<int> v2;
+        int countV2=0;
+        auto start2 = std::chrono::high_resolution_clock::now();
+        for (int i = 1; i <= sz; ++i){
+            if(v2.Size()==v2.Capacity()){countV2+=1;}
+            v2.push_back(i);
+        }
+
+        auto end2 = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> diffV2 = end2 - start2;
+        cout<< std::setw(15)<< std::left << "class Vector | "<< diffV2.count()<<"s"<<endl;
+        cout<<"Atminties perskirstymu skaicius: "<<countV2<<endl;
+        cout << "..."<<endl;
+    }
+}

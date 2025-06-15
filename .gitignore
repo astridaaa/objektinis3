@@ -27,7 +27,7 @@
 *.lib
 
 # Executables
-*.exe
+main.exe
 *.out
 *.app
 studentai10.txt
@@ -48,3 +48,4 @@ Pirmunai10000.txt
 Pirmunai100000.txt
 Pirmunai1000000.txt
 Pirmunai10000000.txt
+main.exe.manifest

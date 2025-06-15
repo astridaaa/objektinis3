@@ -18,8 +18,8 @@ main.o: main.cpp
 unitTesting.o: unitTesting.cpp
 	g++ -std=c++17 -O3 -c unitTesting.cpp
 
-vectorUnitTests.o: vectorClass/vectorUnitTests.cpp
-	g++ -std=c++17 -O3 -c vectorClass/vectorUnitTests.cpp
+vectorUnitTests.o: vectorUnitTests.cpp
+	g++ -std=c++17 -O3 -c vectorUnitTests.cpp
 
 clean:
 	del *.o *.exe

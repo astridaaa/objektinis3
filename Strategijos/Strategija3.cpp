@@ -47,7 +47,9 @@ int main(){
     }
 
     if (konteineriuTipas == 1) {
-        konteinerisVector studentai, nesimokantys;
+        //konteinerisVector studentai, nesimokantys; std::vector
+        Vector<Stud> studentai;
+        Vector<Stud> nesimokantys;
         vykdomaPrograma3(rusiavimasPagal, studentai, nesimokantys);
     }
     else if (konteineriuTipas == 2) {
